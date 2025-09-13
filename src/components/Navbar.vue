@@ -4,44 +4,37 @@ export default {
   data() {
     return {
       scrolled: false,
-    }
+    };
   },
-   mounted() {
-    window.addEventListener('scroll', this.handleScroll)
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
   },
   beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     handleScroll() {
-      this.scrolled = window.scrollY > 50
+      this.scrolled = window.scrollY > 50;
     },
   },
 };
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg"  :class="{'scrolled bg-bsh-primary': scrolled}">
-    <div class="container-fluid mx-5">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarTogglerDemo03"
-        aria-controls="navbarTogglerDemo03"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+  <nav class="navbar navbar-expand-lg" :class="{ 'scrolled bg-bsh-primary': scrolled }">
+
+    <div class="container-fluid mx-0 mx-md-5">
+
+      <div class="navbar-brand d-flex align-items-center">
+        <img src="/src/assets/logo.png" alt="" class="me-2" width="35" />
+        <h2 class="mb-0 fw-bold text-white">BSH</h2>
+      </div>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand me-5" href="#">
-        <img
-          src="/src/assets/bsh.png"
-          alt=""
-          width="100"
-          style="filter: invert(100%)"
-        />
-      </a>
+
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 small">
           <li class="nav-item px-4">
@@ -51,9 +44,11 @@ export default {
             <router-link to="/about" class="nav-link">About</router-link>
           </li>
           <li class="nav-item px-4">
-            <router-link to="/services" class="nav-link"
-              >Find Services</router-link
-            >
+            <router-link to="/doctors" class="nav-link"> Doctors</router-link>
+          </li>
+          <li class="nav-item px-4">
+            <router-link to="/services" class="nav-link">
+              Find Services</router-link>
           </li>
           <li class="nav-item px-4">
             <router-link to="/contact" class="nav-link">Contact</router-link>
@@ -61,6 +56,7 @@ export default {
         </ul>
       </div>
     </div>
+
   </nav>
 </template>
 
@@ -73,7 +69,7 @@ export default {
   z-index: 1000;
   padding: 1rem 0;
   transition: all 0.3s ease;
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .navbar-transparent {
@@ -122,7 +118,7 @@ export default {
 
 .nav-link:hover,
 .nav-link.router-link-active {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 /* .nav-link.router-link-active::after {
@@ -167,6 +163,16 @@ export default {
 
   .nav-container {
     padding: 0 1rem;
+  }
+}
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background-color: var(--bsh-primary);
+    padding: 1rem;
+    border-radius: .5rem;
+    margin-top: .5rem;
+    backdrop-filter: blur(10px);
+    /* opacity: 0.9; */
   }
 }
 </style>

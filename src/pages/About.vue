@@ -159,7 +159,7 @@ export default {
           </h4>
 
           <p class="text-black-50 mb-3">
-            BSH is a leading healthcare provider in the UK. We are committed to
+            Base Specialist Hospital is a leading healthcare provider in the Nigeria. We are committed to
             providing the best healthcare services to our patients. We have a
             team of highly qualified professionals who are dedicated to
             providing the best care possible.

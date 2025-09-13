@@ -1,7 +1,7 @@
 <script>
 export default {
-  name: 'Footer'
-}
+  name: "Footer",
+};
 </script>
 
 <template>
@@ -11,22 +11,24 @@ export default {
         <!-- Company Info & Newsletter -->
         <div class="col-lg-4 col-md-6">
           <div class="d-flex align-items-center mb-3">
-            <i class="bi bi-hospital text-bsh-accent fs-2 me-2"></i>
-            <h3 class="mb-0 fw-bold">BSH</h3>
+            <img src="/src/assets/logo.png" alt="" class="me-2" width="35" />
+            <h2 class="mb-0 fw-bold text-white">BSH</h2>
           </div>
           <p class="text-light mb-4">
-            BSH a world of comprehensive healthcare where your well-being takes center stage. At BSH, we're dedicated to providing you with personalized and compassionate medical services.
+            BSH a world of comprehensive healthcare where your well-being takes
+            center stage. At BSH, we're dedicated to providing you with
+            personalized and compassionate medical services.
           </p>
-          
+
           <!-- Newsletter Subscription -->
           <div class="mb-4">
             <div class="input-group">
-              <input 
-                type="email" 
-                class="form-control bg-transparent border-light text-white" 
+              <input
+                type="email"
+                class="form-control bg-transparent border-light text-white"
                 placeholder="Email Address"
-                style="border-color: rgba(255,255,255,0.3) !important;"
-              >
+                style="border-color: rgba(255, 255, 255, 0.3) !important"
+              />
               <button class="btn btn-bsh-accent" type="button">
                 Subscribe
               </button>
@@ -54,13 +56,23 @@ export default {
         <div class="col-lg-2 col-md-6">
           <ul class="list-unstyled">
             <li class="mb-2 py-3">
-              <router-link to="/about" class="text-light text-decoration-none hover-accent">About Us</router-link>
+              <router-link
+                to="/about"
+                class="text-light text-decoration-none hover-accent"
+                >About Us</router-link
+              >
             </li>
             <li class="mb-2 py-3">
-              <router-link to="/services" class="text-light text-decoration-none hover-accent">Our Services</router-link>
+              <a href="#" class="text-light text-decoration-none hover-accent"
+                >Doctors</a
+              >
             </li>
             <li class="mb-2 py-3">
-              <router-link to="/" class="text-light text-decoration-none hover-accent">Blog</router-link>
+              <router-link
+                to="/services"
+                class="text-light text-decoration-none hover-accent"
+                >Our Services</router-link
+              >
             </li>
           </ul>
         </div>
@@ -68,13 +80,23 @@ export default {
         <div class="col-lg-2 col-md-6">
           <ul class="list-unstyled">
             <li class="mb-2 py-3">
-              <a href="#" class="text-light text-decoration-none hover-accent">Appointment</a>
+              <a href="#" class="text-light text-decoration-none hover-accent"
+                >Appointment</a
+              >
             </li>
             <li class="mb-2 py-3">
-              <a href="#" class="text-light text-decoration-none hover-accent">Doctors</a>
+              <router-link
+                to="/"
+                class="text-light text-decoration-none hover-accent"
+                >Blog</router-link
+              >
             </li>
             <li class="mb-2 py-3">
-               <router-link to="/contact" class="text-light text-decoration-none hover-accent">Contact Us</router-link>
+              <router-link
+                to="/contact"
+                class="text-light text-decoration-none hover-accent"
+                >Contact Us</router-link
+              >
             </li>
           </ul>
         </div>
@@ -83,24 +105,28 @@ export default {
         <div class="col-lg-4 col-md-6">
           <div class="mb-5">
             <h6 class="mb-3">Address</h6>
-            <p class="text-light small mb-1">22 Demurin Street, Alapere, LA 100001</p>
+            <p class="text-light small mb-1">
+              22 Demurin Street, Alapere, LA 100001
+            </p>
             <p class="text-light small">Nigeria</p>
           </div>
-          
+
           <div class="mb-2">
-          <h6 class="mb-3">Contact</h6>
+            <h6 class="mb-3">Contact</h6>
             <i class="bi bi-telephone text-bsh-accent me-2"></i>
             <span class="text-light small">+234 123 456 7890</span>
           </div>
           <div class="mb-2">
             <i class="bi bi-envelope text-bsh-accent me-2"></i>
-            <span class="text-light small text-break">info@basespecialisthospital.com</span>
+            <span class="text-light small text-break"
+              >info@basespecialisthospital.com</span
+            >
           </div>
         </div>
       </div>
 
       <!-- Footer Bottom -->
-      <hr class="border-light opacity-25 my-4">
+      <hr class="border-light opacity-25 my-4" />
       <div class="row align-items-center">
         <div class="col-md-6">
           <p class="text-light small mb-0">
@@ -109,9 +135,21 @@ export default {
         </div>
         <div class="col-md-6">
           <div class="d-flex justify-content-md-end gap-4">
-            <a href="#" class="text-light small text-decoration-none hover-accent">Privacy Policy</a>
-            <a href="#" class="text-light small text-decoration-none hover-accent">Terms & Conditions</a>
-            <a href="#" class="text-light small text-decoration-none hover-accent">License</a>
+            <a
+              href="#"
+              class="text-light small text-decoration-none hover-accent"
+              >Privacy Policy</a
+            >
+            <a
+              href="#"
+              class="text-light small text-decoration-none hover-accent"
+              >Terms & Conditions</a
+            >
+            <a
+              href="#"
+              class="text-light small text-decoration-none hover-accent"
+              >License</a
+            >
           </div>
         </div>
       </div>
@@ -140,7 +178,7 @@ export default {
 
 .input-group .btn {
   border-left: none;
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: 768px) {
