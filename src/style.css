@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-  font-family: "Montserrat", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
@@ -19,27 +18,47 @@
   --bsh-secondary-hover: #243441;
   --bsh-accent: #42b883;
   --bsh-accent-hover: #369870;
+
+  /* Custom Font Family Variable */
+  --bs-font-sans-serif: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-/* 
-.btn {
-    padding: 0.75rem 2rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: inline-block;
+/* Global Font Family Override */
+html,
+body {
+  font-family: "Montserrat", sans-serif !important;
 }
 
-.btn-primary {
-    background-color: #42b883;
-    color: white;
+/* Bootstrap Font Family Override */
+*,
+*::before,
+*::after {
+  font-family: "Montserrat", sans-serif !important;
 }
 
-.btn-primary:hover {
-    background-color: #369870;
-    transform: translateY(-2px);
-} */
+/* Specific Bootstrap Elements */
+.btn,
+.card,
+.navbar,
+.accordion,
+.form-control,
+.form-select,
+.form-label,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+a,
+li,
+td,
+th {
+  font-family: "Montserrat", sans-serif !important;
+}
 
 /* Custom Background Colors */
 .bg-bsh-primary {

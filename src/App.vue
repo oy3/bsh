@@ -24,11 +24,6 @@ const transparentNav = computed(() => route.path === '/')
   box-sizing: border-box;
 }
 
-body {
-  line-height: 1.6;
-  color: #333;
-}
-
 #app {
   min-height: 100vh;
   display: flex;
