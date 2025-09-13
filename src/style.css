@@ -1,14 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Custom Color Variables */
+  --bsh-primary: #2c3e50;
+  --bsh-primary-hover: #34495e;
+  --bsh-secondary: #1a252f;
+  --bsh-secondary-hover: #243441;
+  --bsh-accent: #42b883;
+  --bsh-accent-hover: #369870;
+}
+
+/* 
+.btn {
+    padding: 0.75rem 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #42b883;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #369870;
+    transform: translateY(-2px);
+} */
+
+/* Custom Background Colors */
+.bg-bsh-primary {
+  background-color: var(--bsh-primary) !important;
+  color: white !important;
+}
+
+.bg-bsh-secondary {
+  background-color: var(--bsh-secondary) !important;
+}
+
+.bg-bsh-accent {
+  background-color: var(--bsh-accent) !important;
+}
+
+/* Custom Text Colors */
+.text-bsh-primary {
+  color: var(--bsh-primary) !important;
+}
+
+.text-bsh-secondary {
+  color: var(--bsh-secondary) !important;
+}
+
+.text-bsh-accent {
+  color: var(--bsh-accent) !important;
+}
+
+/* Custom Border Colors */
+.border-bsh-primary {
+  border-color: var(--bsh-primary) !important;
+}
+
+.border-bsh-secondary {
+  border-color: var(--bsh-secondary) !important;
+}
+
+.border-bsh-accent {
+  border-color: var(--bsh-accent) !important;
+}
+
+/* Custom Solid Buttons */
+.btn-bsh-primary {
+  background-color: var(--bsh-primary);
+  border-color: var(--bsh-primary);
+  color: #fff;
+}
+
+.btn-bsh-primary:hover,
+.btn-bsh-primary:focus {
+  background-color: var(--bsh-primary-hover);
+  border-color: var(--bsh-primary-hover);
+  color: #fff;
+}
+
+.btn-bsh-secondary {
+  background-color: var(--bsh-secondary);
+  border-color: var(--bsh-secondary);
+  color: #fff;
+}
+
+.btn-bsh-secondary:hover,
+.btn-bsh-secondary:focus {
+  background-color: var(--bsh-secondary-hover);
+  border-color: var(--bsh-secondary-hover);
+  color: #fff;
+}
+
+.btn-bsh-accent {
+  background-color: var(--bsh-accent);
+  border-color: var(--bsh-accent);
+  color: #fff;
+}
+
+.btn-bsh-accent:hover,
+.btn-bsh-accent:focus {
+  background-color: var(--bsh-accent-hover);
+  border-color: var(--bsh-accent-hover);
+  color: #fff;
+}
+
+/* Custom Outline Buttons */
+.btn-outline-bsh-primary {
+  color: var(--bsh-primary);
+  border-color: var(--bsh-primary);
+  background-color: transparent;
+}
+
+.btn-outline-bsh-primary:hover,
+.btn-outline-bsh-primary:focus {
+  background-color: var(--bsh-primary);
+  border-color: var(--bsh-primary);
+  color: #fff;
+}
+
+.btn-outline-bsh-secondary {
+  color: var(--bsh-secondary);
+  border-color: var(--bsh-secondary);
+  background-color: transparent;
+}
+
+.btn-outline-bsh-secondary:hover,
+.btn-outline-bsh-secondary:focus {
+  background-color: var(--bsh-secondary);
+  border-color: var(--bsh-secondary);
+  color: #fff;
+}
+
+.btn-outline-bsh-accent {
+  color: var(--bsh-accent);
+  border-color: var(--bsh-accent);
+  background-color: transparent;
+}
+
+.btn-outline-bsh-accent:hover,
+.btn-outline-bsh-accent:focus {
+  background-color: var(--bsh-accent);
+  border-color: var(--bsh-accent);
+  color: #fff;
+}
+
+.bsh-secondary {
+  background-color: #42b883;
 }

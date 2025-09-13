@@ -1,14 +1,23 @@
 <script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import MainLayout from './layouts/MainLayout.vue'
+
+const route = useRoute()
+
+// Make navbar transparent only on home page
+const transparentNav = computed(() => route.path === '/')
 </script>
 
 <template>
-  <MainLayout>
+  <MainLayout :transparentNav="transparentNav">
     <router-view />
   </MainLayout>
 </template>
 
 <style>
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +25,6 @@ import MainLayout from './layouts/MainLayout.vue'
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
   color: #333;
 }

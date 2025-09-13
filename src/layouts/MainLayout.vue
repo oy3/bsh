@@ -3,13 +3,19 @@ import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 
 export default {
-  components: { Navbar, Footer }
+  components: { Navbar, Footer },
+  props: {
+    transparentNav: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 
 <template>
   <div class="layout">
-    <Navbar />
+    <Navbar :transparent="transparentNav" />
     <main class="main-content">
       <slot />
     </main>

@@ -1,54 +1,107 @@
 <script>
 export default {
-  name: 'Navbar'
-}
+  name: "Navbar",
+  data() {
+    return {
+      scrolled: false,
+    }
+  },
+   mounted() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
+  },
+  methods: {
+    handleScroll() {
+      this.scrolled = window.scrollY > 50
+    },
+  },
+};
 </script>
 
 <template>
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-brand">
-        <router-link to="/" class="brand-link">BSH</router-link>
+  <nav class="navbar navbar-expand-lg"  :class="{'scrolled bg-bsh-primary': scrolled}">
+    <div class="container-fluid mx-5">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand me-5" href="#">
+        <img
+          src="/src/assets/bsh.png"
+          alt=""
+          width="100"
+          style="filter: invert(100%)"
+        />
+      </a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 small">
+          <li class="nav-item px-4">
+            <router-link to="/" class="nav-link active">Home</router-link>
+          </li>
+          <li class="nav-item px-4">
+            <router-link to="/about" class="nav-link">About</router-link>
+          </li>
+          <li class="nav-item px-4">
+            <router-link to="/services" class="nav-link"
+              >Find Services</router-link
+            >
+          </li>
+          <li class="nav-item px-4">
+            <router-link to="/contact" class="nav-link">Contact</router-link>
+          </li>
+        </ul>
       </div>
-      <ul class="nav-menu">
-        <li class="nav-item">
-          <router-link to="/" class="nav-link">Home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/about" class="nav-link">About</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/services" class="nav-link">Services</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/contact" class="nav-link">Contact</router-link>
-        </li>
-      </ul>
     </div>
   </nav>
 </template>
 
 <style scoped>
 .navbar {
-  background-color: #2c3e50;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   padding: 1rem 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.navbar-transparent {
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+}
+
+.navbar.scrolled {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
+  padding: 0 2rem;
 }
 
 .brand-link {
-  color: white;
   text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: bold;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav-menu {
@@ -60,13 +113,60 @@ export default {
 }
 
 .nav-link {
-  color: white;
+  color: white !important;
   text-decoration: none;
+  font-weight: 400;
   transition: color 0.3s ease;
+  position: relative;
 }
 
 .nav-link:hover,
 .nav-link.router-link-active {
-  color: #42b883;
+    font-weight: 700;
+}
+
+/* .nav-link.router-link-active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #4a90e2;
+  font-weight: 700;
+} */
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.menu-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.menu-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .nav-container {
+    padding: 0 1rem;
+  }
 }
 </style>
