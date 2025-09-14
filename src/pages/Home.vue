@@ -110,15 +110,15 @@ export default {
           <div class="position-absolute top-0 start-0 m-3">
             <div
               class="card border-light-subtle rounded-4 bg-white shadow-sm p-2"
-              style="width: 270px"
+              style="width: 220px"
             >
               <div class="d-flex align-items-center">
                 <i class="bi bi-headset text-primary fs-3 me-2"></i>
                 <div>
                   <h6 class="mb-0 fw-bold" style="font-size: smaller">24/7</h6>
-                  <span class="text-muted" style="font-size: x-small"
+                  <p class="text-muted mb-0" style="font-size: x-small"
                     >We are available when you want
-                  </span>
+                </p>
                 </div>
               </div>
             </div>
@@ -128,7 +128,7 @@ export default {
           <div class="position-absolute bottom-0 end-0 m-3">
             <div
               class="card border-light-subtle bg-white shadow-sm rounded-4 p-2"
-              style="width: 300px"
+              style="width: 220px"
             >
               <div class="d-flex align-items-start">
                 <i class="bi bi-patch-check text-success fs-3 me-2"></i>
@@ -136,10 +136,10 @@ export default {
                   <h6 class="mb-0 fw-bold" style="font-size: smaller">
                     15 Years of experience
                   </h6>
-                  <small class="text-muted" style="font-size: x-small">
+                  <p class="text-muted mb-0" style="font-size: x-small">
                     We have been serving the community with excellence and
                     compassion for over 15 years
-                  </small>
+                  </p>
                 </div>
               </div>
             </div>
@@ -236,7 +236,7 @@ export default {
               or concerns you may have.
             </p>
             <div class="row g-4">
-              <div class="col-md-6">
+              <div class="col-md-5">
                 <div class="card rounded-4 border-light-subtle px-4 py-2">
                   <div class="d-flex align-items-center">
                     <i class="bi bi-telephone me-3 fs-4 text-bsh-accent"></i>
@@ -247,7 +247,7 @@ export default {
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-7">
                 <div class="card rounded-4 border-light-subtle px-4 py-2">
                   <div class="d-flex align-items-center">
                     <i class="bi bi-envelope-at me-3 fs-4 text-bsh-accent"></i>
@@ -284,9 +284,9 @@ export default {
                     <h6 class="mb-0 fw-bold" style="font-size: smaller">
                       Appointment
                     </h6>
-                    <small class="text-muted" style="font-size: x-small">
+                    <p class="text-muted lh-sm mb-0" style="font-size: x-small">
                       Book Appointment anytime any where
-                    </small>
+                    </p>
                   </div>
                 </div>
               </div>

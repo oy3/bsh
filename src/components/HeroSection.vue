@@ -213,8 +213,6 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .stats-container {
-  }
   .stats-container .card {
     padding: 1.5rem !important;
   }

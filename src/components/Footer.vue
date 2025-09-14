@@ -11,10 +11,10 @@ export default {
         <!-- Company Info & Newsletter -->
         <div class="col-lg-4 col-md-6">
           <div class="d-flex align-items-center mb-3">
-            <img src="/src/assets/logo.png" alt="" class="me-2" width="35" />
-            <h2 class="mb-0 fw-bold text-white">BSH</h2>
+            <img src="/src/assets/bsh.svg" alt="" class="me-2" width="30" />
+            <h4 class="mb-0 fw-bold text-white">BSH</h4>
           </div>
-          <p class="text-light mb-4">
+          <p class="text-light mb-4 small">
             BSH a world of comprehensive healthcare where your well-being takes
             center stage. At BSH, we're dedicated to providing you with
             personalized and compassionate medical services.
