@@ -1,6 +1,11 @@
 <script>
+import DoctorCard from './DoctorCard.vue'
+
 export default {
   name: 'TeamSection',
+  components: {
+    DoctorCard
+  },
   data() {
     return {
       doctors: [
@@ -53,23 +58,7 @@ export default {
 
     <div class="row row-cols-1 row-cols-md-4 g-4">
       <div class="col" v-for="doctor in doctors" :key="doctor.id">
-        <div
-          class="card rounded-5 rounded-bottom-0 border-0 h-100 bg-light border-bottom border-bsh-primary border-5"
-        >
-          <img
-            :src="doctor.image"
-            :alt="doctor.name"
-            class="card-img-top object-fit-cover rounded-top-5"
-            style="object-position: 80% 10%"
-            height="200"
-          />
-          <div class="card-body">
-            <h6 class="card-title fw-bold">{{ doctor.name }}</h6>
-            <p class="card-text text-body-tertiary small">
-              {{ doctor.specialty }}
-            </p>
-          </div>
-        </div>
+        <DoctorCard :doctor="doctor" />
       </div>
     </div>
   </section>
