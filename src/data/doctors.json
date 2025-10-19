@@ -1,0 +1,226 @@
+{
+  "doctors": [
+    {
+      "id": 1,
+      "name": "Dr. Sarah Lee",
+      "titles": "MD, MPH, FAPA",
+      "role": "Board-certified Psychiatrist",
+      "division": "Psychiatry Department",
+      "phone": "+123-456-7890",
+      "email": "sarahlee@prohealth.com",
+      "image": "https://media.istockphoto.com/id/2050883733/photo/happy-successful-doctor-woman-medical-worker-in-white-lab-coat-standing-with-crossed-arms-on.jpg?s=612x612&w=0&k=20&c=XOMsFZDPrgn_jG9_702BTXyz114CxJwS2C45KYnLOqQ=",
+      "specialty": "Psychiatry",
+      "overview": "With more than 15 years of experience learning human psychology and behavior, Dr. Jones is an expert in managing mood disorders and anxiety disorders.",
+      "degrees": [
+        {
+          "school": "University of California, San Francisco",
+          "degree": "Medical degree"
+        },
+        {
+          "school": "University of California, Los Angeles (UCLA) Medical Center",
+          "degree": "Completed residency training in psychiatry"
+        },
+        {
+          "school": "University of California, Berkeley",
+          "degree": "Master of Public Health degree"
+        }
+      ],
+      "experiences": [
+        "Worked in community mental health clinics, private practice, and academic medical centers",
+        "Expertise in the treatment of mood disorders, anxiety disorders, and psychotic disorders",
+        "Special interest in women's mental health and perinatal psychiatry",
+        "Experience managing complex cases that involve both mental health and medical issues"
+      ],
+      "socialMedia": {
+        "facebook": "https://facebook.com/drsarahlee",
+        "linkedin": "https://linkedin.com/in/drsarahlee",
+        "instagram": "https://instagram.com/drsarahlee"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Dr. Fiona Wood",
+      "titles": "MD, FACC",
+      "role": "Board-certified Cardiologist",
+      "division": "Cardiology Department",
+      "phone": "+123-456-7891",
+      "email": "fionawood@prohealth.com",
+      "image": "https://www.shutterstock.com/image-photo/female-healthcare-professional-portrait-600nw-2218001039.jpg",
+      "specialty": "Cardiology",
+      "overview": "Dr. Wood is a renowned cardiologist with over 20 years of experience in treating cardiovascular diseases and performing complex cardiac procedures.",
+      "degrees": [
+        {
+          "school": "Harvard Medical School",
+          "degree": "Doctor of Medicine"
+        },
+        {
+          "school": "Massachusetts General Hospital",
+          "degree": "Cardiology Fellowship"
+        },
+        {
+          "school": "Johns Hopkins University",
+          "degree": "Internal Medicine Residency"
+        }
+      ],
+      "experiences": [
+        "Specialized in interventional cardiology and cardiac catheterization",
+        "Published over 50 research papers in cardiovascular medicine",
+        "Director of Cardiac Catheterization Laboratory",
+        "Expert in treating coronary artery disease and heart failure"
+      ],
+      "socialMedia": {
+        "facebook": "https://facebook.com/drfionawood",
+        "linkedin": "https://linkedin.com/in/drfionawood",
+        "instagram": ""
+      }
+    },
+    {
+      "id": 3,
+      "name": "Dr. Michael Brown",
+      "titles": "MD, PhD, FAAN",
+      "role": "Board-certified Neurologist",
+      "division": "Neurology Department",
+      "phone": "+123-456-7892",
+      "email": "michaelbrown@prohealth.com",
+      "image": "https://images.unsplash.com/photo-1605602517387-ec78b947335e?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fGJsYWNrJTIwZG9jdG9yfGVufDB8fDB8fHww",
+      "specialty": "Neurology",
+      "overview": "Dr. Brown is a leading neurologist specializing in neurodegenerative diseases and movement disorders with extensive research background.",
+      "degrees": [
+        {
+          "school": "Stanford University School of Medicine",
+          "degree": "Doctor of Medicine"
+        },
+        {
+          "school": "University of California, San Francisco",
+          "degree": "PhD in Neuroscience"
+        },
+        {
+          "school": "UCSF Medical Center",
+          "degree": "Neurology Residency"
+        }
+      ],
+      "experiences": [
+        "Specialist in Parkinson's disease and movement disorders",
+        "Lead researcher in neurodegenerative disease clinical trials",
+        "Published extensively on Alzheimer's disease and dementia",
+        "Director of Movement Disorders Clinic"
+      ],
+      "socialMedia": {
+        "facebook": "",
+        "linkedin": "https://linkedin.com/in/drmichaelbrown",
+        "instagram": "https://instagram.com/drmichaelbrown"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Dr. Angela Davis",
+      "titles": "MD, FAAD",
+      "role": "Board-certified Dermatologist",
+      "division": "Dermatology Department",
+      "phone": "+123-456-7893",
+      "email": "angeladavis@prohealth.com",
+      "image": "https://media.istockphoto.com/id/1603361100/photo/portrait-of-black-woman-in-pharmacy-with-tablet-smile-and-online-inventory-list-for-medicine.jpg?s=612x612&w=0&k=20&c=XmWkRM4DHvtVUPNG_7uzaKFhWumBN2egZMgAK7ENomk=",
+      "specialty": "Dermatology",
+      "overview": "Dr. Davis is an expert dermatologist with a focus on cosmetic dermatology, skin cancer prevention, and advanced dermatological procedures.",
+      "degrees": [
+        {
+          "school": "Yale University School of Medicine",
+          "degree": "Doctor of Medicine"
+        },
+        {
+          "school": "Mount Sinai Hospital",
+          "degree": "Dermatology Residency"
+        },
+        {
+          "school": "American Academy of Dermatology",
+          "degree": "Board Certification"
+        }
+      ],
+      "experiences": [
+        "Specialist in cosmetic and medical dermatology",
+        "Expert in skin cancer detection and treatment",
+        "Advanced training in laser therapy and aesthetic procedures",
+        "Published research on melanoma prevention and treatment"
+      ],
+      "socialMedia": {
+        "facebook": "https://facebook.com/drangeladavis",
+        "linkedin": "https://linkedin.com/in/drangeladavis",
+        "instagram": "https://instagram.com/drangeladavis"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Dr. James Wilson",
+      "titles": "MD, FACP",
+      "role": "Board-certified Pediatrician",
+      "division": "Pediatrics Department",
+      "phone": "+123-456-7894",
+      "email": "jameswilson@prohealth.com",
+      "image": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZG9jdG9yfGVufDB8fDB8fHww",
+      "specialty": "Pediatrics",
+      "overview": "Dr. Wilson is a compassionate pediatrician dedicated to providing comprehensive healthcare for children from infancy through adolescence.",
+      "degrees": [
+        {
+          "school": "University of Pennsylvania School of Medicine",
+          "degree": "Doctor of Medicine"
+        },
+        {
+          "school": "Children's Hospital of Philadelphia",
+          "degree": "Pediatrics Residency"
+        },
+        {
+          "school": "American Board of Pediatrics",
+          "degree": "Board Certification"
+        }
+      ],
+      "experiences": [
+        "Specialized care for newborns, children, and adolescents",
+        "Expert in childhood development and behavioral health",
+        "Vaccination and preventive care specialist",
+        "Experience in managing chronic pediatric conditions"
+      ],
+      "socialMedia": {
+        "facebook": "https://facebook.com/drjameswilson",
+        "linkedin": "https://linkedin.com/in/drjameswilson",
+        "instagram": ""
+      }
+    },
+    {
+      "id": 6,
+      "name": "Dr. Maria Rodriguez",
+      "titles": "MD, FACOG",
+      "role": "Board-certified Obstetrician-Gynecologist",
+      "division": "Women's Health Department",
+      "phone": "+123-456-7895",
+      "email": "mariarodriguez@prohealth.com",
+      "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmVtYWxlJTIwZG9jdG9yfGVufDB8fDB8fHww",
+      "specialty": "Obstetrics & Gynecology",
+      "overview": "Dr. Rodriguez provides comprehensive women's healthcare services with a focus on maternal-fetal medicine and minimally invasive surgical techniques.",
+      "degrees": [
+        {
+          "school": "University of Miami Miller School of Medicine",
+          "degree": "Doctor of Medicine"
+        },
+        {
+          "school": "Jackson Memorial Hospital",
+          "degree": "OB/GYN Residency"
+        },
+        {
+          "school": "American College of Obstetricians and Gynecologists",
+          "degree": "Board Certification"
+        }
+      ],
+      "experiences": [
+        "Specialist in high-risk pregnancies and maternal-fetal medicine",
+        "Expert in minimally invasive gynecological surgery",
+        "Women's reproductive health and family planning",
+        "Menopause management and hormone therapy"
+      ],
+      "socialMedia": {
+        "facebook": "https://facebook.com/drmariarodriguez",
+        "linkedin": "https://linkedin.com/in/drmariarodriguez",
+        "instagram": "https://instagram.com/drmariarodriguez"
+      }
+    }
+  ]
+}

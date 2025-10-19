@@ -1,5 +1,6 @@
 <script>
 import DoctorCard from './DoctorCard.vue'
+import doctorsData from '../data/doctors.json'
 
 export default {
   name: 'TeamSection',
@@ -8,32 +9,7 @@ export default {
   },
   data() {
     return {
-      doctors: [
-        {
-          id: 1,
-          name: 'Dr. Fiona Wood',
-          specialty: 'Cardiology',
-          image: 'https://media.istockphoto.com/id/2050883733/photo/happy-successful-doctor-woman-medical-worker-in-white-lab-coat-standing-with-crossed-arms-on.jpg?s=612x612&w=0&k=20&c=XOMsFZDPrgn_jG9_702BTXyz114CxJwS2C45KYnLOqQ=',
-        },
-        {
-          id: 2,
-          name: 'Dr. Sarah Johnson',
-          specialty: 'Pediatrics',
-          image: 'https://www.shutterstock.com/image-photo/female-healthcare-professional-portrait-600nw-2218001039.jpg'
-        },
-        {
-          id: 3,
-          name: 'Dr. Michael Brown',
-          specialty: 'Neurology',
-          image: 'https://images.unsplash.com/photo-1605602517387-ec78b947335e?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fGJsYWNrJTIwZG9jdG9yfGVufDB8fDB8fHww'
-        },
-        {
-          id: 4,
-          name: 'Dr. Angela Davis',
-          specialty: 'Dermatology',
-          image: 'https://media.istockphoto.com/id/1603361100/photo/portrait-of-black-woman-in-pharmacy-with-tablet-smile-and-online-inventory-list-for-medicine.jpg?s=612x612&w=0&k=20&c=XmWkRM4DHvtVUPNG_7uzaKFhWumBN2egZMgAK7ENomk='
-        }
-      ]
+      doctors: doctorsData.doctors.slice(0, 4) // Show only first 4 doctors
     }
   }
 }
@@ -65,5 +41,4 @@ export default {
 </template>
 
 <style scoped>
-/* Add any team-specific styles here if needed */
 </style>
