@@ -1,0 +1,74 @@
+{
+  "faqs": [
+    {
+      "id": "collapseOne",
+      "question": "How do I book an appointment with a doctor?",
+      "answer": "To book an appointment with a doctor, you can visit our website and click on the \"Book an Appointment\" button. You will need to provide your personal information, the doctor you are interested in, and the date and time you would like to schedule.",
+      "expanded": true,
+      "category": "appointments"
+    },
+    {
+      "id": "collapseTwo",
+      "question": "What insurance plans do you accept?",
+      "answer": "We accept most major insurance plans including NHS, BUPA, AXA Health, Vitality Health, and many others. Please contact our billing department to verify your specific insurance coverage.",
+      "expanded": false,
+      "category": "insurance"
+    },
+    {
+      "id": "collapseThree",
+      "question": "What are your operating hours?",
+      "answer": "Our hospital is open 24/7 for emergency services. Regular consultations are available Monday to Friday 8:00 AM - 6:00 PM, and weekends 9:00 AM - 4:00 PM.",
+      "expanded": false,
+      "category": "general"
+    },
+    {
+      "id": "collapseFour",
+      "question": "Do you offer telemedicine consultations?",
+      "answer": "Yes, we offer virtual consultations for certain medical conditions. You can schedule a telemedicine appointment through our online portal or by calling our appointment line.",
+      "expanded": false,
+      "category": "services"
+    },
+    {
+      "id": "collapseFive",
+      "question": "How do I access my medical records?",
+      "answer": "You can access your medical records through our secure patient portal. Simply create an account on our website using your patient ID and follow the verification process.",
+      "expanded": false,
+      "category": "records"
+    },
+    {
+      "id": "collapseSix",
+      "question": "What should I bring to my first appointment?",
+      "answer": "Please bring a valid ID, your insurance card, a list of current medications, medical history, and any previous test results or referral letters from other healthcare providers.",
+      "expanded": false,
+      "category": "appointments"
+    },
+    {
+      "id": "collapseSeven",
+      "question": "How far in advance should I schedule an appointment?",
+      "answer": "For routine check-ups, we recommend scheduling 2-4 weeks in advance. For specialist consultations, it may take 1-2 weeks. Emergency appointments are available same-day.",
+      "expanded": false,
+      "category": "appointments"
+    },
+    {
+      "id": "collapseEight",
+      "question": "Do you have parking facilities?",
+      "answer": "Yes, we provide free parking for patients and visitors. Our parking facility is located adjacent to the main building with easy access to the hospital entrance.",
+      "expanded": false,
+      "category": "facilities"
+    },
+    {
+      "id": "collapseNine",
+      "question": "Can I change or cancel my appointment?",
+      "answer": "Yes, you can change or cancel your appointment up to 24 hours before the scheduled time through our online portal, mobile app, or by calling our appointment line.",
+      "expanded": false,
+      "category": "appointments"
+    },
+    {
+      "id": "collapseTen",
+      "question": "What safety measures do you have in place?",
+      "answer": "We maintain strict hygiene protocols, regular sanitization, social distancing measures, and follow all health authority guidelines to ensure patient and staff safety.",
+      "expanded": false,
+      "category": "safety"
+    }
+  ]
+}

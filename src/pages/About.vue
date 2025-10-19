@@ -2,81 +2,15 @@
 import BlogSection from '../components/BlogSection.vue'
 import TestimonialsSection from '../components/TestimonialsSection.vue'
 import TeamSection from '../components/TeamSection.vue'
+import FAQSection from '../components/FAQSection.vue'
 
 export default {
   name: 'About',
   components: {
     TestimonialsSection,
     BlogSection,
-    TeamSection
-  },
-  data() {
-    return {
-      faqColumn1: [
-        {
-          id: 'collapseOne',
-          question: 'How do I book an appointment with a doctor?',
-          answer: 'To book an appointment with a doctor, you can visit our website and click on the "Book an Appointment" button. You will need to provide your personal information, the doctor you are interested in, and the date and time you would like to schedule.',
-          expanded: true
-        },
-        {
-          id: 'collapseTwo',
-          question: 'What insurance plans do you accept?',
-          answer: 'We accept most major insurance plans including NHS, BUPA, AXA Health, Vitality Health, and many others. Please contact our billing department to verify your specific insurance coverage.',
-          expanded: false
-        },
-        {
-          id: 'collapseThree',
-          question: 'What are your operating hours?',
-          answer: 'Our hospital is open 24/7 for emergency services. Regular consultations are available Monday to Friday 8:00 AM - 6:00 PM, and weekends 9:00 AM - 4:00 PM.',
-          expanded: false
-        },
-        {
-          id: 'collapseFour',
-          question: 'Do you offer telemedicine consultations?',
-          answer: 'Yes, we offer virtual consultations for certain medical conditions. You can schedule a telemedicine appointment through our online portal or by calling our appointment line.',
-          expanded: false
-        },
-        {
-          id: 'collapseFive',
-          question: 'How do I access my medical records?',
-          answer: 'You can access your medical records through our secure patient portal. Simply create an account on our website using your patient ID and follow the verification process.',
-          expanded: false
-        }
-      ],
-      faqColumn2: [
-        {
-          id: 'collapseSix',
-          question: 'What should I bring to my first appointment?',
-          answer: 'Please bring a valid ID, your insurance card, a list of current medications, medical history, and any previous test results or referral letters from other healthcare providers.',
-          expanded: false
-        },
-        {
-          id: 'collapseSeven',
-          question: 'How far in advance should I schedule an appointment?',
-          answer: 'For routine check-ups, we recommend scheduling 2-4 weeks in advance. For specialist consultations, it may take 1-2 weeks. Emergency appointments are available same-day.',
-          expanded: false
-        },
-        {
-          id: 'collapseEight',
-          question: 'Do you have parking facilities?',
-          answer: 'Yes, we provide free parking for patients and visitors. Our parking facility is located adjacent to the main building with easy access to the hospital entrance.',
-          expanded: false
-        },
-        {
-          id: 'collapseNine',
-          question: 'Can I change or cancel my appointment?',
-          answer: 'Yes, you can change or cancel your appointment up to 24 hours before the scheduled time through our online portal, mobile app, or by calling our appointment line.',
-          expanded: false
-        },
-        {
-          id: 'collapseTen',
-          question: 'What safety measures do you have in place?',
-          answer: 'We maintain strict hygiene protocols, regular sanitization, social distancing measures, and follow all health authority guidelines to ensure patient and staff safety.',
-          expanded: false
-        }
-      ]
-    }
+    TeamSection,
+    FAQSection
   }
 }
 </script>
@@ -278,84 +212,7 @@ export default {
     <TeamSection />
 
     <!-- FAQ -->
-    <section class="py-5 px-md-5 px-3">
-      <h6 class="text-uppercase border-bsh-accent border-start border-3 ps-2">
-        FAQ
-      </h6>
-      <h2 class="fw-bold mb-4">Frequently Asked Questions</h2>
-
-      <div class="row g-4">
-        <!-- First Column -->
-        <div class="col-md-6">
-          <div class="accordion border-0" id="faqAccordion1">
-            <div
-              v-for="(faq, index) in faqColumn1"
-              :key="faq.id"
-              class="accordion-item border rounded-4 mb-3"
-            >
-              <h2 class="accordion-header">
-                <button
-                  class="accordion-button bg-white fw-bold text-dark rounded-4"
-                  :class="{ collapsed: !faq.expanded }"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  :data-bs-target="`#${faq.id}`"
-                  :aria-expanded="faq.expanded"
-                  :aria-controls="faq.id"
-                >
-                  {{ faq.question }}
-                </button>
-              </h2>
-              <div
-                :id="faq.id"
-                class="accordion-collapse collapse"
-                :class="{ show: faq.expanded }"
-                data-bs-parent="#faqAccordion1"
-              >
-                <div class="accordion-body text-body-tertiary">
-                  {{ faq.answer }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Second Column -->
-        <div class="col-md-6">
-          <div class="accordion" id="faqAccordion2">
-            <div
-              v-for="(faq, index) in faqColumn2"
-              :key="faq.id"
-              class="accordion-item border rounded-4 mb-3"
-            >
-              <h2 class="accordion-header">
-                <button
-                  class="accordion-button bg-white fw-bold text-dark rounded-4"
-                  :class="{ collapsed: !faq.expanded }"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  :data-bs-target="`#${faq.id}`"
-                  :aria-expanded="faq.expanded"
-                  :aria-controls="faq.id"
-                >
-                  {{ faq.question }}
-                </button>
-              </h2>
-              <div
-                :id="faq.id"
-                class="accordion-collapse collapse"
-                :class="{ show: faq.expanded }"
-                data-bs-parent="#faqAccordion2"
-              >
-                <div class="accordion-body text-body-tertiary">
-                  {{ faq.answer }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <FAQSection id="about-page" />
 
     <TestimonialsSection />
     <BlogSection />
