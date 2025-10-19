@@ -47,8 +47,8 @@ export default {
             <router-link to="/doctors" class="nav-link"> Doctors</router-link>
           </li>
           <li class="nav-item px-4">
-            <router-link to="/services" class="nav-link">
-              Find Services</router-link>
+            <router-link to="/blog" class="nav-link">
+              Blog</router-link>
           </li>
           <li class="nav-item px-4">
             <router-link to="/contact" class="nav-link">Contact</router-link>

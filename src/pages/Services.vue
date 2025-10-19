@@ -1,85 +1,71 @@
 <script>
+import BlogCard from '../components/BlogCard.vue'
+import blogsData from '../data/blogs.json'
+
 export default {
-  name: 'Services',
+  name: 'Blog',
+  components: {
+    BlogCard
+  },
   data() {
     return {
-      services: [
-        {
-          id: 1,
-          title: 'Web Development',
-          description: 'Custom web applications built with modern technologies and frameworks',
-          icon: '🌐',
-          features: ['Responsive Design', 'Modern Frameworks', 'SEO Optimized', 'Performance Focused'],
-          price: 'Starting at $2,500'
-        },
-        {
-          id: 2,
-          title: 'Mobile Apps',
-          description: 'Native and cross-platform mobile applications for iOS and Android',
-          icon: '📱',
-          features: ['Cross-Platform', 'Native Performance', 'App Store Ready', 'Push Notifications'],
-          price: 'Starting at $5,000'
-        },
-        {
-          id: 3,
-          title: 'Cloud Solutions',
-          description: 'Scalable cloud infrastructure and deployment solutions',
-          icon: '☁️',
-          features: ['Auto Scaling', 'High Availability', 'Security Focused', '24/7 Monitoring'],
-          price: 'Starting at $1,500'
-        },
-        {
-          id: 4,
-          title: 'Data Analytics',
-          description: 'Business intelligence and data visualization solutions',
-          icon: '📊',
-          features: ['Real-time Analytics', 'Custom Dashboards', 'Data Integration', 'Predictive Models'],
-          price: 'Starting at $3,000'
-        },
-        {
-          id: 5,
-          title: 'AI & Machine Learning',
-          description: 'Intelligent automation and machine learning solutions',
-          icon: '🤖',
-          features: ['Custom AI Models', 'Natural Language Processing', 'Computer Vision', 'Automation'],
-          price: 'Starting at $10,000'
-        },
-        {
-          id: 6,
-          title: 'Consulting',
-          description: 'Technical consulting and digital transformation guidance',
-          icon: '💡',
-          features: ['Strategy Planning', 'Technology Audit', 'Team Training', 'Best Practices'],
-          price: 'Starting at $200/hour'
-        }
-      ],
-      process: [
-        {
-          step: 1,
-          title: 'Discovery',
-          description: 'We analyze your needs and define project requirements'
-        },
-        {
-          step: 2,
-          title: 'Planning',
-          description: 'Create detailed project roadmap and timeline'
-        },
-        {
-          step: 3,
-          title: 'Development',
-          description: 'Build your solution using agile methodology'
-        },
-        {
-          step: 4,
-          title: 'Testing',
-          description: 'Rigorous testing to ensure quality and performance'
-        },
-        {
-          step: 5,
-          title: 'Deployment',
-          description: 'Launch your solution and provide ongoing support'
-        }
-      ]
+      blogs: blogsData.blogs,
+      filteredBlogs: blogsData.blogs,
+      searchQuery: '',
+      selectedCategory: 'All',
+      categories: ['All', 'Technology', 'Mental Health', 'Preventive Care', 'Cardiology', 'Pediatrics', 'Women\'s Health'],
+      isActive: blogsData.active
+    }
+  },
+  methods: {
+    filterBlogs() {
+      let filtered = this.blogs;
+
+      // Filter by category
+      if (this.selectedCategory !== 'All') {
+        filtered = filtered.filter(blog =>
+          blog.category === this.selectedCategory
+        );
+      }
+
+      // Filter by search query
+      if (this.searchQuery) {
+        filtered = filtered.filter(blog =>
+          blog.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          blog.excerpt.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          blog.author.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          blog.tags.some(tag => tag.toLowerCase().includes(this.searchQuery.toLowerCase()))
+        );
+      }
+
+      this.filteredBlogs = filtered;
+    },
+    selectCategory(category) {
+      this.selectedCategory = category;
+      this.filterBlogs();
+    },
+    onSearchInput() {
+      this.filterBlogs();
+    },
+    selectBlog(blog) {
+      this.$router.push(`/blog/${blog.slug}`);
+    },
+    formatDate(dateString) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(dateString).toLocaleDateString(undefined, options);
+    }
+  },
+  computed: {
+    featuredBlogs() {
+      return this.blogs.filter(blog => blog.featured).slice(0, 3);
+    },
+    latestBlogs() {
+      return this.blogs.sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate)).slice(0, 6);
+    }
+  },
+  watch: {
+    searchQuery() {
+      this.filterBlogs();
     }
   }
 }
@@ -91,7 +77,9 @@ export default {
     <section class="page-header">
       <div class="container">
         <h1>Our Services</h1>
-        <p>Comprehensive technology solutions tailored to your business needs</p>
+        <p>
+          Comprehensive technology solutions tailored to your business needs
+        </p>
       </div>
     </section>
 
@@ -100,15 +88,23 @@ export default {
       <div class="container">
         <h2 class="section-title">What We Offer</h2>
         <div class="services-grid">
-          <div v-for="service in services" :key="service.id" class="service-card">
+          <div
+            v-for="service in services"
+            :key="service.id"
+            class="service-card"
+          >
             <div class="service-icon">{{ service.icon }}</div>
             <h3 class="service-title">{{ service.title }}</h3>
             <p class="service-description">{{ service.description }}</p>
             <ul class="service-features">
-              <li v-for="feature in service.features" :key="feature">{{ feature }}</li>
+              <li v-for="feature in service.features" :key="feature">
+                {{ feature }}
+              </li>
             </ul>
             <div class="service-price">{{ service.price }}</div>
-            <router-link to="/contact" class="btn btn-primary">Get Quote</router-link>
+            <router-link to="/contact" class="btn btn-primary"
+              >Get Quote</router-link
+            >
           </div>
         </div>
       </div>
@@ -163,10 +159,16 @@ export default {
     <section class="cta">
       <div class="container">
         <h2>Ready to Start Your Project?</h2>
-        <p>Let's discuss your requirements and create something amazing together</p>
+        <p>
+          Let's discuss your requirements and create something amazing together
+        </p>
         <div class="cta-actions">
-          <router-link to="/contact" class="btn btn-primary">Start Project</router-link>
-          <router-link to="/about" class="btn btn-secondary">Learn More</router-link>
+          <router-link to="/contact" class="btn btn-primary"
+            >Start Project</router-link
+          >
+          <router-link to="/about" class="btn btn-secondary"
+            >Learn More</router-link
+          >
         </div>
       </div>
     </section>
@@ -224,7 +226,7 @@ export default {
   background: white;
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid #e9ecef;
@@ -232,7 +234,7 @@ export default {
 
 .service-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .service-icon {
@@ -266,7 +268,7 @@ export default {
 }
 
 .service-features li::before {
-  content: '✓';
+  content: "✓";
   position: absolute;
   left: 0;
   color: #42b883;
@@ -328,7 +330,7 @@ export default {
 }
 
 .process-step:not(:last-child)::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 25px;
   top: 60px;
@@ -421,20 +423,20 @@ export default {
   .page-header h1 {
     font-size: 2rem;
   }
-  
+
   .services-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .process-step {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .process-step::after {
     display: none;
   }
-  
+
   .step-number {
     margin-right: 0;
     margin-bottom: 1rem;
