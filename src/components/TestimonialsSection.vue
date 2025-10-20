@@ -29,9 +29,9 @@ export default {
       const text = review || "";
       return text.length > 200 ? text.substring(0, 200) + "..." : text;
     },
-    getAvatarUrl(avatar) {
+    getAvatarUrl(testimonial) {
       // Handle null, undefined, empty string, or whitespace-only strings
-      return avatar && avatar.trim() ? avatar : 'https://placehold.co/400';
+      return testimonial.avatar && testimonial.avatar.trim() ? testimonial.avatar :  'https://ui-avatars.com/api/?name=' + encodeURIComponent(testimonial.name);
     },
   },
   computed: {},
@@ -70,7 +70,7 @@ export default {
         <div class="card-footer bg-white border-top-0">
           <div class="d-flex align-items-center">
             <img
-              :src="getAvatarUrl(testimonial.avatar)"
+              :src="testimonial.avatar ||  'https://ui-avatars.com/api/?name=' + encodeURIComponent(testimonial.name)"
               :alt="testimonial.name"
               class="rounded-circle me-2 object-fit-cover"
               style="width: 40px; height: 40px"
