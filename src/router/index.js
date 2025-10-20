@@ -5,11 +5,15 @@ import Doctors from '../pages/Doctors.vue'
 import Blog from '../pages/Blog.vue'
 import BlogDetail from '../pages/BlogDetail.vue'
 import Contact from '../pages/Contact.vue'
+import Services from '../pages/Services.vue'
+import ServiceDetail from '../pages/ServiceDetail.vue'
 
 const routes = [
     { path: '/', component: Home },
     { path: '/about', component: About },
     { path: '/doctors', component: Doctors },
+    { path: '/services', component: Services },
+    { path: '/services/:id', name: 'ServiceDetail', component: ServiceDetail },
     { path: '/blog', component: Blog },
     { path: '/blog/:slug', component: BlogDetail, props: true },
     { path: '/contact', component: Contact }

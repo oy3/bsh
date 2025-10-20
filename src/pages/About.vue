@@ -156,7 +156,7 @@ export default {
 
       <div class="row g-5">
         <div class="col-sm-4">
-          <div class="card bg-info-subtle rounded-4 border-0">
+          <div class="card bg-info-subtle rounded-4 border-0 h-100">
             <div class="card-body">
               <div
                 class="d-flex align-items-center justify-content-center border border-white border-2 rounded-3 mb-3"
@@ -166,14 +166,13 @@ export default {
               </div>
               <h5 class="card-title fw-bold">Our Mission</h5>
               <p class="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                Highly trained professionals deliver quality and compassionate health  services,partnering with various health  insurance and organisations.
               </p>
             </div>
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="card bg-success-subtle rounded-4 border-0">
+          <div class="card bg-success-subtle rounded-4 border-0 h-100">
             <div class="card-body">
               <div
                 class="d-flex align-items-center justify-content-center border border-white border-2 rounded-3 mb-3"
@@ -183,14 +182,13 @@ export default {
               </div>
               <h5 class="card-title fw-bold">Our Vision</h5>
               <p class="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                To be a leading provider of excellent accessible and affordable healthcare services. 
               </p>
             </div>
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="card bg-danger-subtle rounded-4 border-0">
+          <div class="card bg-danger-subtle rounded-4 border-0 h-100">
             <div class="card-body">
               <div
                 class="d-flex align-items-center justify-content-center border border-white border-2 rounded-3 mb-3"
@@ -200,8 +198,7 @@ export default {
               </div>
               <h5 class="card-title fw-bold">Our Values</h5>
               <p class="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                Compassion, Integrity,Excellence, respect and Teamwork
               </p>
             </div>
           </div>

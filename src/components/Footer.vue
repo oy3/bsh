@@ -63,7 +63,7 @@ export default {
               >
             </li>
             <li class="mb-2 py-3">
-              <a href="#" class="text-light text-decoration-none hover-accent"
+              <a href="/doctors" class="text-light text-decoration-none hover-accent"
                 >Doctors</a
               >
             </li>
@@ -86,7 +86,7 @@ export default {
             </li>
             <li class="mb-2 py-3">
               <router-link
-                to="/"
+                to="/blog"
                 class="text-light text-decoration-none hover-accent"
                 >Blog</router-link
               >

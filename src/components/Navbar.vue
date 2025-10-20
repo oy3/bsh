@@ -47,6 +47,10 @@ export default {
             <router-link to="/doctors" class="nav-link"> Doctors</router-link>
           </li>
           <li class="nav-item px-4">
+            <router-link to="/services" class="nav-link">
+              Services</router-link>
+          </li>
+          <li class="nav-item px-4">
             <router-link to="/blog" class="nav-link">
               Blog</router-link>
           </li>

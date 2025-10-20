@@ -1,0 +1,245 @@
+[
+  {
+    "id": "family-health",
+    "title": "Family Health",
+    "shortDescription": "Comprehensive care for every member of your family.",
+    "description": "At BSH, our Family Health service is dedicated to providing comprehensive, patient-centered care for individuals and families across all ages and stages of life. We believe in building long-term relationships with our patients, allowing us to understand your unique health needs and provide personalized care that supports your overall well-being.",
+    "image": "/images/services/family-health.jpg",
+    "icon": "bi-people-fill",
+    "features": [
+      {
+        "title": "Preventive Care",
+        "description": "Regular check-ups, vaccinations, and health screenings."
+      },
+      {
+        "title": "Chronic Disease Management",
+        "description": "Ongoing care for conditions like diabetes, hypertension and asthma."
+      },
+      {
+        "title": "Pediatric Care",
+        "description": "Specialized healthcare for infants, children, and adolescents."
+      },
+      {
+        "title": "Women's Health",
+        "description": "Including gynecological exams, prenatal care, and menopause management."
+      }
+    ],
+    "doctors": ["dr-john-doe", "dr-michael-brown"]
+  },
+  {
+    "id": "surgeries",
+    "title": "Surgeries",
+    "shortDescription": "Advanced surgical procedures with state-of-the-art technology and expert surgeons.",
+    "description": "Our surgery department is equipped with cutting-edge technology and staffed by highly skilled surgeons. We offer a wide range of surgical procedures, from minimally invasive to complex operations, all performed with the highest standards of safety and care.",
+    "image": "/images/services/surgeries.jpg",
+    "icon": "bi-scissors",
+    "features": [
+      {
+        "title": "General Surgery",
+        "description": "Common procedures including appendectomy, hernia repair, and gallbladder removal."
+      },
+      {
+        "title": "Minimally Invasive Surgery",
+        "description": "Laparoscopic procedures for faster recovery and minimal scarring."
+      },
+      {
+        "title": "Emergency Surgery",
+        "description": "24/7 emergency surgical services for acute conditions."
+      },
+      {
+        "title": "Post-operative Care",
+        "description": "Comprehensive recovery support and rehabilitation services."
+      }
+    ],
+    "doctors": ["dr-sarah-johnson", "dr-david-wilson"]
+  },
+  {
+    "id": "gynaecology",
+    "title": "Gynaecology",
+    "shortDescription": "Specialized care for reproductive health, including menopause and hormone health.",
+    "description": "Our gynecology department provides comprehensive care for women's reproductive health. From routine check-ups to complex procedures, our experienced team offers compassionate care in a comfortable and private setting.",
+    "image": "/images/services/gynaecology.jpg",
+    "icon": "bi-gender-female",
+    "features": [
+      {
+        "title": "Routine Check-ups",
+        "description": "Regular gynecological examinations and health screenings."
+      },
+      {
+        "title": "Pregnancy Care",
+        "description": "Comprehensive prenatal and postnatal care services."
+      },
+      {
+        "title": "Fertility Services",
+        "description": "Diagnosis and treatment of fertility issues."
+      },
+      {
+        "title": "Menopause Management",
+        "description": "Support and treatment for menopause-related symptoms."
+      }
+    ],
+    "doctors": ["dr-jane-smith", "dr-lisa-anderson"]
+  },
+  {
+    "id": "haematology",
+    "title": "Haematology",
+    "shortDescription": "Diagnosis and treatment of blood disorders and related conditions.",
+    "description": "Our hematology department specializes in diagnosing and treating disorders of the blood, bone marrow, and lymphatic systems. We offer comprehensive care for both benign and malignant blood conditions.",
+    "image": "/images/services/haematology.jpg",
+    "icon": "bi-droplet-fill",
+    "features": [
+      {
+        "title": "Blood Disorders",
+        "description": "Diagnosis and treatment of anemia, blood clotting disorders, and other conditions."
+      },
+      {
+        "title": "Cancer Care",
+        "description": "Treatment for leukemia, lymphoma, and other blood cancers."
+      },
+      {
+        "title": "Blood Testing",
+        "description": "Advanced diagnostic testing and monitoring services."
+      },
+      {
+        "title": "Transfusion Services",
+        "description": "Safe and efficient blood transfusion services."
+      }
+    ],
+    "doctors": ["dr-robert-chen", "dr-maria-rodriguez"]
+  },
+  {
+    "id": "emergency-care",
+    "title": "Emergency Care",
+    "shortDescription": "24/7 emergency medical services with rapid response times.",
+    "description": "Our emergency department is staffed 24/7 by experienced emergency physicians and nurses. We provide immediate care for all medical emergencies with state-of-the-art equipment and facilities.",
+    "image": "/images/services/emergency.jpg",
+    "icon": "bi-hospital-fill",
+    "features": [
+      {
+        "title": "24/7 Service",
+        "description": "Round-the-clock emergency medical care."
+      },
+      {
+        "title": "Rapid Response",
+        "description": "Quick assessment and treatment of emergency conditions."
+      },
+      {
+        "title": "Advanced Equipment",
+        "description": "State-of-the-art emergency medical facilities."
+      },
+      {
+        "title": "Expert Team",
+        "description": "Skilled emergency physicians and specialists available 24/7."
+      }
+    ],
+    "doctors": ["dr-james-thompson", "dr-emily-parker"]
+  },
+  {
+    "id": "pediatrics",
+    "title": "Pediatrics",
+    "shortDescription": "Specialized healthcare for children from newborns to adolescents.",
+    "description": "Our pediatric department provides comprehensive care for children of all ages. We focus on both preventive care and treatment of childhood illnesses in a child-friendly environment.",
+    "image": "/images/services/pediatrics.jpg",
+    "icon": "bi-heart-fill",
+    "features": [
+      {
+        "title": "Well-Child Visits",
+        "description": "Regular check-ups and developmental assessments."
+      },
+      {
+        "title": "Vaccinations",
+        "description": "Complete immunization services following standard schedules."
+      },
+      {
+        "title": "Acute Care",
+        "description": "Treatment for childhood illnesses and injuries."
+      },
+      {
+        "title": "Behavioral Health",
+        "description": "Support for developmental and behavioral concerns."
+      }
+    ],
+    "doctors": ["dr-jane-smith", "dr-michael-brown"]
+  },
+  {
+    "id": "cardiology",
+    "title": "Cardiology",
+    "shortDescription": "Comprehensive heart care with advanced diagnostic and treatment options.",
+    "description": "Our cardiology department offers state-of-the-art diagnostic testing and treatment for all types of heart conditions. We provide both preventive care and advanced treatment options.",
+    "image": "/images/services/cardiology.jpg",
+    "icon": "bi-heart-pulse-fill",
+    "features": [
+      {
+        "title": "Heart Screening",
+        "description": "Comprehensive cardiac evaluation and risk assessment."
+      },
+      {
+        "title": "Diagnostic Tests",
+        "description": "ECG, stress tests, and advanced cardiac imaging."
+      },
+      {
+        "title": "Treatment Plans",
+        "description": "Personalized care plans for heart conditions."
+      },
+      {
+        "title": "Rehabilitation",
+        "description": "Cardiac rehabilitation and lifestyle modification programs."
+      }
+    ],
+    "doctors": ["dr-william-parker", "dr-susan-lee"]
+  },
+  {
+    "id": "neurology",
+    "title": "Neurology",
+    "shortDescription": "Expert care for disorders of the nervous system.",
+    "description": "Our neurology department specializes in diagnosing and treating conditions affecting the brain, spinal cord, and nervous system. We use advanced technology for accurate diagnosis and treatment.",
+    "image": "/images/services/neurology.jpg",
+    "icon": "bi-brain",
+    "features": [
+      {
+        "title": "Neurological Exams",
+        "description": "Comprehensive evaluation of neurological function."
+      },
+      {
+        "title": "Diagnostic Testing",
+        "description": "EEG, EMG, and advanced neuroimaging services."
+      },
+      {
+        "title": "Treatment Plans",
+        "description": "Customized care for neurological conditions."
+      },
+      {
+        "title": "Rehabilitation",
+        "description": "Neuro-rehabilitation services for recovery and management."
+      }
+    ],
+    "doctors": ["dr-thomas-miller", "dr-rachel-wong"]
+  },
+  {
+    "id": "dermatology",
+    "title": "Dermatology",
+    "shortDescription": "Complete skin care services for all ages.",
+    "description": "Our dermatology department provides comprehensive care for all skin conditions. From routine check-ups to advanced treatments, we offer the latest in dermatological care.",
+    "image": "/images/services/dermatology.jpg",
+    "icon": "bi-bandaid-fill",
+    "features": [
+      {
+        "title": "Skin Examinations",
+        "description": "Thorough skin health evaluations and cancer screenings."
+      },
+      {
+        "title": "Medical Treatments",
+        "description": "Treatment for acne, eczema, and other skin conditions."
+      },
+      {
+        "title": "Surgical Procedures",
+        "description": "Minor surgical procedures for skin conditions."
+      },
+      {
+        "title": "Cosmetic Services",
+        "description": "Advanced cosmetic treatments and procedures."
+      }
+    ],
+    "doctors": ["dr-anna-white", "dr-mark-davis"]
+  }
+]

@@ -15,28 +15,55 @@ export default {
       filteredDoctors: doctorsData.doctors,
       searchQuery: '',
       selectedSpecialty: 'All',
-      specialties: ['All', 'Emergency', 'Pediatric', 'Cardiology', 'Psychiatry', 'Neurology', 'Dermatology', 'Obstetrics & Gynecology', 'Others'],
+      specialties: this.getSpecialties(doctorsData.doctors),
       selectedDoctor: null,
       showDoctorDetail: false
     }
   },
   methods: {
+    formatSpecialties(specialties) {
+      if (!specialties || specialties.length === 0) return '';
+      if (specialties.length === 1) return specialties[0];
+      if (specialties.length === 2) return `${specialties[0]} & ${specialties[1]}`;
+      return specialties.slice(0, -1).join(', ') + ' & ' + specialties[specialties.length - 1];
+    },
+    getSpecialties(doctors) {
+      // Get all specialties from all doctors
+      const allSpecialties = doctors.flatMap(doctor => doctor.specialties);
+      
+      // Get unique specialties
+      const uniqueSpecialties = [...new Set(allSpecialties)];
+      
+      // Sort specialties alphabetically
+      const sortedSpecialties = uniqueSpecialties.sort();
+      
+      // Always include 'All' at the beginning and 'Others' at the end
+      return ['All', ...sortedSpecialties, 'Others'];
+    },
     filterDoctors() {
       let filtered = this.doctors;
       
       // Filter by specialty
       if (this.selectedSpecialty !== 'All') {
-        filtered = filtered.filter(doctor => 
-          doctor.specialty.toLowerCase() === this.selectedSpecialty.toLowerCase() ||
-          (this.selectedSpecialty === 'Pediatric' && doctor.specialty === 'Pediatrics')
-        );
+        if (this.selectedSpecialty === 'Others') {
+          // For 'Others', show doctors whose specialties are not in the main specialties list
+          const mainSpecialties = this.specialties.filter(s => s !== 'All' && s !== 'Others');
+          filtered = filtered.filter(doctor => 
+            !doctor.specialties.some(specialty => mainSpecialties.includes(specialty))
+          );
+        } else {
+          // For specific specialties, show doctors that have that specialty
+          filtered = filtered.filter(doctor => 
+            doctor.specialties.includes(this.selectedSpecialty)
+          );
+        }
       }
       
       // Filter by search query
       if (this.searchQuery) {
         filtered = filtered.filter(doctor =>
           doctor.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          doctor.specialty.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          doctor.specialties.some(s => s.toLowerCase().includes(this.searchQuery.toLowerCase())) ||
           doctor.role.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }

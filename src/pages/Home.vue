@@ -17,38 +17,26 @@ export default {
             services: [
                 {
                     id: 1,
-                    title: 'Dentist',
+                    title: 'Family Health',
                     description: 'Cutting-edge solutions for modern challenges',
                     icon: 'heart-pulse-fill'
                 },
                 {
                     id: 2,
-                    title: 'Pediatrics',
+                    title: 'Surgeries',
                     description: 'Delivering excellence in every project',
                     icon: 'heart-pulse-fill'
                 },
                 {
                     id: 3,
-                    title: 'Cardiology',
+                    title: 'Gynecology',
                     description: '24/7 customer support and maintenance',
                     icon: 'heart-pulse-fill'
                 },
                 {
                     id: 4,
-                    title: 'Dermatology',
+                    title: 'Haematology',
                     description: 'Cutting-edge solutions for modern challenges',
-                    icon: 'heart-pulse-fill'
-                },
-                {
-                    id: 5,
-                    title: 'Gynecology',
-                    description: 'Delivering excellence in every project',
-                    icon: 'heart-pulse-fill'
-                },
-                {
-                    id: 6,
-                    title: 'Orthopedics',
-                    description: '24/7 customer support and maintenance',
                     icon: 'heart-pulse-fill'
                 },
             ]
