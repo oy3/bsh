@@ -23,6 +23,7 @@ export default {
 
     <div class="d-flex justify-content-between align-items-end mb-5">
       <h2 class="fw-bold mb-0">Meet out expert doctors</h2>
+      <router-link to="/doctors" class="link-success link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
       <span class="text-muted d-flex align-items-center">
         <small> View Full Team </small>
         <i
@@ -30,6 +31,7 @@ export default {
           style="transform: rotate(45deg)"
         ></i>
       </span>
+    </router-link>
     </div>
 
     <div class="row row-cols-1 row-cols-md-4 g-4">

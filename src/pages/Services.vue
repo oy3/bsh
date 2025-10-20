@@ -281,7 +281,7 @@ export default {
             :key="testimonial.id"
             class="col-md-4"
           >
-            <div class="card h-100 border-0 shadow-sm">
+            <div class="card bg-light h-100 border-0">
               <div class="card-body p-4">
                 <div class="d-flex align-items-center mb-4">
                   <div class="flex-shrink-0">
@@ -332,22 +332,126 @@ export default {
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section py-5">
+    <!-- Book Appointment -->
+    <section class="appt-section py-5" style="background-color: #cff4fc52">
       <div class="container-fluid px-md-5 px-3">
-        <div class="row align-items-center">
-          <div class="col-lg-8">
+        <div class="row align-items-center g-3">
+          <div class="col-md-6">
             <h2 class="fw-bold mb-4">Ready to Book an Appointment?</h2>
-            <p class="text-muted mb-lg-0">
-              Schedule a consultation with our specialists today. We're here to
-              help you achieve better health.
+            <p class="text-muted mb-4">
+              Fill out the form to schedule an appointment with one of our
+              specialists. Our team will get back to you shortly to confirm your
+              booking.
             </p>
+
+            <div class="d-flex align-items-center">
+              <div class="me-3">
+                <i class="bi bi-clock fs-3 text-bsh-accent"></i>
+              </div>
+              <div class="small">
+                <h6>Opening Hours</h6>
+                <ul class="text-muted p-0 mb-0" style="list-style-type: none">
+                  <li>Monday - Friday: 8:00 AM - 9:00 PM</li>
+                  <li>Saturday: 9:00 AM - 6:00 PM</li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div class="col-lg-4 text-lg-end">
-            <router-link to="/contact" class="btn btn-primary btn-lg px-4">
-              Book Appointment
-              <i class="bi bi-arrow-right ms-2"></i>
-            </router-link>
+          <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body">
+                <form action="">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput2" class="form-label">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleFormControlInput2"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">
+                      Email address
+                    </label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="exampleFormControlInput1"
+                      placeholder="name@example.com"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput3" class="form-label">
+                      Service
+                    </label>
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                    >
+                      <option selected>Open this select menu</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput4" class="form-label">
+                      Preffered Date
+                    </label>
+                    <input
+                      type="datetime-local"
+                      class="form-control"
+                      id="exampleFormControlInput4"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">
+                      Message (Optional)
+                    </label>
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                  <button type="button" class="btn btn-bsh-accent w-100">
+                    Book Appointment
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section bg-bsh-primary py-5">
+      <div class="container-fluid px-md-5 px-3">
+        <div class="text-center">
+          <h2 class="fw-bold">24/7 Emergency Help Line</h2>
+          <p class="mb-4">
+            We are here for you around the clock. Do not hestitate to reach out
+            in an emergency.
+          </p>
+          <div class="d-flex gap-5 col-6 mx-auto">
+            <a
+              class="text-white link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+              href="tel:+2347033449959"
+            >
+              <i class="bi bi-telephone-fill me-1"></i>
+              +234 703 344 9959
+            </a>
+            <a
+              class="text-white link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+              href="mailto:basespecialisthospital@gmail.com"
+            >
+              <i class="bi bi-envelope-fill me-1"></i>
+              basespecialisthospital@gmail.com
+            </a>
           </div>
         </div>
       </div>

@@ -18,26 +18,30 @@ export default {
                 {
                     id: 1,
                     title: 'Family Health',
-                    description: 'Cutting-edge solutions for modern challenges',
-                    icon: 'heart-pulse-fill'
+                    description: 'Comprehensive care for every member of your family.',
+                    icon: 'people-fill',
+                    link: 'family-health'
                 },
                 {
                     id: 2,
                     title: 'Surgeries',
-                    description: 'Delivering excellence in every project',
-                    icon: 'heart-pulse-fill'
+                    description: 'Advanced surgical procedures with state-of-the-art technology.',
+                    icon: 'scissors',
+                      link: 'surgeries'
                 },
                 {
                     id: 3,
                     title: 'Gynecology',
-                    description: '24/7 customer support and maintenance',
-                    icon: 'heart-pulse-fill'
+                    description: 'Specialized care for women\'s reproductive health.',
+                    icon: 'gender-female',
+                             link: 'gynaecology'
                 },
                 {
                     id: 4,
                     title: 'Haematology',
-                    description: 'Cutting-edge solutions for modern challenges',
-                    icon: 'heart-pulse-fill'
+                    description: 'Diagnosis and treatment of blood disorders.',
+                    icon: 'droplet-fill',
+                    link: 'haematology'
                 },
             ]
         }
@@ -72,12 +76,19 @@ export default {
               <p class="fw-light text-secondary">{{ service.description }}</p>
             </div>
             <div class="card-footer bg-white border-top-0">
-              <button
-                class="btn btn-outline-bsh-primary rounded-circle d-flex align-items-center justify-content-center p-0"
-                style="height: 40px; width: 40px"
+              <router-link
+                :to="{
+                  name: 'ServiceDetail',
+                  params: { id: service.link.toLowerCase() },
+                }"
               >
-                <i class="bi bi-arrow-up-right"></i>
-              </button>
+                <button
+                  class="btn btn-outline-bsh-primary rounded-circle d-flex align-items-center justify-content-center p-0"
+                  style="height: 40px; width: 40px"
+                >
+                  <i class="bi bi-arrow-up-right"></i>
+                </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -104,9 +115,9 @@ export default {
                 <i class="bi bi-headset text-primary fs-3 me-2"></i>
                 <div>
                   <h6 class="mb-0 fw-bold" style="font-size: smaller">24/7</h6>
-                  <p class="text-muted mb-0" style="font-size: x-small"
-                    >We are available when you want
-                </p>
+                  <p class="text-muted mb-0" style="font-size: x-small">
+                    We are available when you want
+                  </p>
                 </div>
               </div>
             </div>
@@ -194,13 +205,15 @@ export default {
           </div>
 
           <button
-            class="btn bg-bsh-primary btn-sm d-flex align-items-center rounded-3 px-3"
+            class="btn bg-bsh-primary btn-sm rounded-3 px-3"
           >
-            More About Us
-            <i
-              class="bi bi-arrow-up-short fs-4 d-inline-block mb-0"
-              style="transform: rotate(45deg)"
-            ></i>
+            <router-link to="/about" class="text-decoration-none d-flex align-items-center text-white">
+              More About Us
+              <i
+                class="bi bi-arrow-up-short fs-4 d-inline-block mb-0"
+                style="transform: rotate(45deg)"
+              ></i>
+            </router-link>
           </button>
         </div>
       </div>
@@ -214,7 +227,9 @@ export default {
       <div class="row g-4">
         <div class="col-md-6 d-flex align-items-center">
           <div>
-            <h6 class="text-uppercase border-bsh-accent border-start border-3 ps-2">
+            <h6
+              class="text-uppercase border-bsh-accent border-start border-3 ps-2"
+            >
               Emergency Help Line
             </h6>
             <h2 class="fw-bold mb-4">24/7 Help Line for assitance</h2>
@@ -289,7 +304,6 @@ export default {
 
     <!-- Blog Section Component -->
     <BlogSection />
-
   </div>
 </template>
 
