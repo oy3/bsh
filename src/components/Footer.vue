@@ -1,13 +1,13 @@
 <script>
-import hospitalInfo from '../data/hospital-info.json'
+import hospitalInfo from "../data/hospital-info.json";
 
 export default {
   name: "Footer",
   data() {
     return {
-      info: hospitalInfo
-    }
-  }
+      info: hospitalInfo,
+    };
+  },
 };
 </script>
 
@@ -18,7 +18,12 @@ export default {
         <!-- Company Info & Newsletter -->
         <div class="col-lg-4 col-md-6">
           <div class="d-flex align-items-center mb-3">
-            <img :src="info.logo" :alt="info.shortName" class="me-2" width="30" />
+            <img
+              :src="info.logo"
+              :alt="info.shortName"
+              class="me-2"
+              width="30"
+            />
             <h4 class="mb-0 fw-bold text-white">{{ info.shortName }}</h4>
           </div>
           <p class="text-light mb-4 small">
@@ -42,34 +47,44 @@ export default {
 
           <!-- Social Media Icons -->
           <div class="d-flex gap-3">
-            <a v-if="info.socialMedia.facebook" 
-               :href="info.socialMedia.facebook" 
-               target="_blank"
-               class="text-white-50 hover-accent">
+            <a
+              v-if="info.socialMedia.facebook"
+              :href="info.socialMedia.facebook"
+              target="_blank"
+              class="text-white-50 hover-accent"
+            >
               <i class="bi bi-facebook fs-5"></i>
             </a>
-            <a v-if="info.socialMedia.instagram" 
-               :href="info.socialMedia.instagram" 
-               target="_blank"
-               class="text-white-50 hover-accent">
+            <a
+              v-if="info.socialMedia.instagram"
+              :href="info.socialMedia.instagram"
+              target="_blank"
+              class="text-white-50 hover-accent"
+            >
               <i class="bi bi-instagram fs-5"></i>
             </a>
-            <a v-if="info.socialMedia.twitter" 
-               :href="info.socialMedia.twitter" 
-               target="_blank"
-               class="text-white-50 hover-accent">
+            <a
+              v-if="info.socialMedia.twitter"
+              :href="info.socialMedia.twitter"
+              target="_blank"
+              class="text-white-50 hover-accent"
+            >
               <i class="bi bi-twitter-x fs-5"></i>
             </a>
-            <a v-if="info.socialMedia.youtube" 
-               :href="info.socialMedia.youtube" 
-               target="_blank"
-               class="text-white-50 hover-accent">
+            <a
+              v-if="info.socialMedia.youtube"
+              :href="info.socialMedia.youtube"
+              target="_blank"
+              class="text-white-50 hover-accent"
+            >
               <i class="bi bi-youtube fs-5"></i>
             </a>
-            <a v-if="info.socialMedia.linkedin" 
-               :href="info.socialMedia.linkedin" 
-               target="_blank"
-               class="text-white-50 hover-accent">
+            <a
+              v-if="info.socialMedia.linkedin"
+              :href="info.socialMedia.linkedin"
+              target="_blank"
+              class="text-white-50 hover-accent"
+            >
               <i class="bi bi-linkedin fs-5"></i>
             </a>
           </div>
@@ -86,7 +101,9 @@ export default {
               >
             </li>
             <li class="mb-2 py-3">
-              <a href="/doctors" class="text-light text-decoration-none hover-accent"
+              <a
+                href="/doctors"
+                class="text-light text-decoration-none hover-accent"
                 >Doctors</a
               >
             </li>
@@ -103,16 +120,20 @@ export default {
         <div class="col-lg-2 col-md-6">
           <ul class="list-unstyled">
             <li class="mb-2 py-3">
-              <a href="#" class="text-light text-decoration-none hover-accent"
-                >Appointment</a
+              <router-link
+                to="/contact"
+                class="text-light text-decoration-none hover-accent"
               >
+                Appointment
+              </router-link>
             </li>
             <li class="mb-2 py-3">
               <router-link
                 to="/blog"
                 class="text-light text-decoration-none hover-accent"
-                >Blog</router-link
               >
+                Blog
+              </router-link>
             </li>
             <li class="mb-2 py-3">
               <router-link
@@ -135,16 +156,21 @@ export default {
 
           <div class="mb-4">
             <h6 class="mb-3">Contact</h6>
-            <div 
-              class="mb-2">
+            <div class="mb-2">
               <i class="bi bi-telephone text-bsh-accent me-2"></i>
               <span class="text-light small">
-                {{ info.contact.phones.find(phone => phone.type === 'main').number }}
+                {{
+                  info.contact.phones.find((phone) => phone.type === "main")
+                    .number
+                }}
               </span>
             </div>
             <div class="mb-2">
               <i class="bi bi-envelope text-bsh-accent me-2"></i>
-              <span class="text-light small text-break">{{ info.contact.emails.find(email => email.type === 'general').address }}</span>
+              <span class="text-light small text-break">{{
+                info.contact.emails.find((email) => email.type === "general")
+                  .address
+              }}</span>
             </div>
           </div>
 
