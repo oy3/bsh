@@ -23,11 +23,10 @@
         "title": "Women's Health",
         "description": "Including gynecological exams, prenatal care, and menopause management."
       }
-    ],
-    "doctors": ["dr-john-doe", "dr-michael-brown"]
+    ]
   },
   {
-    "id": "surgeries",
+    "id": "surgery",
     "title": "Surgeries",
     "shortDescription": "Advanced surgical procedures with state-of-the-art technology and expert surgeons.",
     "description": "Our surgery department is equipped with cutting-edge technology and staffed by highly skilled surgeons. We offer a wide range of surgical procedures, from minimally invasive to complex operations, all performed with the highest standards of safety and care.",
@@ -50,8 +49,7 @@
         "title": "Post-operative Care",
         "description": "Comprehensive recovery support and rehabilitation services."
       }
-    ],
-    "doctors": ["dr-sarah-johnson", "dr-david-wilson"]
+    ]
   },
   {
     "id": "gynaecology",
@@ -77,8 +75,7 @@
         "title": "Menopause Management",
         "description": "Support and treatment for menopause-related symptoms."
       }
-    ],
-    "doctors": ["dr-jane-smith", "dr-lisa-anderson"]
+    ]
   },
   {
     "id": "haematology",
@@ -104,8 +101,7 @@
         "title": "Transfusion Services",
         "description": "Safe and efficient blood transfusion services."
       }
-    ],
-    "doctors": ["dr-robert-chen", "dr-maria-rodriguez"]
+    ]
   },
   {
     "id": "emergency-care",
@@ -131,8 +127,7 @@
         "title": "Expert Team",
         "description": "Skilled emergency physicians and specialists available 24/7."
       }
-    ],
-    "doctors": ["dr-james-thompson", "dr-emily-parker"]
+    ]
   },
   {
     "id": "pediatrics",
@@ -158,8 +153,7 @@
         "title": "Behavioral Health",
         "description": "Support for developmental and behavioral concerns."
       }
-    ],
-    "doctors": ["dr-jane-smith", "dr-michael-brown"]
+    ]
   },
   {
     "id": "cardiology",
@@ -185,8 +179,7 @@
         "title": "Rehabilitation",
         "description": "Cardiac rehabilitation and lifestyle modification programs."
       }
-    ],
-    "doctors": ["dr-william-parker", "dr-susan-lee"]
+    ]
   },
   {
     "id": "neurology",
@@ -194,7 +187,7 @@
     "shortDescription": "Expert care for disorders of the nervous system.",
     "description": "Our neurology department specializes in diagnosing and treating conditions affecting the brain, spinal cord, and nervous system. We use advanced technology for accurate diagnosis and treatment.",
     "image": "/images/services/neurology.jpg",
-    "icon": "bi-brain",
+    "icon": "bi-virus",
     "features": [
       {
         "title": "Neurological Exams",
@@ -212,8 +205,7 @@
         "title": "Rehabilitation",
         "description": "Neuro-rehabilitation services for recovery and management."
       }
-    ],
-    "doctors": ["dr-thomas-miller", "dr-rachel-wong"]
+    ]
   },
   {
     "id": "dermatology",
@@ -239,7 +231,6 @@
         "title": "Cosmetic Services",
         "description": "Advanced cosmetic treatments and procedures."
       }
-    ],
-    "doctors": ["dr-anna-white", "dr-mark-davis"]
+    ]
   }
 ]

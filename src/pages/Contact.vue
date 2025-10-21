@@ -1,5 +1,6 @@
 <script>
 import FAQSection from "../components/FAQSection.vue";
+import hospitalInfo from "../data/hospital-info.json";
 
 export default {
   name: "Contact",
@@ -8,6 +9,7 @@ export default {
   },
   data() {
     return {
+      info: hospitalInfo,
       form: {
         firstName: "",
         lastName: "",
@@ -26,20 +28,6 @@ export default {
         { value: "records", label: "Medical Records" },
         { value: "feedback", label: "Feedback & Complaints" },
         { value: "careers", label: "Careers" },
-      ],
-      contactInfo: {
-        address: "22 Demurin Street, Alapere, Lagos 100001",
-        phone: "+234 1 234 5678",
-        emergencyPhone: "+234 1 234 5679",
-        email: "info@bsh.com.ng",
-        emergencyEmail: "emergency@bsh.com.ng",
-        website: "www.bsh.com.ng",
-      },
-      businessHours: [
-        { day: "Monday - Friday", hours: "8:00 AM - 6:00 PM" },
-        { day: "Saturday", hours: "9:00 AM - 4:00 PM" },
-        { day: "Sunday", hours: "10:00 AM - 2:00 PM" },
-        { day: "Emergency Services", hours: "24/7 Available" },
       ],
       isSubmitting: false,
       submitMessage: "",
@@ -147,10 +135,19 @@ export default {
                 <h5 class="fw-bold mb-2 text-danger">Emergency</h5>
                 <p class="text-muted mb-2">24/7 Emergency Line</p>
                 <a
-                  :href="`tel:${contactInfo.emergencyPhone}`"
+                  :href="`tel:${
+                    info.contact.phones.find(
+                      (phone) => phone.type === 'emergency'
+                    ).number
+                  }`"
                   class="text-decoration-none fw-semibold text-danger"
-                  >{{ contactInfo.emergencyPhone }}</a
                 >
+                  {{
+                    info.contact.phones.find(
+                      (phone) => phone.type === "emergency"
+                    ).number
+                  }}
+                </a>
               </div>
             </div>
           </div>
@@ -168,9 +165,15 @@ export default {
                 <h5 class="fw-bold mb-2">General Inquiries</h5>
                 <p class="text-muted mb-2">For appointments & questions</p>
                 <a
-                  :href="`tel:${contactInfo.phone}`"
+                  :href="`tel:${
+                    info.contact.phones.find((phone) => phone.type === 'main')
+                      .number
+                  }`"
                   class="text-decoration-none fw-semibold text-primary"
-                  >{{ contactInfo.phone }}</a
+                  >{{
+                    info.contact.phones.find((phone) => phone.type === "main")
+                      .number
+                  }}</a
                 >
               </div>
             </div>
@@ -189,10 +192,19 @@ export default {
                 <h5 class="fw-bold mb-2">Email Us</h5>
                 <p class="text-muted mb-2">Send us a message</p>
                 <a
-                  :href="`mailto:${contactInfo.email}`"
+                  :href="`mailto:${
+                    info.contact.emails.find(
+                      (email) => email.type === 'general'
+                    ).address
+                  }`"
                   class="text-decoration-none fw-semibold text-success"
-                  >{{ contactInfo.email }}</a
                 >
+                  {{
+                    info.contact.emails.find(
+                      (email) => email.type === "general"
+                    ).address
+                  }}
+                </a>
               </div>
             </div>
           </div>
@@ -209,9 +221,12 @@ export default {
                 </div>
                 <h5 class="fw-bold mb-2">Visit Us</h5>
                 <p class="text-muted mb-2">Our location</p>
-                <p class="fw-semibold text-warning small">
-                  {{ contactInfo.address }}
-                </p>
+                <a
+                  :href="`${info.address.gmap}`"
+                  target="_blank"
+                  class="text-decoration-none fw-semibold text-warning small"
+                  >{{ info.address.fullAddress }}
+                </a>
               </div>
             </div>
           </div>
@@ -362,7 +377,7 @@ export default {
                     <div class="col-12">
                       <button
                         type="submit"
-                        class="btn btn-primary btn-lg px-5"
+                        class="btn btn-bsh-primary btn-lg px-5"
                         :disabled="isSubmitting"
                       >
                         <span
@@ -392,20 +407,53 @@ export default {
                   Business Hours
                 </h5>
                 <div class="space-y-3">
-                  <div
-                    v-for="(schedule, index) in businessHours"
-                    :key="index"
-                    class="d-flex justify-content-between align-items-center py-2"
-                    :class="{
-                      'border-bottom': index < businessHours.length - 1,
-                    }"
+                  <!-- <div
+                    v-for="(hours, day) in info.workingHours.regular"
+                    :key="day"
+                    class="d-flex justify-content-between align-items-center py-2 border-bottom"
                   >
-                    <span class="fw-semibold text-muted">{{
-                      schedule.day
-                    }}</span>
+                    <span class="fw-semibold text-muted">{{ day }}</span>
+                    <span class="text-primary fw-semibold">{{ hours }}</span>
+                  </div> -->
+                  <!-- Weekdays -->
+                  <div
+                    class="d-flex justify-content-between align-items-center py-2 border-bottom"
+                  >
+                    <span class="fw-semibold text-muted">Monday - Friday</span>
                     <span class="text-primary fw-semibold">{{
-                      schedule.hours
+                      info.workingHours.regular.monday
                     }}</span>
+                  </div>
+                  <!-- Saturday -->
+                  <div
+                    class="d-flex justify-content-between align-items-center py-2 border-bottom"
+                  >
+                    <span class="fw-semibold text-muted">Saturday</span>
+                    <span class="text-primary fw-semibold">{{
+                      info.workingHours.regular.saturday
+                    }}</span>
+                  </div>
+                  <!-- Sunday -->
+                  <div
+                    class="d-flex justify-content-between align-items-center py-2 border-bottom"
+                  >
+                    <span class="fw-semibold text-muted">Sunday</span>
+                    <span class="text-primary fw-semibold">{{
+                      info.workingHours.regular.sunday
+                    }}</span>
+                  </div>
+                  <!-- Emergency Hours -->
+                  <div class="">
+                    <div
+                      class="d-flex justify-content-between align-items-center py-2"
+                    >
+                      <span class="fw-semibold text-danger"
+                        >Emergency Care</span
+                      >
+                      <span class="text-danger fw-semibold">{{
+                        info.workingHours.emergency
+                      }}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -420,19 +468,30 @@ export default {
                 </h5>
                 <div class="d-grid gap-2">
                   <a
-                    :href="`tel:${contactInfo.emergencyPhone}`"
+                    :href="`tel:${
+                      info.contact.phones.find(
+                        (phone) => phone.type === 'emergency'
+                      ).number
+                    }`"
                     class="btn btn-danger"
                   >
                     <i class="bi bi-telephone-fill me-2"></i>Emergency Line
                   </a>
                   <a
-                    :href="`tel:${contactInfo.phone}`"
+                    :href="`tel:${
+                      info.contact.phones.find((phone) => phone.type === 'main')
+                        .number
+                    }`"
                     class="btn btn-outline-primary"
                   >
                     <i class="bi bi-headset me-2"></i>General Inquiries
                   </a>
                   <a
-                    :href="`mailto:${contactInfo.email}`"
+                    :href="`mailto:${
+                      info.contact.emails.find(
+                        (email) => email.type === 'general'
+                      ).address
+                    }`"
                     class="btn btn-outline-success"
                   >
                     <i class="bi bi-envelope me-2"></i>Email Us
@@ -499,7 +558,7 @@ export default {
                   <div class="card-body p-3">
                     <h6 class="fw-bold mb-1">Base Specialist Hospital</h6>
                     <p class="text-muted small mb-0">
-                      {{ contactInfo.address }}
+                      {{ info.address.fullAddress }}
                     </p>
                   </div>
                 </div>

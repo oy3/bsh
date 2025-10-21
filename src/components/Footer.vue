@@ -1,6 +1,13 @@
 <script>
+import hospitalInfo from '../data/hospital-info.json'
+
 export default {
   name: "Footer",
+  data() {
+    return {
+      info: hospitalInfo
+    }
+  }
 };
 </script>
 
@@ -11,13 +18,11 @@ export default {
         <!-- Company Info & Newsletter -->
         <div class="col-lg-4 col-md-6">
           <div class="d-flex align-items-center mb-3">
-            <img src="/src/assets/bsh.svg" alt="" class="me-2" width="30" />
-            <h4 class="mb-0 fw-bold text-white">BSH</h4>
+            <img :src="info.logo" :alt="info.shortName" class="me-2" width="30" />
+            <h4 class="mb-0 fw-bold text-white">{{ info.shortName }}</h4>
           </div>
           <p class="text-light mb-4 small">
-            BSH a world of comprehensive healthcare where your well-being takes
-            center stage. At BSH, we're dedicated to providing you with
-            personalized and compassionate medical services.
+            {{ info.description }}
           </p>
 
           <!-- Newsletter Subscription -->
@@ -37,17 +42,35 @@ export default {
 
           <!-- Social Media Icons -->
           <div class="d-flex gap-3">
-            <a href="#" class="text-white-50 hover-accent">
+            <a v-if="info.socialMedia.facebook" 
+               :href="info.socialMedia.facebook" 
+               target="_blank"
+               class="text-white-50 hover-accent">
               <i class="bi bi-facebook fs-5"></i>
             </a>
-            <a href="#" class="text-white-50 hover-accent">
+            <a v-if="info.socialMedia.instagram" 
+               :href="info.socialMedia.instagram" 
+               target="_blank"
+               class="text-white-50 hover-accent">
               <i class="bi bi-instagram fs-5"></i>
             </a>
-            <a href="#" class="text-white-50 hover-accent">
+            <a v-if="info.socialMedia.twitter" 
+               :href="info.socialMedia.twitter" 
+               target="_blank"
+               class="text-white-50 hover-accent">
               <i class="bi bi-twitter-x fs-5"></i>
             </a>
-            <a href="#" class="text-white-50 hover-accent">
+            <a v-if="info.socialMedia.youtube" 
+               :href="info.socialMedia.youtube" 
+               target="_blank"
+               class="text-white-50 hover-accent">
               <i class="bi bi-youtube fs-5"></i>
+            </a>
+            <a v-if="info.socialMedia.linkedin" 
+               :href="info.socialMedia.linkedin" 
+               target="_blank"
+               class="text-white-50 hover-accent">
+              <i class="bi bi-linkedin fs-5"></i>
             </a>
           </div>
         </div>
@@ -106,22 +129,37 @@ export default {
           <div class="mb-5">
             <h6 class="mb-3">Address</h6>
             <p class="text-light small mb-1">
-              22 Demurin Street, Alapere, LA 100001
+              {{ info.address.fullAddress }}
             </p>
-            <p class="text-light small">Nigeria</p>
           </div>
 
-          <div class="mb-2">
+          <div class="mb-4">
             <h6 class="mb-3">Contact</h6>
-            <i class="bi bi-telephone text-bsh-accent me-2"></i>
-            <span class="text-light small">+234 123 456 7890</span>
+            <div 
+              class="mb-2">
+              <i class="bi bi-telephone text-bsh-accent me-2"></i>
+              <span class="text-light small">
+                {{ info.contact.phones.find(phone => phone.type === 'main').number }}
+              </span>
+            </div>
+            <div class="mb-2">
+              <i class="bi bi-envelope text-bsh-accent me-2"></i>
+              <span class="text-light small text-break">{{ info.contact.emails.find(email => email.type === 'general').address }}</span>
+            </div>
           </div>
-          <div class="mb-2">
-            <i class="bi bi-envelope text-bsh-accent me-2"></i>
-            <span class="text-light small text-break"
-              >info@basespecialisthospital.com</span
-            >
-          </div>
+
+          <!-- <div class="mb-2">
+            <h6 class="mb-3">Working Hours</h6>
+            <div v-for="(hours, day) in info.workingHours.regular" 
+                 :key="day" 
+                 class="mb-1">
+              <span class="text-light small text-capitalize">{{ day }}: </span>
+              <span class="text-light small">{{ hours }}</span>
+            </div>
+            <div class="mt-2">
+              <span class="badge bg-danger">24/7 Emergency Care Available</span>
+            </div>
+          </div> -->
         </div>
       </div>
 

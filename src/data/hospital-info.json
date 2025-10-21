@@ -1,0 +1,64 @@
+{
+  "name": "Base Specialist Hospital",
+  "shortName": "BSH",
+  "logo": "/src/assets/bsh.svg",
+  "slogan": "Comprehensive healthcare where your well-being takes center stage",
+  "description": "BSH a world of comprehensive healthcare where your well-being takes center stage. At BSH, we're dedicated to providing you with personalized and compassionate medical services.",
+  "address": {
+    "street": "22 Demurin Street",
+    "area": "Alapere",
+    "city": "Lagos",
+    "state": "LA",
+    "postalCode": "100001",
+    "country": "Nigeria",
+    "fullAddress": "22 Demurin Street, Alapere, Lagos 100001, Nigeria",
+    "coordinates": {
+      "latitude": "6.5944",
+      "longitude": "3.3887"
+    },
+    "gmap": "https://maps.app.goo.gl/59KoTkEN1yfN7gobA"
+  },
+  "contact": {
+    "phones": [
+      {
+        "number": "+234 703 344 9959",
+        "type": "main",
+        "isEmergency": false 
+      },
+      {
+        "number": "+234 703 344 9959",
+        "type": "emergency",
+        "isEmergency": true
+      }
+    ],
+    "emails": [
+      {
+        "address": "info@basespecialisthospital.ng",
+        "type": "general"
+      },
+      {
+        "address": "basespecialisthospital@gmail.com",
+        "type": "appointments"
+      }
+    ]
+  },
+  "workingHours": {
+    "regular": {
+      "monday": "8:00 AM - 9:00 PM",
+      "tuesday": "8:00 AM - 9:00 PM",
+      "wednesday": "8:00 AM - 9:00 PM",
+      "thursday": "8:00 AM - 9:00 PM",
+      "friday": "8:00 AM - 9:00 PM",
+      "saturday": "9:00 AM - 6:00 PM",
+      "sunday": "Closed"
+    },
+    "emergency": "24/7"
+  },
+  "socialMedia": {
+    "facebook": "https://facebook.com/basespecialisthospital",
+    "instagram": "https://instagram.com/basespecialisthospital",
+    "twitter": "https://twitter.com/basespecialist",
+    "youtube": "https://youtube.com/basespecialisthospital",
+    "linkedin": "https://linkedin.com/company/basespecialisthospital"
+  }
+}

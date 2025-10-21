@@ -4,6 +4,7 @@ export default {
   data() {
     return {
       scrolled: false,
+      isNavOpen: false,
     };
   },
   mounted() {
@@ -15,6 +16,18 @@ export default {
   methods: {
     handleScroll() {
       this.scrolled = window.scrollY > 50;
+    },
+    closeNavbar() {
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      const navbarCollapse = document.querySelector('.navbar-collapse');
+      if (navbarCollapse.classList.contains('show')) {
+        navbarToggler.click();
+      }
+    },
+  },
+  watch: {
+    $route() {
+      this.closeNavbar();
     },
   },
 };

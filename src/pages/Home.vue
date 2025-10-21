@@ -3,6 +3,7 @@ import HeroSection from '../components/HeroSection.vue'
 import Testimonials from '../components/TestimonialsSection.vue'
 import BlogSection from '../components/BlogSection.vue'
 import TeamSection from '../components/TeamSection.vue'
+import hospitalInfo from "../data/hospital-info.json";
 
 export default {
     name: 'Home',
@@ -14,6 +15,7 @@ export default {
     },
     data() {
         return {
+                info: hospitalInfo,
             services: [
                 {
                     id: 1,
@@ -204,10 +206,11 @@ export default {
             </div>
           </div>
 
-          <button
-            class="btn bg-bsh-primary btn-sm rounded-3 px-3"
-          >
-            <router-link to="/about" class="text-decoration-none d-flex align-items-center text-white">
+          <button class="btn bg-bsh-primary btn-sm rounded-3 px-3">
+            <router-link
+              to="/about"
+              class="text-decoration-none d-flex align-items-center text-white"
+            >
               More About Us
               <i
                 class="bi bi-arrow-up-short fs-4 d-inline-block mb-0"
@@ -245,7 +248,13 @@ export default {
                     <i class="bi bi-telephone me-3 fs-4 text-bsh-accent"></i>
                     <div class="d-grid small">
                       <span class="fw-bold">Phone Number</span>
-                      <span class="text-body-tertiary">+234 123 4567</span>
+                      <span class="text-body-tertiary">
+                        {{
+                          info.contact.phones.find(
+                            (phone) => phone.type === "emergency"
+                          ).number
+                        }}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -257,7 +266,11 @@ export default {
                     <div class="d-grid small">
                       <span class="fw-bold">Email Address</span>
                       <span class="text-body-tertiary text-break">
-                        info@basespecialisthospital.com
+                        {{
+                          info.contact.emails.find(
+                            (email) => email.type === "general"
+                          ).address
+                        }}
                       </span>
                     </div>
                   </div>

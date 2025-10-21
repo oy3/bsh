@@ -23,7 +23,7 @@ export default {
   <div class="doctor-detail-view">
     <!-- Back Button -->
     <div class="mb-4">
-      <button @click="goBack" class="btn btn-sm btn-outline-primary">
+      <button @click="goBack" class="btn btn-sm btn-outline-bsh-primary">
         <i class="bi bi-arrow-left me-2"></i>Back
       </button>
     </div>
@@ -41,7 +41,7 @@ export default {
                 class="card-img-top"
                 style="height: 500px; object-fit: cover; object-position: center 20%;"
               >
-              <div class="card-body text-center bg-primary text-white py-3">
+              <div class="card-body text-center bg-bsh-primary text-white py-3">
                 <h5 class="mb-0 fw-bold">{{ doctor.division }}</h5>
               </div>
             </div>
@@ -50,7 +50,7 @@ export default {
           <!-- Doctor Info -->
           <div class="col-lg-7 ps-lg-5 mt-4 mt-lg-0">
             <div class="mb-4">
-              <h1 class="display-5 fw-bold text-primary mb-2">{{ doctor.name }}, {{ doctor.titles }}</h1>
+              <h1 class="display-5 fw-bold text-bsh-primary mb-2">{{ doctor.name }}, {{ doctor.titles }}</h1>
               <h4 class="text-muted mb-3">{{ doctor.role }}</h4>
               <p class="lead text-muted">{{ doctor.overview }}</p>
             </div>
@@ -90,7 +90,7 @@ export default {
             <div class="row g-3 mb-4">
               <div class="col-md-6">
                 <div class="d-flex align-items-center">
-                  <i class="bi bi-telephone-fill text-primary me-3 fs-5"></i>
+                  <i class="bi bi-telephone-fill text-bsh-accent me-3 fs-5"></i>
                   <div>
                     <div class="text-muted small">Phone</div>
                     <div class="fw-semibold">{{ doctor.phone }}</div>
@@ -99,7 +99,7 @@ export default {
               </div>
               <div class="col-md-6">
                 <div class="d-flex align-items-center">
-                  <i class="bi bi-envelope-fill text-primary me-3 fs-5"></i>
+                  <i class="bi bi-envelope-fill text-bsh-accent me-3 fs-5"></i>
                   <div>
                     <div class="text-muted small">Email</div>
                     <div class="fw-semibold">{{ doctor.email }}</div>
@@ -112,7 +112,7 @@ export default {
             <div class="card border-0 shadow-sm rounded-3">
               <div class="card-body">
                 <div class="d-flex align-items-center mb-3">
-                  <i class="bi bi-calendar-check text-primary me-2 fs-4"></i>
+                  <i class="bi bi-calendar-check text-bsh-accent me-2 fs-4"></i>
                   <h5 class="mb-0 fw-bold">Appointment Schedules</h5>
                 </div>
                 <div class="row g-2">
@@ -149,7 +149,7 @@ export default {
           <!-- Degrees -->
           <div class="col-lg-6 mb-4 mb-lg-0">
             <div class="d-flex align-items-center mb-4">
-              <i class="bi bi-mortarboard text-primary me-3 fs-3"></i>
+              <i class="bi bi-mortarboard text-bsh-accent me-3 fs-3"></i>
               <h3 class="mb-0 fw-bold">Degrees</h3>
             </div>
             <div class="space-y-3">
@@ -158,9 +158,9 @@ export default {
                 :key="index"
                 class="d-flex align-items-start mb-3"
               >
-                <div class="bg-primary rounded-circle me-3 mt-1" style="width: 8px; height: 8px; min-width: 8px;"></div>
+                <div class="bg-bsh-accent rounded-circle me-3 mt-1" style="width: 8px; height: 8px; min-width: 8px;"></div>
                 <div>
-                  <div class="fw-semibold text-primary">{{ degree.school }}</div>
+                  <div class="fw-semibold text-bsh-accent">{{ degree.school }}</div>
                   <div class="text-muted">{{ degree.degree }}</div>
                 </div>
               </div>
@@ -170,7 +170,7 @@ export default {
           <!-- Experiences -->
           <div class="col-lg-6">
             <div class="d-flex align-items-center mb-4">
-              <i class="bi bi-briefcase text-primary me-3 fs-3"></i>
+              <i class="bi bi-briefcase text-bsh-accent me-3 fs-3"></i>
               <h3 class="mb-0 fw-bold">Experiences</h3>
             </div>
             <div class="space-y-3">
@@ -179,7 +179,7 @@ export default {
                 :key="index"
                 class="d-flex align-items-start mb-3"
               >
-                <div class="bg-primary rounded-circle me-3 mt-1" style="width: 8px; height: 8px; min-width: 8px;"></div>
+                <div class="bg-bsh-accent rounded-circle me-3 mt-1" style="width: 8px; height: 8px; min-width: 8px;"></div>
                 <div class="text-muted">{{ experience }}</div>
               </div>
             </div>

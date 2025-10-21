@@ -1,58 +1,15 @@
 <script>
 import testimonialData from "../data/testimonials.json";
+import hospitalInfo from "../data/hospital-info.json";
+import servicesData from "../data/services.json";
 
 export default {
   name: "Services",
   data() {
     return {
+      info: hospitalInfo,
+      services: servicesData,
       testimonials: testimonialData,
-      otherServices: [
-        {
-          id: "emergency-care",
-          title: "Emergency Care",
-          description: "24/7 emergency medical services",
-          icon: "bi bi-hospital-fill text-danger",
-          iconClass:
-            "bg-danger bg-opacity-10 rounded-circle me-3 d-flex align-items-center justify-content-center",
-          arrowClass: "text-danger",
-        },
-        {
-          id: "pediatrics",
-          title: "Pediatrics",
-          description: "Specialized healthcare for children",
-          icon: "bi bi-heart-fill text-primary",
-          iconClass:
-            "bg-primary bg-opacity-10 rounded-circle me-3 d-flex align-items-center justify-content-center",
-          arrowClass: "text-primary",
-        },
-        {
-          id: "cardiology",
-          title: "Cardiology",
-          description: "Comprehensive heart care services",
-          icon: "bi bi-heart-pulse-fill text-success",
-          iconClass:
-            "bg-success bg-opacity-10 rounded-circle me-3 d-flex align-items-center justify-content-center",
-          arrowClass: "text-success",
-        },
-        {
-          id: "neurology",
-          title: "Neurology",
-          description: "Expert care for nervous system disorders",
-          icon: "bi bi-brain text-info",
-          iconClass:
-            "bg-info bg-opacity-10 rounded-circle me-3 d-flex align-items-center justify-content-center",
-          arrowClass: "text-info",
-        },
-        {
-          id: "dermatology",
-          title: "Dermatology",
-          description: "Complete skin care services",
-          icon: "bi bi-bandaid-fill text-warning",
-          iconClass:
-            "bg-warning bg-opacity-10 rounded-circle me-3 d-flex align-items-center justify-content-center",
-          arrowClass: "text-warning",
-        },
-      ],
       benefits: [
         {
           id: 1,
@@ -80,6 +37,23 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    mainServices() {
+      return this.services.filter((service) =>
+        ["family-health", "surgery", "gynaecology", "haematology"].includes(
+          service.id
+        )
+      );
+    },
+    otherServices() {
+      return this.services.filter(
+        (service) =>
+          !["family-health", "surgery", "gynaecology", "haematology"].includes(
+            service.id
+          )
+      );
+    },
   },
 };
 </script>
@@ -117,82 +91,26 @@ export default {
         <h2 class="section-title text-center mb-5">What We Offer</h2>
 
         <div class="row g-4">
-          <!-- Family Health -->
-          <div class="col-md-6 col-lg-3">
+          <div
+            v-for="(service, index) in mainServices"
+            :key="service.id"
+            class="col-md-6 col-lg-3"
+          >
             <router-link
-              :to="{ name: 'ServiceDetail', params: { id: 'family-health' } }"
+              :to="{ name: 'ServiceDetail', params: { id: service.id } }"
               class="card text-bg-light h-100 border-0 hover-card text-decoration-none"
             >
               <div class="card-body p-4">
                 <div
-                  class="icon-wrapper bg-primary bg-opacity-10 rounded-circle mb-4 d-flex align-items-center justify-content-center"
+                  class="icon-wrapper rounded-circle mb-4 d-flex align-items-center justify-content-center bg-primary bg-opacity-10"
                 >
-                  <i class="bi bi-people-fill text-primary fs-2"></i>
+                  <i
+                    class="text-bsh-primary fs-3 bi"
+                    :class="[service.icon]"
+                  ></i>
                 </div>
-                <h5 class="fw-bold mb-3 text-dark">Family Health</h5>
-                <p class="text-muted mb-0">
-                  Comprehensive care for every member of your family.
-                </p>
-              </div>
-            </router-link>
-          </div>
-
-          <!-- Surgeries -->
-          <div class="col-md-6 col-lg-3">
-            <router-link
-              :to="{ name: 'ServiceDetail', params: { id: 'surgeries' } }"
-              class="card text-bg-light h-100 border-0 hover-card text-decoration-none"
-            >
-              <div class="card-body p-4">
-                <div
-                  class="icon-wrapper bg-success bg-opacity-10 rounded-circle mb-4 d-flex align-items-center justify-content-center"
-                >
-                  <i class="bi bi-scissors text-success fs-2"></i>
-                </div>
-                <h5 class="fw-bold mb-3 text-dark">Surgeries</h5>
-                <p class="text-muted mb-0">
-                  Advanced surgical procedures with state-of-the-art technology.
-                </p>
-              </div>
-            </router-link>
-          </div>
-
-          <!-- Gynaecology -->
-          <div class="col-md-6 col-lg-3">
-            <router-link
-              :to="{ name: 'ServiceDetail', params: { id: 'gynaecology' } }"
-              class="card text-bg-light h-100 border-0 hover-card text-decoration-none"
-            >
-              <div class="card-body p-4">
-                <div
-                  class="icon-wrapper bg-danger bg-opacity-10 rounded-circle mb-4 d-flex align-items-center justify-content-center"
-                >
-                  <i class="bi bi-gender-female text-danger fs-2"></i>
-                </div>
-                <h5 class="fw-bold mb-3 text-dark">Gynaecology</h5>
-                <p class="text-muted mb-0">
-                  Specialized care for women's reproductive health.
-                </p>
-              </div>
-            </router-link>
-          </div>
-
-          <!-- Haematology -->
-          <div class="col-md-6 col-lg-3">
-            <router-link
-              :to="{ name: 'ServiceDetail', params: { id: 'haematology' } }"
-              class="card text-bg-light h-100 border-0 hover-card text-decoration-none"
-            >
-              <div class="card-body p-4">
-                <div
-                  class="icon-wrapper bg-warning bg-opacity-10 rounded-circle mb-4 d-flex align-items-center justify-content-center"
-                >
-                  <i class="bi bi-droplet-fill text-warning fs-2"></i>
-                </div>
-                <h5 class="fw-bold mb-3 text-dark">Haematology</h5>
-                <p class="text-muted mb-0">
-                  Diagnosis and treatment of blood disorders.
-                </p>
+                <h5 class="fw-bold mb-3 text-dark">{{ service.title }}</h5>
+                <p class="text-muted mb-0">{{ service.shortDescription }}</p>
               </div>
             </router-link>
           </div>
@@ -203,31 +121,35 @@ export default {
           <h3 class="fw-bold mb-4">Other Services</h3>
           <div class="row g-4">
             <div
-              v-for="service in otherServices"
+              v-for="(service, index) in otherServices"
               :key="service.id"
               class="col-md-6 col-lg-4"
             >
               <router-link
                 :to="{ name: 'ServiceDetail', params: { id: service.id } }"
-                class="card border-0 shadow-sm hover-card text-decoration-none"
+                class="card border-0 shadow-sm hover-card text-decoration-none h-100"
               >
                 <div class="card-body p-4">
                   <div class="d-flex align-items-center">
-                    <div class="icon-wrapper" :class="service.iconClass">
-                      <i :class="service.icon"></i>
+                    <div>
+                      <div
+                        class="icon-wrapper rounded-circle me-3 d-flex align-items-center justify-content-center bg-opacity-10 bg-success"
+                      >
+                        <i
+                          class="bi text-bsh-accent fs-4"
+                          :class="[service.icon]"
+                        ></i>
+                      </div>
                     </div>
                     <div>
                       <h5 class="fw-bold mb-2 text-dark">
                         {{ service.title }}
                       </h5>
                       <p class="text-muted mb-0 small">
-                        {{ service.description }}
+                        {{ service.shortDescription }}
                       </p>
                     </div>
-                    <i
-                      class="bi bi-chevron-right ms-auto"
-                      :class="service.arrowClass"
-                    ></i>
+                    <i class="bi bi-chevron-right ms-auto text-bsh-accent"></i>
                   </div>
                 </div>
               </router-link>
@@ -350,9 +272,13 @@ export default {
               </div>
               <div class="small">
                 <h6>Opening Hours</h6>
-                <ul class="text-muted p-0 mb-0" style="list-style-type: none">
-                  <li>Monday - Friday: 8:00 AM - 9:00 PM</li>
-                  <li>Saturday: 9:00 AM - 6:00 PM</li>
+                <ul
+                  v-for="(hours, day) in info.workingHours.regular"
+                  :key="day"
+                  class="text-muted text-capitalize p-0 mb-0"
+                  style="list-style-type: none"
+                >
+                  <li class="mb-2">{{ day }}: {{ hours }}</li>
                 </ul>
               </div>
             </div>
@@ -437,20 +363,32 @@ export default {
             We are here for you around the clock. Do not hestitate to reach out
             in an emergency.
           </p>
-          <div class="d-flex gap-5 col-6 mx-auto">
+          <div class="d-flex gap-5 col-md-6 mx-auto">
             <a
               class="text-white link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-              href="tel:+2347033449959"
+              :href="`tel:${
+                info.contact.phones.find((phone) => phone.type === 'emergency')
+                  .number
+              }`"
             >
               <i class="bi bi-telephone-fill me-1"></i>
-              +234 703 344 9959
+              {{
+                info.contact.phones.find((phone) => phone.type === "emergency")
+                  .number
+              }}
             </a>
             <a
               class="text-white link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-              href="mailto:basespecialisthospital@gmail.com"
+              :href="`mailto:${
+                info.contact.emails.find((email) => email.type === 'general')
+                  .address
+              }`"
             >
               <i class="bi bi-envelope-fill me-1"></i>
-              basespecialisthospital@gmail.com
+              {{
+                info.contact.emails.find((email) => email.type === "general")
+                  .address
+              }}
             </a>
           </div>
         </div>
