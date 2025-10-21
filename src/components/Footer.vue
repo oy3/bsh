@@ -18,8 +18,7 @@ export default {
         <!-- Company Info & Newsletter -->
         <div class="col-lg-4 col-md-6">
           <div class="d-flex align-items-center mb-3">
-            <img
-              :src="info.logo"
+            <img src="/src/assets/bsh.svg" 
               :alt="info.shortName"
               class="me-2"
               width="30"

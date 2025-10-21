@@ -1,7 +1,7 @@
 {
   "name": "Base Specialist Hospital",
   "shortName": "BSH",
-  "logo": "/src/assets/bsh.svg",
+  "logo": "../src/assets/bsh.svg",
   "slogan": "Comprehensive healthcare where your well-being takes center stage",
   "description": "BSH a world of comprehensive healthcare where your well-being takes center stage. At BSH, we're dedicated to providing you with personalized and compassionate medical services.",
   "address": {
