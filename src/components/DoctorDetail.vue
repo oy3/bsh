@@ -1,22 +1,25 @@
 <script>
 export default {
-  name: 'DoctorDetailView',
+  name: "DoctorDetailView",
   props: {
     doctor: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  emits: ['back'],
+  emits: ["back"],
   methods: {
     goBack() {
-      this.$emit('back')
+      this.$emit("back");
     },
     hasValidSocialLink(platform) {
-      return this.doctor?.socialMedia?.[platform] && this.doctor.socialMedia[platform] !== ''
-    }
-  }
-}
+      return (
+        this.doctor?.socialMedia?.[platform] &&
+        this.doctor.socialMedia[platform] !== ""
+      );
+    },
+  },
+};
 </script>
 
 <template>
@@ -29,18 +32,26 @@ export default {
     </div>
 
     <!-- Doctor Profile Section -->
-    <div class="py-5 rounded-4" style="background-color: #e8f4fd;">
+    <div class="py-5 rounded-4" style="background-color: #e8f4fd">
       <div class="container-fluid">
         <div class="row align-items-center">
           <!-- Doctor Image -->
           <div class="col-lg-5">
             <div class="card border-0 rounded-4 overflow-hidden shadow-lg">
-              <img 
-                :src="doctor.image" 
+              <img
+                :src="
+                  doctor.image
+                    ? doctor.image
+                    : 'https://placehold.co/400x400?text=IMG'
+                "
                 :alt="doctor.name"
                 class="card-img-top"
-                style="height: 500px; object-fit: cover; object-position: center 20%;"
-              >
+                style="
+                  height: 500px;
+                  object-fit: cover;
+                  object-position: center 20%;
+                "
+              />
               <div class="card-body text-center bg-bsh-primary text-white py-3">
                 <h5 class="mb-0 fw-bold">{{ doctor.division }}</h5>
               </div>
@@ -50,37 +61,39 @@ export default {
           <!-- Doctor Info -->
           <div class="col-lg-7 ps-lg-5 mt-4 mt-lg-0">
             <div class="mb-4">
-              <h1 class="display-5 fw-bold text-bsh-primary mb-2">{{ doctor.name }}, {{ doctor.titles }}</h1>
+              <h1 class="display-5 fw-bold text-bsh-primary mb-2">
+                {{ doctor.name }}, {{ doctor.titles }}
+              </h1>
               <h4 class="text-muted mb-3">{{ doctor.role }}</h4>
               <p class="lead text-muted">{{ doctor.overview }}</p>
             </div>
 
             <!-- Social Media -->
             <div class="d-flex gap-3 mb-4">
-              <a 
+              <a
                 v-if="hasValidSocialLink('facebook')"
-                :href="doctor.socialMedia.facebook" 
+                :href="doctor.socialMedia.facebook"
                 target="_blank"
                 class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center"
-                style="width: 50px; height: 50px;"
+                style="width: 50px; height: 50px"
               >
                 <i class="bi bi-facebook"></i>
               </a>
-              <a 
+              <a
                 v-if="hasValidSocialLink('linkedin')"
-                :href="doctor.socialMedia.linkedin" 
+                :href="doctor.socialMedia.linkedin"
                 target="_blank"
                 class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center"
-                style="width: 50px; height: 50px;"
+                style="width: 50px; height: 50px"
               >
                 <i class="bi bi-linkedin"></i>
               </a>
-              <a 
+              <a
                 v-if="hasValidSocialLink('instagram')"
-                :href="doctor.socialMedia.instagram" 
+                :href="doctor.socialMedia.instagram"
                 target="_blank"
                 class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center"
-                style="width: 50px; height: 50px;"
+                style="width: 50px; height: 50px"
               >
                 <i class="bi bi-instagram"></i>
               </a>
@@ -93,7 +106,7 @@ export default {
                   <i class="bi bi-telephone-fill text-bsh-accent me-3 fs-5"></i>
                   <div>
                     <div class="text-muted small">Phone</div>
-                    <div class="fw-semibold">{{ doctor.phone }}</div>
+                    <div class="fw-semibold">{{ doctor.phone ? doctor.phone : 'N/A' }}</div>
                   </div>
                 </div>
               </div>
@@ -102,7 +115,7 @@ export default {
                   <i class="bi bi-envelope-fill text-bsh-accent me-3 fs-5"></i>
                   <div>
                     <div class="text-muted small">Email</div>
-                    <div class="fw-semibold">{{ doctor.email }}</div>
+                    <div class="fw-semibold">{{ doctor.email ? doctor.email : 'N/A' }}</div>
                   </div>
                 </div>
               </div>
@@ -153,14 +166,19 @@ export default {
               <h3 class="mb-0 fw-bold">Degrees</h3>
             </div>
             <div class="space-y-3">
-              <div 
-                v-for="(degree, index) in doctor.degrees" 
+              <div
+                v-for="(degree, index) in doctor.degrees"
                 :key="index"
                 class="d-flex align-items-start mb-3"
               >
-                <div class="bg-bsh-accent rounded-circle me-3 mt-1" style="width: 8px; height: 8px; min-width: 8px;"></div>
+                <div
+                  class="bg-bsh-accent rounded-circle me-3 mt-1"
+                  style="width: 8px; height: 8px; min-width: 8px"
+                ></div>
                 <div>
-                  <div class="fw-semibold text-bsh-accent">{{ degree.school }}</div>
+                  <div class="fw-semibold text-bsh-accent">
+                    {{ degree.school }}
+                  </div>
                   <div class="text-muted">{{ degree.degree }}</div>
                 </div>
               </div>
@@ -174,12 +192,15 @@ export default {
               <h3 class="mb-0 fw-bold">Experiences</h3>
             </div>
             <div class="space-y-3">
-              <div 
-                v-for="(experience, index) in doctor.experiences" 
+              <div
+                v-for="(experience, index) in doctor.experiences"
                 :key="index"
                 class="d-flex align-items-start mb-3"
               >
-                <div class="bg-bsh-accent rounded-circle me-3 mt-1" style="width: 8px; height: 8px; min-width: 8px;"></div>
+                <div
+                  class="bg-bsh-accent rounded-circle me-3 mt-1"
+                  style="width: 8px; height: 8px; min-width: 8px"
+                ></div>
                 <div class="text-muted">{{ experience }}</div>
               </div>
             </div>

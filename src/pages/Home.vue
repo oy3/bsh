@@ -4,6 +4,7 @@ import Testimonials from '../components/TestimonialsSection.vue'
 import BlogSection from '../components/BlogSection.vue'
 import TeamSection from '../components/TeamSection.vue'
 import hospitalInfo from "../data/hospital-info.json";
+import servicesData from "../data/services.json";
 
 export default {
     name: 'Home',
@@ -15,37 +16,17 @@ export default {
     },
     data() {
         return {
-                info: hospitalInfo,
-            services: [
-                {
-                    id: 1,
-                    title: 'Family Health',
-                    description: 'Comprehensive care for every member of your family.',
-                    icon: 'people-fill',
-                    link: 'family-health'
-                },
-                {
-                    id: 2,
-                    title: 'Surgeries',
-                    description: 'Advanced surgical procedures with state-of-the-art technology.',
-                    icon: 'scissors',
-                      link: 'surgeries'
-                },
-                {
-                    id: 3,
-                    title: 'Gynecology',
-                    description: 'Specialized care for women\'s reproductive health.',
-                    icon: 'gender-female',
-                             link: 'gynaecology'
-                },
-                {
-                    id: 4,
-                    title: 'Haematology',
-                    description: 'Diagnosis and treatment of blood disorders.',
-                    icon: 'droplet-fill',
-                    link: 'haematology'
-                },
-            ]
+            info: hospitalInfo,
+            allServices: servicesData,
+        }
+    },
+    computed: {
+        services() {
+            // Filter and return the main services for the home page
+            const mainServiceIds = ['family-health', 'surgery', 'gynaecology', 'haematology'];
+            return this.allServices.filter(service => 
+                mainServiceIds.includes(service.id)
+            );
         }
     }
 }
@@ -64,28 +45,28 @@ export default {
       <h2 class="fw-bold mb-5">Healthcare services for your well-being</h2>
 
       <div class="row g-4">
-        <div class="col-md-4" v-for="service in services" :key="service.id">
-          <div class="card p-3 h-100 rounded-4 border-light-subtle">
+        <div class="col-md-3" v-for="service in services" :key="service.id">
+          <div class="card p-1 h-100 rounded-4 border-light-subtle">
             <div class="card-header bg-white border-bottom-0">
               <i
                 class="d-flex align-items-center justify-content-center border rounded-3 fs-3 text-bsh-accent"
-                :class="`bi bi-${service.icon}`"
-                style="width: 56px; height: 56px"
+                :class="service.icon"
+                style="width: 50px; height: 50px"
               ></i>
             </div>
             <div class="card-body">
               <h6 class="fw-bold">{{ service.title }}</h6>
-              <p class="fw-light text-secondary">{{ service.description }}</p>
+              <p class="fw-light text-secondary small">{{ service.shortDescription }}</p>
             </div>
             <div class="card-footer bg-white border-top-0">
               <router-link
                 :to="{
                   name: 'ServiceDetail',
-                  params: { id: service.link.toLowerCase() },
+                  params: { id: service.id },
                 }"
               >
                 <button
-                  class="btn btn-outline-bsh-primary rounded-circle d-flex align-items-center justify-content-center p-0"
+                  class="btn btn-outline-bsh-accent rounded-circle d-flex align-items-center justify-content-center p-0"
                   style="height: 40px; width: 40px"
                 >
                   <i class="bi bi-arrow-up-right"></i>
@@ -157,7 +138,7 @@ export default {
           </h4>
 
           <p class="text-black-50 mb-3">
-            BSH is a leading healthcare provider in the UK. We are committed to
+            BSH is a leading healthcare provider in the Nigeria. We are committed to
             providing the best healthcare services to our patients. We have a
             team of highly qualified professionals who are dedicated to
             providing the best care possible.
