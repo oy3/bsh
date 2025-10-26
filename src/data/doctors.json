@@ -36,7 +36,7 @@
       "division": "Haematology",
       "phone": null,
       "email": null,
-      "image": null,
+      "image": "/images/doctors/tosin_adeyemi.png",
       "specialties": ["Haematology"],
       "overview": "Dr. Oluwatosin is a skilled haematologist specializing in blood disorders and related conditions.",
       "degrees": [
@@ -133,7 +133,7 @@
       "division": "Obstetrics and Gynaecology",
       "phone": null,
       "email": null,
-      "image": null,
+      "image": "/images/doctors/jesudemu.png",
       "specialties": ["Gynaecology"],
       "overview": "Dr. Jesudemi specializes in gynaecology with a focus on comprehensive women's healthcare.",
       "degrees": [
