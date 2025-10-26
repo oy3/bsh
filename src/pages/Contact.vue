@@ -1,6 +1,7 @@
 <script>
 import FAQSection from "../components/FAQSection.vue";
 import hospitalInfo from "../data/hospital-info.json";
+import emailService from "../services/emailService.js";
 
 export default {
   name: "Contact",
@@ -41,14 +42,22 @@ export default {
       this.isSubmitting = true;
       this.submitMessage = "";
 
-      // Simulate form submission
-      setTimeout(() => {
+      try {
+        const result = await emailService.sendContactEmail(this.form);
+        
         this.isSubmitting = false;
-        this.submitSuccess = true;
-        this.submitMessage =
-          "Thank you for contacting us! We'll respond within 24 hours.";
-        this.resetForm();
-      }, 2000);
+        this.submitSuccess = result.success;
+        this.submitMessage = result.message;
+        
+        if (result.success) {
+          this.resetForm();
+        }
+      } catch (error) {
+        this.isSubmitting = false;
+        this.submitSuccess = false;
+        this.submitMessage = "An error occurred. Please try again later.";
+        console.error('Form submission error:', error);
+      }
     },
     validateForm() {
       const required = [

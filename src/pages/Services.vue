@@ -2,6 +2,7 @@
 import testimonialData from "../data/testimonials.json";
 import hospitalInfo from "../data/hospital-info.json";
 import servicesData from "../data/services.json";
+import emailService from "../services/emailService.js";
 
 export default {
   name: "Services",
@@ -10,6 +11,16 @@ export default {
       info: hospitalInfo,
       services: servicesData,
       testimonials: testimonialData,
+      appointmentForm: {
+        fullName: "",
+        email: "",
+        service: "",
+        preferredDate: "",
+        message: "",
+      },
+      isSubmittingAppointment: false,
+      appointmentMessage: "",
+      appointmentSuccess: false,
       benefits: [
         {
           id: 1,
@@ -53,6 +64,56 @@ export default {
             service.id
           )
       );
+    },
+  },
+  methods: {
+    async submitAppointment() {
+      if (!this.validateAppointmentForm()) return;
+
+      this.isSubmittingAppointment = true;
+      this.appointmentMessage = "";
+
+      try {
+        const result = await emailService.sendAppointmentEmail(this.appointmentForm);
+        
+        this.isSubmittingAppointment = false;
+        this.appointmentSuccess = result.success;
+        this.appointmentMessage = result.message;
+        
+        if (result.success) {
+          this.resetAppointmentForm();
+        }
+      } catch (error) {
+        this.isSubmittingAppointment = false;
+        this.appointmentSuccess = false;
+        this.appointmentMessage = "An error occurred. Please try again later.";
+        console.error('Appointment submission error:', error);
+      }
+    },
+    validateAppointmentForm() {
+      const required = ["fullName", "email", "service", "preferredDate"];
+      for (let field of required) {
+        if (!this.appointmentForm[field]) {
+          alert(`Please fill in the ${field.replace(/([A-Z])/g, " $1").toLowerCase()} field.`);
+          return false;
+        }
+      }
+      return true;
+    },
+    resetAppointmentForm() {
+      this.appointmentForm = {
+        fullName: "",
+        email: "",
+        service: "",
+        preferredDate: "",
+        message: "",
+      };
+
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        this.appointmentMessage = "";
+        this.appointmentSuccess = false;
+      }, 5000);
     },
   },
 };
@@ -286,65 +347,101 @@ export default {
           <div class="col-md-6">
             <div class="card border-0 shadow-sm">
               <div class="card-body">
-                <form action="">
+                <!-- Success Message -->
+                <div
+                  v-if="appointmentSuccess"
+                  class="alert alert-success d-flex align-items-center mb-4"
+                >
+                  <i class="bi bi-check-circle-fill me-2"></i>
+                  {{ appointmentMessage }}
+                </div>
+
+                <!-- Error Message -->
+                <div
+                  v-if="!appointmentSuccess && appointmentMessage"
+                  class="alert alert-danger d-flex align-items-center mb-4"
+                >
+                  <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                  {{ appointmentMessage }}
+                </div>
+
+                <form @submit.prevent="submitAppointment">
                   <div class="mb-3">
-                    <label for="exampleFormControlInput2" class="form-label">
-                      Full Name
+                    <label for="appointmentName" class="form-label">
+                      Full Name *
                     </label>
                     <input
                       type="text"
                       class="form-control"
-                      id="exampleFormControlInput2"
+                      id="appointmentName"
+                      v-model="appointmentForm.fullName"
                       placeholder="John Doe"
+                      required
                     />
                   </div>
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">
-                      Email address
+                    <label for="appointmentEmail" class="form-label">
+                      Email address *
                     </label>
                     <input
                       type="email"
                       class="form-control"
-                      id="exampleFormControlInput1"
+                      id="appointmentEmail"
+                      v-model="appointmentForm.email"
                       placeholder="name@example.com"
+                      required
                     />
                   </div>
                   <div class="mb-3">
-                    <label for="exampleFormControlInput3" class="form-label">
-                      Service
+                    <label for="appointmentService" class="form-label">
+                      Service *
                     </label>
                     <select
                       class="form-select"
-                      aria-label="Default select example"
+                      id="appointmentService"
+                      v-model="appointmentForm.service"
+                      required
                     >
-                      <option selected>Open this select menu</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                      <option value="">Select a service</option>
+                      <option v-for="service in services" :key="service.id" :value="service.title">
+                        {{ service.title }}
+                      </option>
                     </select>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleFormControlInput4" class="form-label">
-                      Preffered Date
+                    <label for="appointmentDate" class="form-label">
+                      Preferred Date *
                     </label>
                     <input
                       type="datetime-local"
                       class="form-control"
-                      id="exampleFormControlInput4"
+                      id="appointmentDate"
+                      v-model="appointmentForm.preferredDate"
+                      required
                     />
                   </div>
                   <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">
+                    <label for="appointmentMessage" class="form-label">
                       Message (Optional)
                     </label>
                     <textarea
                       class="form-control"
-                      id="exampleFormControlTextarea1"
+                      id="appointmentMessage"
+                      v-model="appointmentForm.message"
                       rows="3"
+                      placeholder="Any additional information..."
                     ></textarea>
                   </div>
-                  <button type="button" class="btn btn-bsh-accent w-100">
-                    Book Appointment
+                  <button 
+                    type="submit" 
+                    class="btn btn-bsh-accent w-100"
+                    :disabled="isSubmittingAppointment"
+                  >
+                    <span
+                      v-if="isSubmittingAppointment"
+                      class="spinner-border spinner-border-sm me-2"
+                    ></span>
+                    {{ isSubmittingAppointment ? 'Booking...' : 'Book Appointment' }}
                   </button>
                 </form>
               </div>
