@@ -120,7 +120,7 @@ export default {
           <ul class="list-unstyled">
             <li class="mb-2 py-3">
               <router-link
-                to="/contact"
+               to="/services#book-appt"
                 class="text-light text-decoration-none hover-accent"
               >
                 Appointment

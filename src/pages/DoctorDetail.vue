@@ -211,7 +211,7 @@ export default {
                 <p class="text-muted mb-4">
                   Schedule a consultation with {{ doctor.name }}.
                 </p>
-                <router-link to="/contact" class="btn btn-bsh-accent w-100 mb-3">
+                <router-link  to="/services#book-appt" class="btn btn-bsh-accent w-100 mb-3">
                   Request Appointment
                   <i class="bi bi-arrow-right ms-2"></i>
                 </router-link>

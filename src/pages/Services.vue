@@ -316,7 +316,7 @@ export default {
     </section>
 
     <!-- Book Appointment -->
-    <section class="appt-section py-5" style="background-color: #cff4fc52">
+    <section id="book-appt" class="appt-section py-5" style="background-color: #cff4fc52">
       <div class="container-fluid px-md-5 px-3">
         <div class="row align-items-center g-3">
           <div class="col-md-6">

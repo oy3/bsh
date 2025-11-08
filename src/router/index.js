@@ -29,6 +29,19 @@ const router = createRouter({
         if (savedPosition) {
             return savedPosition
         }
+        // If there's a hash, scroll to that element
+        if (to.hash) {
+            // Add a small delay to ensure the element is rendered
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        el: to.hash,
+                        behavior: 'smooth',
+                        top: 80 // Offset for fixed navbar
+                    })
+                }, 100)
+            })
+        }
         // For all other navigation, scroll to top
         return { top: 0 }
     }

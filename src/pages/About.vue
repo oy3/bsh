@@ -21,9 +21,13 @@ export default {
     <section class="hero-banner position-relative overflow-hidden py-5">
       <div class="hero-overlay position-absolute w-100 h-100"></div>
       <div class="container-fluid px-md-5 px-3 position-relative">
-        <div class="row min-vh-50 d-flex align-items-center justify-content-center text-center py-5">
+        <div
+          class="row min-vh-50 d-flex align-items-center justify-content-center text-center py-5"
+        >
           <div class="col-lg-8">
-            <h6 class="text-white text-uppercase mb-3 fw-light tracking-wider">About</h6>
+            <h6 class="text-white text-uppercase mb-3 fw-light tracking-wider">
+              About
+            </h6>
             <h1 class="text-white display-4 fw-bold mb-0">
               Dedicated to your Health and Wellness
             </h1>
@@ -53,9 +57,9 @@ export default {
                 <i class="bi bi-headset text-primary fs-3 me-2"></i>
                 <div>
                   <h6 class="mb-0 fw-bold" style="font-size: smaller">24/7</h6>
-                  <p class="text-muted mb-0" style="font-size: x-small"
-                    >We are available when you want
-                </p>
+                  <p class="text-muted mb-0" style="font-size: x-small">
+                    We are available when you want
+                  </p>
                 </div>
               </div>
             </div>
@@ -93,10 +97,10 @@ export default {
           </h4>
 
           <p class="text-black-50 mb-3">
-            Base Specialist Hospital is a leading healthcare provider in the Nigeria. We are committed to
-            providing the best healthcare services to our patients. We have a
-            team of highly qualified professionals who are dedicated to
-            providing the best care possible.
+            Base Specialist Hospital is a leading healthcare provider in the
+            Nigeria. We are committed to providing the best healthcare services
+            to our patients. We have a team of highly qualified professionals
+            who are dedicated to providing the best care possible.
           </p>
 
           <div class="row mb-4">
@@ -142,15 +146,18 @@ export default {
             </div>
           </div>
 
-          <button
-            class="btn bg-bsh-primary btn-sm d-flex align-items-center rounded-3 px-3"
+          <router-link
+            to="/services#book-appt"
+            class="btn bg-bsh-primary btn-sm rounded-3 px-3"
           >
-            Book Appointment
-            <i
-              class="bi bi-arrow-up-short fs-4 d-inline-block mb-0"
-              style="transform: rotate(45deg)"
-            ></i>
-          </button>
+            <span class="d-flex align-items-center">
+              Book Appointment
+              <i
+                class="bi bi-arrow-up-short fs-4 d-inline-block mb-0"
+                style="transform: rotate(45deg)"
+              ></i>
+            </span>
+          </router-link>
         </div>
       </div>
 
@@ -166,7 +173,9 @@ export default {
               </div>
               <h5 class="card-title fw-bold">Our Mission</h5>
               <p class="card-text">
-                Highly trained professionals deliver quality and compassionate health  services,partnering with various health  insurance and organisations.
+                Highly trained professionals deliver quality and compassionate
+                health services,partnering with various health insurance and
+                organisations.
               </p>
             </div>
           </div>
@@ -182,7 +191,8 @@ export default {
               </div>
               <h5 class="card-title fw-bold">Our Vision</h5>
               <p class="card-text">
-                To be a leading provider of excellent accessible and affordable healthcare services. 
+                To be a leading provider of excellent accessible and affordable
+                healthcare services.
               </p>
             </div>
           </div>
@@ -222,12 +232,20 @@ export default {
 }
 
 .hero-banner {
-  background: linear-gradient(135deg, var(--bsh-primary) 0%, var(--bsh-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--bsh-primary) 0%,
+    var(--bsh-secondary) 100%
+  );
   min-height: 50vh;
 }
 
 .hero-overlay {
-  background: linear-gradient(135deg, rgba(44, 62, 80, 0.8) 0%, rgba(26, 37, 47, 0.9) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(44, 62, 80, 0.8) 0%,
+    rgba(26, 37, 47, 0.9) 100%
+  );
 }
 
 .min-vh-50 {
@@ -242,11 +260,11 @@ export default {
   .hero-banner {
     min-height: 40vh;
   }
-  
+
   .min-vh-50 {
     min-height: 40vh;
   }
-  
+
   .hero-banner h1 {
     font-size: 2.5rem !important;
   }

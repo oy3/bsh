@@ -8,7 +8,7 @@
       "division": "General Medicine",
       "phone": null,
       "email": null,
-      "image": null,
+      "image": "/images/doctors/olayinka_adeyemi.jpeg",
       "specialties": ["General Medicine"],
       "overview": "Dr. Adeyemi is a dedicated resident physician with expertise in general medicine and primary care.",
       "degrees": [
@@ -36,17 +36,17 @@
       "division": "Haematology",
       "phone": null,
       "email": null,
-      "image": "/images/doctors/tosin_adeyemi.png",
+      "image": "/images/doctors/tosin_adeyemi.jpeg",
       "specialties": ["Haematology"],
       "overview": "Dr. Oluwatosin is a skilled haematologist specializing in blood disorders and related conditions.",
       "degrees": [
         {
-          "school": "Medical School",
+          "school": "Olabisi Onabanjo University",
           "degree": "Doctor of Medicine (MD)"
         },
         {
-          "school": "Medical School",
-          "degree": "Fellowship in Haematology"
+          "school": "Ogun State National Postgraduate Medical College of Nigeria",
+          "degree": "Fellowship"
         }
       ],
       "experiences": [
@@ -100,7 +100,7 @@
       "division": "Gynaecology and Obstetrics",
       "phone": null,
       "email": null,
-      "image": null,
+      "image": "/images/doctors/adekunle.jpeg",
       "specialties": ["Gynaecology", "Obstetrics"],
       "overview": "Dr. Olayiwola is a specialized gynaecologist and obstetrician with extensive experience in women's health.",
       "degrees": [
@@ -133,7 +133,7 @@
       "division": "Obstetrics and Gynaecology",
       "phone": null,
       "email": null,
-      "image": "/images/doctors/jesudemu.png",
+      "image": "/images/doctors/jesudemu.jpeg",
       "specialties": ["Gynaecology"],
       "overview": "Dr. Jesudemi specializes in gynaecology with a focus on comprehensive women's healthcare.",
       "degrees": [
