@@ -21,6 +21,7 @@ export default {
       isSubmittingAppointment: false,
       appointmentMessage: "",
       appointmentSuccess: false,
+      minAppointmentDate: this.getMinDate(),
       benefits: [
         {
           id: 1,
@@ -67,6 +68,20 @@ export default {
     },
   },
   methods: {
+    getMinDate() {
+      // Get current date and add 24 hours
+      const now = new Date();
+      now.setHours(now.getHours() + 24);
+      
+      // Format as datetime-local format (YYYY-MM-DDTHH:mm)
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      
+      return `${year}-${month}-${day}T${hours}:${minutes}`;
+    },
     async submitAppointment() {
       if (!this.validateAppointmentForm()) return;
 
@@ -410,13 +425,14 @@ export default {
                   </div>
                   <div class="mb-3">
                     <label for="appointmentDate" class="form-label">
-                      Preferred Date *
+                      Preferred Date & Time *
                     </label>
                     <input
                       type="datetime-local"
                       class="form-control"
                       id="appointmentDate"
                       v-model="appointmentForm.preferredDate"
+                      :min="minAppointmentDate"
                       required
                     />
                   </div>
