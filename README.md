@@ -19,6 +19,9 @@ A modern, responsive healthcare website for Base Specialist Hospital built with 
 - **Doctors**: Doctor listing with filtering and individual doctor profile pages
 - **Blog**: Blog listing and detailed blog post pages
 - **Contact**: Contact form, business hours, emergency information, and FAQ
+- **Privacy Policy**: NDPR-compliant privacy policy with sidebar navigation
+- **Terms & Conditions**: Full legal terms covering medical disclaimers, appointments, and governing law
+- **Licenses & Accreditations**: Hospital regulatory credentials, specialty certifications, and HMO partners
 
 ### Technical Features
 - ✅ Vue 3 with Composition API
@@ -98,19 +101,20 @@ cd bsh
 npm install
 ```
 
-3. **Set up EmailJS (Optional - for contact/appointment emails)**
-   - Sign up at [emailjs.com](https://emailjs.com)
-   - Configure your email service (Zoho Mail or Gmail)
-   - Create email templates
-   - Update `src/services/emailService.js` with your keys:
-   ```javascript
-   const EMAIL_CONFIG = {
-     serviceId: 'your_service_id',
-     contactTemplateId: 'your_contact_template_id',
-     appointmentTemplateId: 'your_appointment_template_id',
-     publicKey: 'your_public_key',
-   };
+3. **Set up environment variables**
+   - Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
    ```
+   - Fill in your EmailJS values in `.env`:
+   ```env
+   VITE_EMAILJS_PUBLIC_KEY=your_public_key
+   VITE_EMAILJS_SERVICE_ID=your_service_id
+   VITE_EMAILJS_CONTACT_TEMPLATE_ID=your_contact_template_id
+   VITE_EMAILJS_APPOINTMENT_TEMPLATE_ID=your_appointment_template_id
+   ```
+   - Sign up at [emailjs.com](https://emailjs.com) if you haven't already
+   - **Never commit the `.env` file** — it is git-ignored
 
 ### Development
 
@@ -219,6 +223,9 @@ The application uses Vue Router with hash-based scrolling for smooth navigation 
 - `/blog` - Blog listing
 - `/blog/:slug` - Blog post page
 - `/contact` - Contact page
+- `/privacy-policy` - Privacy Policy
+- `/terms` - Terms & Conditions
+- `/licenses` - Licenses & Accreditations
 
 ### Hash Navigation
 To link to specific sections on a page, use hash anchors:
@@ -244,26 +251,110 @@ Bootstrap 5 grid system is used for responsive layouts.
 
 ## 🚀 Deployment
 
-### Deploy to DigitalOcean (or any server)
+### Automated Deploy via GitHub Actions (recommended)
+
+Pushes and merges to `main` automatically build and deploy to DigitalOcean. See [CI/CD Setup](#-cicd--github-actions) below.
+
+### Manual Deploy to DigitalOcean
 
 1. **Build the project**
 ```bash
 npm run build
 ```
 
-2. **Upload the `dist/` folder** to your server using FileZilla or similar FTP client
+2. **Upload the `dist/` folder** to your server via FileZilla (SFTP to `/var/www/bsh`)
 
-3. **Configure your web server** (Apache/Nginx) to serve the `dist/` folder as the root
+3. **Nginx** serves the `dist/` contents — ensure the SPA fallback config is in place
 
-4. **Set up SSL certificate** for HTTPS (recommended)
+4. **Set up SSL certificate** via Certbot for HTTPS (already active at basespecialistshospital.com)
 
-### Deploy to Netlify (Recommended)
+### Deploy to Netlify (alternative)
 
 1. Push code to GitHub
 2. Connect repository to Netlify
 3. Build command: `npm run build`
 4. Publish directory: `dist`
-5. Deploy!
+5. Add `VITE_EMAILJS_*` env vars in Netlify dashboard
+6. Deploy!
+
+---
+
+## 🚀 CI/CD — GitHub Actions
+
+The project uses GitHub Actions for automated deployment to DigitalOcean on every push to `main`.
+
+### Branch Strategy
+
+```
+main          ← production-only, protected — auto-deploys to server
+  └── development  ← active work branch, daily commits go here
+        └── feature/xxx  ← optional per-feature branches
+```
+
+**Workflow:**
+1. Do all your work on the `development` branch
+2. Open a Pull Request: `development` → `main`
+3. Merge the PR → GitHub Actions automatically builds and deploys
+
+### GitHub Actions Secrets Required
+
+Go to your repo on GitHub → **Settings → Secrets and variables → Actions → New repository secret** and add:
+
+| Secret Name | Value |
+|---|---|
+| `SSH_PRIVATE_KEY` | Your deploy private key (see SSH Key Setup below) |
+| `SSH_HOST` | `134.122.96.171` |
+| `SSH_USER` | Your server user (e.g., `root`) |
+| `SSH_PORT` | `22` |
+| `DEPLOY_PATH` | `/var/www/bsh` |
+| `VITE_EMAILJS_PUBLIC_KEY` | Your EmailJS public key |
+| `VITE_EMAILJS_SERVICE_ID` | Your EmailJS service ID |
+| `VITE_EMAILJS_CONTACT_TEMPLATE_ID` | Contact form template ID |
+| `VITE_EMAILJS_APPOINTMENT_TEMPLATE_ID` | Appointment template ID |
+
+### SSH Key Setup (one-time)
+
+1. **Generate a dedicated deploy key** (on your local machine or server):
+```bash
+ssh-keygen -t ed25519 -C "github-actions-deploy" -f ~/.ssh/bsh_deploy_key -N ""
+```
+This creates two files: `bsh_deploy_key` (private) and `bsh_deploy_key.pub` (public).
+
+2. **Add the public key to your DO server** (SSH in as your normal user):
+```bash
+cat ~/.ssh/bsh_deploy_key.pub | ssh root@134.122.96.171 "cat >> ~/.ssh/authorized_keys"
+```
+
+3. **Add the private key to GitHub Secrets** as `SSH_PRIVATE_KEY`:
+```bash
+cat ~/.ssh/bsh_deploy_key
+```
+Copy the entire output (including `-----BEGIN...` and `-----END...` lines) into the GitHub Secret.
+
+### Nginx SPA Configuration
+
+Ensure your Nginx config on the server handles Vue Router's history mode — all unknown paths must return `index.html`:
+
+```nginx
+server {
+    listen 80;
+    root /var/www/bsh;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+
+### Protect `main` Branch on GitHub
+
+Go to your repo → **Settings → Branches → Add branch ruleset**:
+- Branch name pattern: `main`
+- ✅ Require a pull request before merging
+- ✅ Require at least 1 approval (optional for solo projects)
+- ✅ Block direct pushes
+- ✅ Restrict deletions
 
 ## 📦 Dependencies
 
@@ -303,6 +394,7 @@ For support or questions about the BSH website, please contact:
 
 ---
 
-**Last Updated**: December 2025
+**Last Updated**: April 2026
 **Project**: Base Specialist Hospital Website
 **Built with**: Vue 3 + Vite + Bootstrap 5
+**Deployed to**: DigitalOcean (134.122.96.171) via GitHub Actions

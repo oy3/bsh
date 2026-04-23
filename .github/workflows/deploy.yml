@@ -1,0 +1,59 @@
+name: Deploy to Production
+
+# Triggers only when code is pushed/merged into main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy to DigitalOcean
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Pull the code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js with npm cache for faster installs
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Clean install — uses package-lock.json for reproducible builds
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Build the app — injects EmailJS secrets as VITE_ env vars at build time
+      - name: Build
+        env:
+          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
+          VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}
+          VITE_EMAILJS_CONTACT_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_CONTACT_TEMPLATE_ID }}
+          VITE_EMAILJS_APPOINTMENT_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_APPOINTMENT_TEMPLATE_ID }}
+        run: npm run build
+
+      # 5. Write the SSH private key to a temp file and trust the server host
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      # 6. Sync dist/ to the server web root — only changed files are uploaded
+      #    --delete removes files on server that no longer exist in dist/
+      - name: Deploy via rsync
+        run: |
+          rsync -avzr --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }}" \
+            dist/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
+
+      # 7. Clean up the private key from the runner
+      - name: Cleanup SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
