@@ -44,8 +44,20 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      # 6. Sync dist/ to the server web root — only changed files are uploaded
-      #    --delete removes files on server that no longer exist in dist/
+      # 6. Ensure the deploy path exists on the server and is not root
+      - name: Verify deploy path
+        run: |
+          DEPLOY_PATH="${{ secrets.DEPLOY_PATH }}"
+          if [ -z "$DEPLOY_PATH" ] || [ "$DEPLOY_PATH" = "/" ]; then
+            echo "ERROR: DEPLOY_PATH secret is missing or set to root (/). Aborting."
+            exit 1
+          fi
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            "mkdir -p $DEPLOY_PATH"
+
+      # 7. Sync dist/ to the server web root — only changed files are uploaded
+      #    --delete removes files on the server that no longer exist in dist/
       - name: Deploy via rsync
         run: |
           rsync -avzr --delete \
