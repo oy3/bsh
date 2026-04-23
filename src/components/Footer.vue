@@ -18,7 +18,8 @@ export default {
         <!-- Company Info & Newsletter -->
         <div class="col-lg-4 col-md-6">
           <div class="d-flex align-items-center mb-3">
-            <img src="/src/assets/bsh.svg" 
+            <img
+              src="/src/assets/bsh.svg"
               :alt="info.shortName"
               class="me-2"
               width="30"
@@ -90,43 +91,38 @@ export default {
         </div>
 
         <!-- Quick Links -->
-        <div class="col-lg-2 col-md-6">
-          <ul class="list-unstyled">
-            <li class="mb-2 py-3">
+        <div class="col-lg-4 col-md-6 d-flex justify-content-center">
+          <ul class="list-unstyled" style="column-count: 2">
+            <li class="mb-4">
               <router-link
                 to="/about"
                 class="text-light text-decoration-none hover-accent"
                 >About Us</router-link
               >
             </li>
-            <li class="mb-2 py-3">
+            <li class="mb-4">
               <a
                 href="/doctors"
                 class="text-light text-decoration-none hover-accent"
                 >Doctors</a
               >
             </li>
-            <li class="mb-2 py-3">
+            <li class="mb-4">
               <router-link
                 to="/services"
                 class="text-light text-decoration-none hover-accent"
                 >Our Services</router-link
               >
             </li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-6">
-          <ul class="list-unstyled">
-            <li class="mb-2 py-3">
+            <li class="mb-4">
               <router-link
-               to="/services#book-appt"
+                to="/services#book-appt"
                 class="text-light text-decoration-none hover-accent"
               >
                 Appointment
               </router-link>
             </li>
-            <li class="mb-2 py-3">
+            <li class="mb-4">
               <router-link
                 to="/blog"
                 class="text-light text-decoration-none hover-accent"
@@ -134,7 +130,7 @@ export default {
                 Blog
               </router-link>
             </li>
-            <li class="mb-2 py-3">
+            <li>
               <router-link
                 to="/contact"
                 class="text-light text-decoration-none hover-accent"
@@ -145,31 +141,33 @@ export default {
         </div>
 
         <!-- Contact Info -->
-        <div class="col-lg-4 col-md-6">
-          <div class="mb-5">
-            <h6 class="mb-3">Address</h6>
-            <p class="text-light small mb-1">
-              {{ info.address.fullAddress }}
-            </p>
-          </div>
-
-          <div class="mb-4">
-            <h6 class="mb-3">Contact</h6>
-            <div class="mb-2">
-              <i class="bi bi-telephone text-bsh-accent me-2"></i>
-              <span class="text-light small">
-                {{
-                  info.contact.phones.find((phone) => phone.type === "main")
-                    .number
-                }}
-              </span>
+        <div class="col-lg-4 col-md-6 d-flex justify-content-end">
+          <div>
+            <div class="mb-5">
+              <h6 class="mb-3">Address</h6>
+              <p class="text-light small mb-1">
+                {{ info.address.fullAddress }}
+              </p>
             </div>
-            <div class="mb-2">
-              <i class="bi bi-envelope text-bsh-accent me-2"></i>
-              <span class="text-light small text-break">{{
-                info.contact.emails.find((email) => email.type === "general")
-                  .address
-              }}</span>
+
+            <div class="mb-4">
+              <h6 class="mb-3">Contact</h6>
+              <div class="mb-2">
+                <i class="bi bi-telephone text-bsh-accent me-2"></i>
+                <span class="text-light small">
+                  {{
+                    info.contact.phones.find((phone) => phone.type === "main")
+                      .number
+                  }}
+                </span>
+              </div>
+              <div class="mb-2">
+                <i class="bi bi-envelope text-bsh-accent me-2"></i>
+                <span class="text-light small text-break">{{
+                  info.contact.emails.find((email) => email.type === "general")
+                    .address
+                }}</span>
+              </div>
             </div>
           </div>
 
@@ -191,27 +189,40 @@ export default {
       <!-- Footer Bottom -->
       <hr class="border-light opacity-25 my-4" />
       <div class="row align-items-center">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <p class="text-light small mb-0">
-            &copy; 2025 BSH. All rights reserved.
+            &copy; {{ new Date().getFullYear() }} BSH. All rights reserved.
           </p>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+          <p class="text-white d-inline-flex align-items-center small mb-0">
+            <img class="me-2" height="20" src="../assets/rootlab.svg" alt="" />
+            Powered by
+            <a
+              href="https://rootlab.africa"
+              target="_blank"
+              class="text-decoration-none text-decoration-underline text-light hover-accent d-inline-flex align-items-center ms-1"
+            >
+              rootlab
+            </a>
+          </p>
+        </div>
+        <div class="col-md-4">
           <div class="d-flex justify-content-md-end gap-4">
-            <a
-              href="#"
+            <router-link
+              to="/privacy-policy"
               class="text-light small text-decoration-none hover-accent"
-              >Privacy Policy</a
+              >Privacy Policy</router-link
             >
-            <a
-              href="#"
+            <router-link
+              to="/terms"
               class="text-light small text-decoration-none hover-accent"
-              >Terms & Conditions</a
+              >Terms &amp; Conditions</router-link
             >
-            <a
-              href="#"
+            <router-link
+              to="/licenses"
               class="text-light small text-decoration-none hover-accent"
-              >License</a
+              >Licenses</router-link
             >
           </div>
         </div>

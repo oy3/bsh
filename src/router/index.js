@@ -8,6 +8,9 @@ import BlogDetail from '../pages/BlogDetail.vue'
 import Contact from '../pages/Contact.vue'
 import Services from '../pages/Services.vue'
 import ServiceDetail from '../pages/ServiceDetail.vue'
+import PrivacyPolicy from '../pages/PrivacyPolicy.vue'
+import TermsConditions from '../pages/TermsConditions.vue'
+import Licenses from '../pages/Licenses.vue'
 
 const routes = [
     { path: '/', component: Home },
@@ -18,7 +21,10 @@ const routes = [
     { path: '/services/:id', name: 'ServiceDetail', component: ServiceDetail },
     { path: '/blog', component: Blog },
     { path: '/blog/:slug', component: BlogDetail, props: true },
-    { path: '/contact', component: Contact }
+    { path: '/contact', component: Contact },
+    { path: '/privacy-policy', component: PrivacyPolicy },
+    { path: '/terms', component: TermsConditions },
+    { path: '/licenses', component: Licenses },
 ]
 
 const router = createRouter({
