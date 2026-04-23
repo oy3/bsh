@@ -1,11 +1,13 @@
 import emailjs from "@emailjs/browser";
 
-// EmailJS configuration
+// EmailJS configuration — values come from environment variables.
+// Locally: set these in your .env file (see .env.example).
+// In CI/CD: set them as GitHub Secrets (VITE_EMAILJS_*).
 const EMAIL_CONFIG = {
-    serviceId: "zoho_mail", // You'll get this from EmailJS dashboard
-    contactTemplateId: "template_hlf2snc", // Template for contact form
-    appointmentTemplateId: "template_ubzbq3o", // Template for appointments
-    publicKey: "kHQqaeTgUDJIIdMRp", // Your EmailJS public key
+    serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+    contactTemplateId: import.meta.env.VITE_EMAILJS_CONTACT_TEMPLATE_ID,
+    appointmentTemplateId: import.meta.env.VITE_EMAILJS_APPOINTMENT_TEMPLATE_ID,
+    publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
 };
 
 // Initialize EmailJS
