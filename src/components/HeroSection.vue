@@ -18,7 +18,7 @@ export default {
             label: "client satisfaction rating",
           },
           {
-            number: "5,000+",
+            number: "1,000+",
             label: "clients served annually",
           },
           {
@@ -28,7 +28,7 @@ export default {
         ],
         badge: {
           avatars: ["👨‍💼", "👩‍💼", "👨‍💻"],
-          text: "150K +",
+          text: "1K +",
           subtitle: "Client Success",
         },
       },

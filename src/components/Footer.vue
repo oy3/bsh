@@ -22,9 +22,9 @@ export default {
               src="/src/assets/bsh.svg"
               :alt="info.shortName"
               class="me-2"
-              width="30"
+              height="60"
             />
-            <h4 class="mb-0 fw-bold text-white">{{ info.shortName }}</h4>
+            <!-- <h4 class="mb-0 fw-bold text-white">{{ info.shortName }}</h4> -->
           </div>
           <p class="text-light mb-4 small">
             {{ info.description }}

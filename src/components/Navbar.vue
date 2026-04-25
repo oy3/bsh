@@ -39,8 +39,8 @@ export default {
     <div class="container-fluid mx-0 mx-md-5">
 
       <div class="navbar-brand d-flex align-items-center">
-        <img src="/src/assets/bsh.svg" alt="" class="me-2" width="25" />
-        <h4 class="mb-0 fw-bold text-white">BSH</h4>
+        <img src="/src/assets/bsh.svg" alt="" class="me-2" height="70" />
+        <!-- <h4 class="mb-0 fw-bold text-white">BSH</h4> -->
       </div>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
