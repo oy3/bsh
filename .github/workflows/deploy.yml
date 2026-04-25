@@ -48,13 +48,18 @@ jobs:
       - name: Verify deploy path
         run: |
           DEPLOY_PATH="${{ secrets.DEPLOY_PATH }}"
-          if [ -z "$DEPLOY_PATH" ] || [ "$DEPLOY_PATH" = "/" ]; then
-            echo "ERROR: DEPLOY_PATH secret is missing or set to root (/). Aborting."
+          EXPECTED_DEPLOY_PATH="/var/www/bsh"
+          if [ -z "$DEPLOY_PATH" ]; then
+            echo "ERROR: DEPLOY_PATH secret is missing. Aborting."
+            exit 1
+          fi
+          if [ "$DEPLOY_PATH" != "$EXPECTED_DEPLOY_PATH" ]; then
+            echo "ERROR: DEPLOY_PATH must be $EXPECTED_DEPLOY_PATH. Aborting."
             exit 1
           fi
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            "mkdir -p $DEPLOY_PATH"
+            "mkdir -p '$DEPLOY_PATH'"
 
       # 7. Sync dist/ to the server web root — only changed files are uploaded
       #    --delete removes files on the server that no longer exist in dist/
@@ -63,7 +68,7 @@ jobs:
           rsync -avzr --delete \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }}" \
             dist/ \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:"${{ secrets.DEPLOY_PATH }}/"
 
       # 7. Clean up the private key from the runner
       - name: Cleanup SSH key
