@@ -253,7 +253,22 @@ Bootstrap 5 grid system is used for responsive layouts.
 
 ### Automated Deploy via GitHub Actions (recommended)
 
-Pushes and merges to `main` automatically build and deploy to DigitalOcean. See [CI/CD Setup](#-cicd--github-actions) below.
+Pushes and merges to `main` automatically build and deploy to DigitalOcean using release-based atomic deployments. See [CI/CD Setup](#-cicd--github-actions) below.
+
+### Rootlab Production Architecture
+
+This project is deployed under:
+
+```text
+/apps/bsh/
+    current/        -> symlink to active release
+    releases/       -> immutable release directories
+    shared/
+        logs/
+        tmp/
+```
+
+Deployment never writes directly into `current/`. A new release is uploaded into `releases/<release-id>/`, validated, then activated by atomically updating the `current` symlink.
 
 ### Manual Deploy to DigitalOcean
 
@@ -262,11 +277,13 @@ Pushes and merges to `main` automatically build and deploy to DigitalOcean. See 
 npm run build
 ```
 
-2. **Upload the `dist/` folder** to your server via FileZilla (SFTP to `/var/www/bsh`)
+2. **Upload the `dist/` folder** to a release directory (for example `/apps/bsh/releases/<release-id>/`)
 
-3. **Nginx** serves the `dist/` contents — ensure the SPA fallback config is in place
+3. **Switch the active release** by updating `/apps/bsh/current` symlink
 
-4. **Set up SSL certificate** via Certbot for HTTPS (already active at basespecialistshospital.com)
+4. **Nginx** serves `/apps/bsh/current` and SPA fallback config must be enabled
+
+5. **Set up SSL certificate** via Certbot for HTTPS (already active at basespecialistshospital.com)
 
 ### Deploy to Netlify (alternative)
 
@@ -298,19 +315,26 @@ main          ← production-only, protected — auto-deploys to server
 
 ### GitHub Actions Secrets Required
 
-Go to your repo on GitHub → **Settings → Secrets and variables → Actions → New repository secret** and add:
+Go to your repo on GitHub → **Settings → Environments → production** and add:
+
+#### Environment Secrets
 
 | Secret Name | Value |
 |---|---|
 | `SSH_PRIVATE_KEY` | Your deploy private key (see SSH Key Setup below) |
-| `SSH_HOST` | `134.122.96.171` |
-| `SSH_USER` | Your server user (e.g., `root`) |
-| `SSH_PORT` | `22` |
-| `DEPLOY_PATH` | `/var/www/bsh` |
 | `VITE_EMAILJS_PUBLIC_KEY` | Your EmailJS public key |
 | `VITE_EMAILJS_SERVICE_ID` | Your EmailJS service ID |
 | `VITE_EMAILJS_CONTACT_TEMPLATE_ID` | Contact form template ID |
 | `VITE_EMAILJS_APPOINTMENT_TEMPLATE_ID` | Appointment template ID |
+
+#### Environment Variables
+
+| Variable Name | Value |
+|---|---|
+| `APP_ROOT` | `/apps/bsh` |
+| `SSH_HOST` | `161.35.163.18` |
+| `SSH_PORT` | `22` |
+| `SSH_USER` | `rootlab` |
 
 ### SSH Key Setup (one-time)
 
@@ -322,7 +346,7 @@ This creates two files: `bsh_deploy_key` (private) and `bsh_deploy_key.pub` (pub
 
 2. **Add the public key to your DO server** (SSH in as your normal user):
 ```bash
-cat ~/.ssh/bsh_deploy_key.pub | ssh root@134.122.96.171 "cat >> ~/.ssh/authorized_keys"
+cat ~/.ssh/bsh_deploy_key.pub | ssh rootlab@161.35.163.18 "cat >> ~/.ssh/authorized_keys"
 ```
 
 3. **Add the private key to GitHub Secrets** as `SSH_PRIVATE_KEY`:
@@ -333,12 +357,31 @@ Copy the entire output (including `-----BEGIN...` and `-----END...` lines) into 
 
 ### Nginx SPA Configuration
 
-Ensure your Nginx config on the server handles Vue Router's history mode — all unknown paths must return `index.html`:
+Use the production template in `deploy/nginx/bsh.conf`.
+
+Apply example:
+
+```bash
+sudo cp deploy/nginx/bsh.conf /etc/nginx/sites-available/bsh.conf
+sudo ln -s /etc/nginx/sites-available/bsh.conf /etc/nginx/sites-enabled/bsh.conf
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+The template includes:
+
+- Vue Router history fallback (`try_files ... /index.html`)
+- HTTP to HTTPS redirect
+- Security headers
+- Gzip compression
+- Static asset caching optimization
+
+Minimal fallback example:
 
 ```nginx
 server {
     listen 80;
-    root /var/www/bsh;
+    root /apps/bsh/current;
     index index.html;
 
     location / {
@@ -346,6 +389,13 @@ server {
     }
 }
 ```
+
+### Deployment and Rollback Workflows
+
+- Automatic deploy on `main`: `.github/workflows/deploy.yml`
+- Manual rollback: `.github/workflows/rollback.yml`
+
+Rollback uses release IDs from `/apps/bsh/releases` and atomically repoints `/apps/bsh/current`.
 
 ### Protect `main` Branch on GitHub
 
@@ -397,4 +447,4 @@ For support or questions about the BSH website, please contact:
 **Last Updated**: April 2026
 **Project**: Base Specialist Hospital Website
 **Built with**: Vue 3 + Vite + Bootstrap 5
-**Deployed to**: DigitalOcean (134.122.96.171) via GitHub Actions
+**Deployed to**: DigitalOcean (rootlab-prod-01 / 161.35.163.18) via GitHub Actions

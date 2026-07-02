@@ -1,6 +1,5 @@
 name: Deploy to Production
 
-# Triggers only when code is pushed/merged into main
 on:
   push:
     branches:
@@ -8,26 +7,30 @@ on:
 
 jobs:
   build-and-deploy:
-    name: Build & Deploy to DigitalOcean
+    name: Build and Atomic Deploy
     runs-on: ubuntu-latest
+    environment: production
+
+    env:
+      APP_ROOT: ${{ vars.APP_ROOT }}
+      SSH_HOST: ${{ vars.SSH_HOST }}
+      SSH_PORT: ${{ vars.SSH_PORT }}
+      SSH_USER: ${{ vars.SSH_USER }}
+      KEEP_RELEASES: "2"
 
     steps:
-      # 1. Pull the code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Set up Node.js with npm cache for faster installs
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
 
-      # 3. Clean install — uses package-lock.json for reproducible builds
       - name: Install dependencies
         run: npm ci
 
-      # 4. Build the app — injects EmailJS secrets as VITE_ env vars at build time
       - name: Build
         env:
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
@@ -36,41 +39,64 @@ jobs:
           VITE_EMAILJS_APPOINTMENT_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_APPOINTMENT_TEMPLATE_ID }}
         run: npm run build
 
-      # 5. Write the SSH private key to a temp file and trust the server host
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H "${SSH_HOST}" >> ~/.ssh/known_hosts
 
-      # 6. Ensure the deploy path exists on the server and is not root
-      - name: Verify deploy path
+      - name: Validate required deployment variables
         run: |
-          DEPLOY_PATH="${{ secrets.DEPLOY_PATH }}"
-          EXPECTED_DEPLOY_PATH="/var/www/bsh"
-          if [ -z "$DEPLOY_PATH" ]; then
-            echo "ERROR: DEPLOY_PATH secret is missing. Aborting."
-            exit 1
-          fi
-          if [ "$DEPLOY_PATH" != "$EXPECTED_DEPLOY_PATH" ]; then
-            echo "ERROR: DEPLOY_PATH must be $EXPECTED_DEPLOY_PATH. Aborting."
-            exit 1
-          fi
-          ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            "mkdir -p '$DEPLOY_PATH'"
+          test -n "${APP_ROOT}" || (echo "APP_ROOT variable is required" && exit 1)
+          test -n "${SSH_HOST}" || (echo "SSH_HOST variable is required" && exit 1)
+          test -n "${SSH_PORT}" || (echo "SSH_PORT variable is required" && exit 1)
+          test -n "${SSH_USER}" || (echo "SSH_USER variable is required" && exit 1)
 
-      # 7. Sync dist/ to the server web root — only changed files are uploaded
-      #    --delete removes files on the server that no longer exist in dist/
-      - name: Deploy via rsync
+      - name: Prepare release metadata
+        id: release
         run: |
-          rsync -avzr --delete \
-            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }}" \
+          ts="$(date -u +'%Y%m%d%H%M%S')"
+          short_sha="${GITHUB_SHA::8}"
+          release_id="${ts}-${short_sha}"
+          release_path="${APP_ROOT}/releases/${release_id}"
+          echo "release_id=$release_id" >> "$GITHUB_OUTPUT"
+          echo "release_path=$release_path" >> "$GITHUB_OUTPUT"
+
+      - name: Create server directories
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "${SSH_PORT}" \
+            "${SSH_USER}@${SSH_HOST}" \
+            "mkdir -p '${APP_ROOT}/releases' '${APP_ROOT}/shared/logs' '${APP_ROOT}/shared/tmp'"
+
+      - name: Upload deployment scripts
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${SSH_PORT}" \
+            scripts/deploy/ \
+            "${SSH_USER}@${SSH_HOST}:${APP_ROOT}/shared/tmp/deploy-scripts/"
+
+          ssh -i ~/.ssh/deploy_key -p "${SSH_PORT}" \
+            "${SSH_USER}@${SSH_HOST}" \
+            "chmod +x '${APP_ROOT}/shared/tmp/deploy-scripts/'*.sh"
+
+      - name: Upload release to non-live directory
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "${SSH_PORT}" \
+            "${SSH_USER}@${SSH_HOST}" \
+            "mkdir -p '${{ steps.release.outputs.release_path }}'"
+
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${SSH_PORT}" \
             dist/ \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:"${{ secrets.DEPLOY_PATH }}/"
+            "${SSH_USER}@${SSH_HOST}:${{ steps.release.outputs.release_path }}/"
 
-      # 7. Clean up the private key from the runner
+      - name: Validate release and atomic deploy switch
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "${SSH_PORT}" \
+            "${SSH_USER}@${SSH_HOST}" \
+            "${APP_ROOT}/shared/tmp/deploy-scripts/release_deploy.sh --app-root '${APP_ROOT}' --release-id '${{ steps.release.outputs.release_id }}' --keep '${KEEP_RELEASES}'"
+
       - name: Cleanup SSH key
         if: always()
         run: rm -f ~/.ssh/deploy_key

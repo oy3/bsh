@@ -1,0 +1,57 @@
+name: Rollback Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: "Release directory name under /apps/bsh/releases (for example 20260702153000-1a2b3c4d)"
+        required: true
+        type: string
+
+jobs:
+  rollback:
+    name: Rollback current symlink
+    runs-on: ubuntu-latest
+    environment: production
+
+    env:
+      APP_ROOT: ${{ vars.APP_ROOT }}
+      SSH_HOST: ${{ vars.SSH_HOST }}
+      SSH_PORT: ${{ vars.SSH_PORT }}
+      SSH_USER: ${{ vars.SSH_USER }}
+
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${SSH_HOST}" >> ~/.ssh/known_hosts
+
+      - name: Validate required deployment variables
+        run: |
+          test -n "${APP_ROOT}" || (echo "APP_ROOT variable is required" && exit 1)
+          test -n "${SSH_HOST}" || (echo "SSH_HOST variable is required" && exit 1)
+          test -n "${SSH_PORT}" || (echo "SSH_PORT variable is required" && exit 1)
+          test -n "${SSH_USER}" || (echo "SSH_USER variable is required" && exit 1)
+
+      - name: Upload deployment scripts
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${SSH_PORT}" \
+            scripts/deploy/ \
+            "${SSH_USER}@${SSH_HOST}:${APP_ROOT}/shared/tmp/deploy-scripts/"
+
+          ssh -i ~/.ssh/deploy_key -p "${SSH_PORT}" \
+            "${SSH_USER}@${SSH_HOST}" \
+            "chmod +x '${APP_ROOT}/shared/tmp/deploy-scripts/'*.sh"
+
+      - name: Validate target release and rollback
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "${SSH_PORT}" \
+            "${SSH_USER}@${SSH_HOST}" \
+            "${APP_ROOT}/shared/tmp/deploy-scripts/release_rollback.sh --app-root '${APP_ROOT}' --release-id '${{ github.event.inputs.release_id }}'"
+
+      - name: Cleanup SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
