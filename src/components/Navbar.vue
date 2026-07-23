@@ -18,9 +18,9 @@ export default {
       this.scrolled = window.scrollY > 50;
     },
     closeNavbar() {
-      const navbarToggler = document.querySelector('.navbar-toggler');
-      const navbarCollapse = document.querySelector('.navbar-collapse');
-      if (navbarCollapse.classList.contains('show')) {
+      const navbarToggler = document.querySelector(".navbar-toggler");
+      const navbarCollapse = document.querySelector(".navbar-collapse");
+      if (navbarCollapse.classList.contains("show")) {
         navbarToggler.click();
       }
     },
@@ -34,17 +34,27 @@ export default {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg" :class="{ 'scrolled bg-bsh-primary': scrolled }">
-
+  <nav
+    class="navbar navbar-expand-lg"
+    :class="{ 'scrolled bg-bsh-primary': scrolled }"
+  >
     <div class="container-fluid mx-0 mx-md-5">
+      <router-link to="/" class="navbar-brand brand-link">
+        <div class="d-flex align-items-center">
+          <img src="/src/assets/bsh.svg" alt="" class="me-2" height="70" />
+          <!-- <h4 class="mb-0 fw-bold text-white">BSH</h4> -->
+        </div>
+      </router-link>
 
-      <div class="navbar-brand d-flex align-items-center">
-        <img src="/src/assets/bsh.svg" alt="" class="me-2" height="70" />
-        <!-- <h4 class="mb-0 fw-bold text-white">BSH</h4> -->
-      </div>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
-        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -60,12 +70,10 @@ export default {
             <router-link to="/doctors" class="nav-link"> Doctors</router-link>
           </li>
           <li class="nav-item px-4">
-            <router-link to="/services" class="nav-link">
-              Services</router-link>
+            <router-link to="/services" class="nav-link"> Services</router-link>
           </li>
           <li class="nav-item px-4">
-            <router-link to="/blog" class="nav-link">
-              Blog</router-link>
+            <router-link to="/blog" class="nav-link"> Blog</router-link>
           </li>
           <li class="nav-item px-4">
             <router-link to="/contact" class="nav-link">Contact</router-link>
@@ -73,7 +81,6 @@ export default {
         </ul>
       </div>
     </div>
-
   </nav>
 </template>
 
@@ -186,8 +193,8 @@ export default {
   .navbar-collapse {
     background-color: var(--bsh-primary);
     padding: 1rem;
-    border-radius: .5rem;
-    margin-top: .5rem;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
     backdrop-filter: blur(10px);
     /* opacity: 0.9; */
   }
