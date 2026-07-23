@@ -157,7 +157,7 @@ export default {
                 </li>
                 <li class="mb-2">
                   <i class="bi bi-check-square-fill text-bsh-accent me-2"></i>
-                  <span>Warm and Welcoming Environment</span>
+                  <span>Welcoming Environment</span>
                 </li>
                 <li class="mb-2">
                   <i class="bi bi-check-square-fill text-bsh-accent me-2"></i>

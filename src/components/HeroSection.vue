@@ -48,7 +48,7 @@ export default {
         style="z-index: 2"
       ></div>
       <img
-        src="/src/assets/bg-bsh.jpg"
+        src="/src/assets/bg-bsh.jpeg"
         alt="BSH Team"
         class="w-100 h-100 object-fit-cover"
         style="object-position: center"
