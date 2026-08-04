@@ -1,202 +1,40 @@
 <script>
+import hospitalInfo from '../data/hospital-info.json'
+import services from '../data/services.json'
+
 export default {
-  name: "Navbar",
-  data() {
-    return {
-      scrolled: false,
-      isNavOpen: false,
-    };
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  beforeUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
-  methods: {
-    handleScroll() {
-      this.scrolled = window.scrollY > 50;
-    },
-    closeNavbar() {
-      const navbarToggler = document.querySelector(".navbar-toggler");
-      const navbarCollapse = document.querySelector(".navbar-collapse");
-      if (navbarCollapse.classList.contains("show")) {
-        navbarToggler.click();
-      }
-    },
-  },
-  watch: {
-    $route() {
-      this.closeNavbar();
-    },
-  },
-};
+  name: 'MainNavbar',
+  props: { transparent: { type: Boolean, default: false } },
+  data: () => ({ isOpen: false, scrolled: false, info: hospitalInfo, services }),
+  watch: { $route() { this.isOpen = false } },
+  mounted() { window.addEventListener('keydown', this.onKeydown); window.addEventListener('scroll', this.onScroll, { passive: true }); this.onScroll() },
+  beforeUnmount() { window.removeEventListener('keydown', this.onKeydown); window.removeEventListener('scroll', this.onScroll) },
+  methods: { onKeydown(event) { if (event.key === 'Escape') this.isOpen = false }, onScroll() { this.scrolled = window.scrollY > 24 } }
+}
 </script>
 
 <template>
-  <nav
-    class="navbar navbar-expand-lg"
-    :class="{ 'scrolled bg-bsh-primary': scrolled }"
-  >
-    <div class="container-fluid mx-0 mx-md-5">
-      <router-link to="/" class="navbar-brand brand-link">
-        <div class="d-flex align-items-center">
-          <img src="/src/assets/bsh.svg" alt="" class="me-2" height="70" />
-          <!-- <h4 class="mb-0 fw-bold text-white">BSH</h4> -->
-        </div>
-      </router-link>
-
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarTogglerDemo03"
-        aria-controls="navbarTogglerDemo03"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 small">
-          <li class="nav-item px-4">
-            <router-link to="/" class="nav-link active">Home</router-link>
-          </li>
-          <li class="nav-item px-4">
-            <router-link to="/about" class="nav-link">About</router-link>
-          </li>
-          <li class="nav-item px-4">
-            <router-link to="/doctors" class="nav-link"> Doctors</router-link>
-          </li>
-          <li class="nav-item px-4">
-            <router-link to="/services" class="nav-link"> Services</router-link>
-          </li>
-          <li class="nav-item px-4">
-            <router-link to="/blog" class="nav-link"> Blog</router-link>
-          </li>
-          <li class="nav-item px-4">
-            <router-link to="/contact" class="nav-link">Contact</router-link>
-          </li>
-        </ul>
+    <div class="emergency-bar">
+      <div class="site-container emergency-bar__inner">
+        <span><i class="bi bi-clock"></i> Emergency department open 24 hours, 7 days a week</span>
+        <span class="emergency-bar__contacts"><a :href="`tel:${info.contact.phones[0].number.replace(/\s/g, '')}`"><i class="bi bi-telephone"></i> {{ info.contact.phones[0].number }}</a><a :href="`mailto:${info.contact.emails[0].address}`">{{ info.contact.emails[0].address }}</a></span>
       </div>
     </div>
-  </nav>
+    <header class="site-header" :class="{ 'site-header--transparent': transparent && !scrolled, 'site-header--scrolled': scrolled }">
+      <div class="site-container nav-inner">
+        <router-link to="/" class="brand" aria-label="Base Specialist Hospital home">
+          <img src="../assets/bsh.svg" alt="Base Specialist Hospital" width="50" height="50" />
+          <span><strong>Base Specialist Hospital</strong><small>Compassionate care. Exceptional results.</small></span>
+        </router-link>
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <router-link to="/">Home</router-link><router-link to="/about">About</router-link>
+          <div class="services-menu"><router-link to="/services">Services <i class="bi bi-chevron-down"></i></router-link><div class="services-popover"><router-link v-for="service in services" :key="service.id" :to="`/services/${service.id}`"><strong>{{ service.title }}</strong><small>{{ service.shortDescription }}</small></router-link></div></div>
+          <router-link to="/doctors">Doctors</router-link><router-link to="/gallery">Gallery</router-link><router-link to="/health-tips">Health Tips</router-link><router-link to="/contact">Contact</router-link>
+        </nav>
+        <div class="nav-actions"><router-link class="appointment-button" to="/book-appointment"><i class="bi bi-calendar-plus"></i><span>Book Appointment</span></router-link><button class="menu-toggle" type="button" :aria-expanded="isOpen" aria-controls="mobile-menu" @click="isOpen = !isOpen"><i :class="isOpen ? 'bi bi-x-lg' : 'bi bi-list'"></i><span class="visually-hidden">Open menu</span></button></div>
+      </div>
+      <div v-if="isOpen" id="mobile-menu" class="mobile-menu">
+        <router-link to="/">Home</router-link><router-link to="/about">About</router-link><router-link to="/services">Services</router-link><router-link v-for="service in services" :key="service.id" :to="`/services/${service.id}`" class="mobile-sub-link">{{ service.title }}</router-link><router-link to="/doctors">Doctors</router-link><router-link to="/gallery">Gallery</router-link><router-link to="/health-tips">Health Tips</router-link><router-link to="/testimonials">Testimonials</router-link><router-link to="/faq">FAQ</router-link><router-link to="/contact">Contact</router-link>
+      </div>
+    </header>
 </template>
-
-<style scoped>
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 1rem 0;
-  transition: all 0.3s ease;
-  background-color: transparent;
-}
-
-.navbar-transparent {
-  background-color: transparent;
-  backdrop-filter: blur(10px);
-}
-
-.navbar.scrolled {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.nav-container {
-  max-width: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
-}
-
-.brand-link {
-  text-decoration: none;
-}
-
-.brand-logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.nav-menu {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 2rem;
-}
-
-.nav-link {
-  color: white !important;
-  text-decoration: none;
-  font-weight: 400;
-  transition: color 0.3s ease;
-  position: relative;
-}
-
-.nav-link:hover,
-.nav-link.router-link-active {
-  font-weight: 700;
-}
-
-/* .nav-link.router-link-active::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: #4a90e2;
-  font-weight: 700;
-} */
-
-.menu-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-
-.menu-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: scale(1.1);
-}
-
-.menu-btn {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .nav-menu {
-    display: none;
-  }
-
-  .menu-btn {
-    display: block;
-  }
-
-  .nav-container {
-    padding: 0 1rem;
-  }
-}
-@media (max-width: 991px) {
-  .navbar-collapse {
-    background-color: var(--bsh-primary);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    margin-top: 0.5rem;
-    backdrop-filter: blur(10px);
-    /* opacity: 0.9; */
-  }
-}
-</style>
