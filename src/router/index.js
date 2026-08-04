@@ -14,6 +14,7 @@ import Licenses from '../pages/Licenses.vue'
 import Gallery from '../pages/Gallery.vue'
 import FaqPage from '../pages/FaqPage.vue'
 import Testimonials from '../pages/Testimonials.vue'
+import Appointment from '../pages/Appointment.vue'
 
 const routes = [
     { path: '/', component: Home, meta: { title: 'Base Specialist Hospital | Specialist Healthcare in Lagos' } },
@@ -31,7 +32,7 @@ const routes = [
     { path: '/gallery', component: Gallery, meta: { title: 'Gallery | Base Specialist Hospital' } },
     { path: '/faq', component: FaqPage, meta: { title: 'FAQ | Base Specialist Hospital' } },
     { path: '/testimonials', component: Testimonials, meta: { title: 'Testimonials | Base Specialist Hospital' } },
-    { path: '/book-appointment', redirect: { path: '/services', hash: '#book-appt' } },
+    { path: '/appointment', alias: '/book-appointment', component: Appointment, meta: { title: 'Book an Appointment | Base Specialist Hospital' } },
 ]
 
 const router = createRouter({

@@ -1,667 +1,84 @@
 <script>
-import FAQSection from "../components/FAQSection.vue";
-import hospitalInfo from "../data/hospital-info.json";
-import emailService from "../services/emailService.js";
+import PageHero from '../components/PageHero.vue'
+import hospitalInfo from '../data/hospital-info.json'
+import emailService from '../services/emailService.js'
 
 export default {
-  name: "Contact",
-  components: {
-    FAQSection,
-  },
+  name: 'Contact',
+  components: { PageHero },
   data() {
     return {
       info: hospitalInfo,
-      form: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        department: "",
-        subject: "",
-        message: "",
-        urgency: "normal",
-      },
-      departments: [
-        { value: "general", label: "General Inquiry" },
-        { value: "appointments", label: "Appointments" },
-        { value: "emergency", label: "Emergency" },
-        { value: "billing", label: "Billing & Insurance" },
-        { value: "records", label: "Medical Records" },
-        { value: "feedback", label: "Feedback & Complaints" },
-        { value: "careers", label: "Careers" },
-      ],
       isSubmitting: false,
-      submitMessage: "",
+      submitMessage: '',
       submitSuccess: false,
-    };
+      form: this.emptyForm(),
+    }
+  },
+  computed: {
+    phone() { return this.info.contact.phones[0].number },
+    phoneLink() { return `tel:${this.phone.replace(/\s/g, '')}` },
+    whatsappLink() { return `https://wa.me/${this.phone.replace(/\D/g, '')}` },
   },
   methods: {
+    emptyForm() {
+      return { fullName: '', email: '', phone: '', subject: '', message: '' }
+    },
     async submitForm() {
-      if (!this.validateForm()) return;
-
-      this.isSubmitting = true;
-      this.submitMessage = "";
-
+      this.isSubmitting = true
+      this.submitMessage = ''
       try {
-        const result = await emailService.sendContactEmail(this.form);
-        
-        this.isSubmitting = false;
-        this.submitSuccess = result.success;
-        this.submitMessage = result.message;
-        
-        if (result.success) {
-          this.resetForm();
-        }
+        const [firstName, ...remainingName] = this.form.fullName.trim().split(/\s+/)
+        const result = await emailService.sendContactEmail({ ...this.form, firstName, lastName: remainingName.join(' ') || 'Patient', department: 'General enquiry', urgency: 'normal' })
+        this.submitSuccess = result.success
+        this.submitMessage = result.message
+        if (result.success) this.form = this.emptyForm()
       } catch (error) {
-        this.isSubmitting = false;
-        this.submitSuccess = false;
-        this.submitMessage = "An error occurred. Please try again later.";
-        console.error('Form submission error:', error);
+        this.submitSuccess = false
+        this.submitMessage = 'An error occurred. Please try again later.'
+      } finally {
+        this.isSubmitting = false
       }
-    },
-    validateForm() {
-      const required = [
-        "firstName",
-        "lastName",
-        "email",
-        "phone",
-        "department",
-        "subject",
-        "message",
-      ];
-      for (let field of required) {
-        if (!this.form[field]) {
-          alert(
-            `Please fill in the ${field
-              .replace(/([A-Z])/g, " $1")
-              .toLowerCase()} field.`
-          );
-          return false;
-        }
-      }
-      return true;
-    },
-    resetForm() {
-      this.form = {
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        department: "",
-        subject: "",
-        message: "",
-        urgency: "normal",
-      };
-
-      // Clear success message after 5 seconds
-      setTimeout(() => {
-        this.submitMessage = "";
-        this.submitSuccess = false;
-      }, 5000);
     },
   },
-};
+}
 </script>
 
 <template>
-  <div class="contact">
-    <!-- Hero Banner -->
-    <section
-      class="hero-banner position-relative overflow-hidden py-5 bg-bsh-primary"
-    >
-      <div class="container-fluid px-md-5 px-3">
-        <div
-          class="row min-vh-50 d-flex align-items-center justify-content-center text-center py-5"
-        >
-          <div class="col-lg-8">
-            <h6 class="text-white text-uppercase mb-3 fw-light">
-              Get in Touch
-            </h6>
-            <h1 class="text-white display-4 fw-bold">Contact Us</h1>
-            <p class="text-white-50 lead mt-3">
-              We're here to help with all your healthcare needs. Reach out to us
-              anytime.
-            </p>
-          </div>
+  <main class="contact-page">
+    <PageHero eyebrow="Contact" title="We are easy to reach" description="22 Demurin Street, Alapere, Ketu, Lagos 100001, Nigeria — with free on-site parking and a 24-hour emergency department." />
+
+    <section class="contact-intro section section--mist">
+      <div class="site-container">
+        <a class="contact-callout" :href="phoneLink"><i class="bi bi-telephone-fill"></i><span>{{ phone }}</span><small>Book an appointment</small></a>
+        <div class="contact-options">
+          <a :href="info.address.gmap" target="_blank" rel="noopener"><i class="bi bi-geo-alt"></i><span><strong>Visit us</strong><small>22 Demurin Street<br>Alapere, Ketu, Lagos</small></span><b>Get directions <i class="bi bi-arrow-up-right"></i></b></a>
+          <a :href="phoneLink"><i class="bi bi-telephone"></i><span><strong>Call us</strong><small>{{ phone }}<br>Front desk & emergencies</small></span><b>Call now <i class="bi bi-arrow-up-right"></i></b></a>
+          <a :href="`mailto:${info.contact.emails[0].address}`"><i class="bi bi-envelope"></i><span><strong>Email us</strong><small>{{ info.contact.emails[0].address }}<br>{{ info.contact.emails[1].address }}</small></span><b>Send email <i class="bi bi-arrow-up-right"></i></b></a>
+          <a :href="whatsappLink" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i><span><strong>WhatsApp</strong><small>Quick questions & bookings<br>Replies during clinic hours</small></span><b>Open chat <i class="bi bi-arrow-up-right"></i></b></a>
         </div>
       </div>
     </section>
 
-    <!-- Contact Information Cards -->
-    <section class="py-5 bg-light">
-      <div class="container-fluid px-md-5 px-3">
-        <div class="row g-4 mb-5">
-          <!-- Emergency Contact -->
-          <div class="col-lg-3 col-md-6">
-            <div class="card border-0 h-100 shadow-sm hover-card">
-              <div class="card-body text-center p-4">
-                <div
-                  class="icon-wrapper bg-danger bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center"
-                  style="width: 70px; height: 70px"
-                >
-                  <i class="bi bi-telephone-fill text-danger fs-2"></i>
-                </div>
-                <h5 class="fw-bold mb-2 text-danger">Emergency</h5>
-                <p class="text-muted mb-2">24/7 Emergency Line</p>
-                <a
-                  :href="`tel:${
-                    info.contact.phones.find(
-                      (phone) => phone.type === 'emergency'
-                    ).number
-                  }`"
-                  class="text-decoration-none fw-semibold text-danger"
-                >
-                  {{
-                    info.contact.phones.find(
-                      (phone) => phone.type === "emergency"
-                    ).number
-                  }}
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- General Contact -->
-          <div class="col-lg-3 col-md-6">
-            <div class="card border-0 h-100 shadow-sm hover-card">
-              <div class="card-body text-center p-4">
-                <div
-                  class="icon-wrapper bg-primary bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center"
-                  style="width: 70px; height: 70px"
-                >
-                  <i class="bi bi-headset text-primary fs-2"></i>
-                </div>
-                <h5 class="fw-bold mb-2">General Inquiries</h5>
-                <p class="text-muted mb-2">For appointments & questions</p>
-                <a
-                  :href="`tel:${
-                    info.contact.phones.find((phone) => phone.type === 'main')
-                      .number
-                  }`"
-                  class="text-decoration-none fw-semibold text-primary"
-                  >{{
-                    info.contact.phones.find((phone) => phone.type === "main")
-                      .number
-                  }}</a
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- Email -->
-          <div class="col-lg-3 col-md-6">
-            <div class="card border-0 h-100 shadow-sm hover-card">
-              <div class="card-body text-center p-4">
-                <div
-                  class="icon-wrapper bg-success bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center"
-                  style="width: 70px; height: 70px"
-                >
-                  <i class="bi bi-envelope-fill text-success fs-2"></i>
-                </div>
-                <h5 class="fw-bold mb-2">Email Us</h5>
-                <p class="text-muted mb-2">Send us a message</p>
-                <a
-                  :href="`mailto:${
-                    info.contact.emails.find(
-                      (email) => email.type === 'general'
-                    ).address
-                  }`"
-                  class="text-decoration-none fw-semibold text-success"
-                >
-                  {{
-                    info.contact.emails.find(
-                      (email) => email.type === "general"
-                    ).address
-                  }}
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Location -->
-          <div class="col-lg-3 col-md-6">
-            <div class="card border-0 h-100 shadow-sm hover-card">
-              <div class="card-body text-center p-4">
-                <div
-                  class="icon-wrapper bg-warning bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center"
-                  style="width: 70px; height: 70px"
-                >
-                  <i class="bi bi-geo-alt-fill text-warning fs-2"></i>
-                </div>
-                <h5 class="fw-bold mb-2">Visit Us</h5>
-                <p class="text-muted mb-2">Our location</p>
-                <a
-                  :href="`${info.address.gmap}`"
-                  target="_blank"
-                  class="text-decoration-none fw-semibold text-warning small"
-                  >{{ info.address.fullAddress }}
-                </a>
-              </div>
-            </div>
-          </div>
+    <section class="section">
+      <div class="site-container contact-grid">
+        <div class="contact-form-wrap">
+          <div class="section-heading"><p class="eyebrow">Send a message</p><h2>How can we help?</h2><p>For non-urgent enquiries. In an emergency, please call <a :href="phoneLink">{{ phone }}</a> or come straight to the hospital.</p></div>
+          <p v-if="submitMessage" class="form-message" :class="{ 'form-message--error': !submitSuccess }" role="status">{{ submitMessage }}</p>
+          <form @submit.prevent="submitForm">
+            <label>Full name *<input v-model.trim="form.fullName" required autocomplete="name"></label>
+            <div class="field-grid"><label>Phone number *<input v-model.trim="form.phone" required type="tel" autocomplete="tel"></label><label>Email *<input v-model.trim="form.email" required type="email" autocomplete="email"></label></div>
+            <label>Subject *<input v-model.trim="form.subject" required></label>
+            <label>Message *<textarea v-model.trim="form.message" required rows="5"></textarea></label>
+            <button class="button-primary" :disabled="isSubmitting"><i class="bi bi-send"></i>{{ isSubmitting ? 'Sending…' : 'Send message' }}</button>
+          </form>
         </div>
+        <aside class="hours-panel"><p class="eyebrow">Plan your visit</p><h2>Opening hours</h2><dl><template v-for="(hours, day) in info.workingHours.regular" :key="day"><dt>{{ day }}</dt><dd>{{ day === 'sunday' ? 'Emergencies only' : hours.replace(' - ', ' – ') }}</dd></template></dl><div><i class="bi bi-heart-pulse-fill"></i><strong>Emergency department</strong><span>Open 24 hours, 7 days a week</span></div></aside>
       </div>
     </section>
-
-    <!-- Main Content -->
-    <section class="py-5">
-      <div class="container-fluid px-md-5 px-3">
-        <div class="row g-5">
-          <!-- Contact Form -->
-          <div class="col-lg-8">
-            <div class="card border-0 shadow-sm">
-              <div class="card-body p-5">
-                <h3 class="fw-bold mb-4">Send us a Message</h3>
-
-                <!-- Success Message -->
-                <div
-                  v-if="submitSuccess"
-                  class="alert alert-success d-flex align-items-center mb-4"
-                >
-                  <i class="bi bi-check-circle-fill me-2"></i>
-                  {{ submitMessage }}
-                </div>
-
-                <form @submit.prevent="submitForm">
-                  <div class="row g-3">
-                    <!-- Name Fields -->
-                    <div class="col-md-6">
-                      <label for="firstName" class="form-label fw-semibold"
-                        >First Name *</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control form-control-lg"
-                        id="firstName"
-                        v-model="form.firstName"
-                        required
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <label for="lastName" class="form-label fw-semibold"
-                        >Last Name *</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control form-control-lg"
-                        id="lastName"
-                        v-model="form.lastName"
-                        required
-                      />
-                    </div>
-
-                    <!-- Contact Fields -->
-                    <div class="col-md-6">
-                      <label for="email" class="form-label fw-semibold"
-                        >Email Address *</label
-                      >
-                      <input
-                        type="email"
-                        class="form-control form-control-lg"
-                        id="email"
-                        v-model="form.email"
-                        required
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <label for="phone" class="form-label fw-semibold"
-                        >Phone Number *</label
-                      >
-                      <input
-                        type="tel"
-                        class="form-control form-control-lg"
-                        id="phone"
-                        v-model="form.phone"
-                        required
-                      />
-                    </div>
-
-                    <!-- Department and Urgency -->
-                    <div class="col-md-6">
-                      <label for="department" class="form-label fw-semibold"
-                        >Department *</label
-                      >
-                      <select
-                        class="form-select form-select-lg"
-                        id="department"
-                        v-model="form.department"
-                        required
-                      >
-                        <option value="">Select a department</option>
-                        <option
-                          v-for="dept in departments"
-                          :key="dept.value"
-                          :value="dept.value"
-                        >
-                          {{ dept.label }}
-                        </option>
-                      </select>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="urgency" class="form-label fw-semibold"
-                        >Urgency Level</label
-                      >
-                      <select
-                        class="form-select form-select-lg"
-                        id="urgency"
-                        v-model="form.urgency"
-                      >
-                        <option value="normal">Normal</option>
-                        <option value="urgent">Urgent</option>
-                        <option value="emergency">Emergency</option>
-                      </select>
-                    </div>
-
-                    <!-- Subject -->
-                    <div class="col-12">
-                      <label for="subject" class="form-label fw-semibold"
-                        >Subject *</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control form-control-lg"
-                        id="subject"
-                        v-model="form.subject"
-                        placeholder="Brief description of your inquiry"
-                        required
-                      />
-                    </div>
-
-                    <!-- Message -->
-                    <div class="col-12">
-                      <label for="message" class="form-label fw-semibold"
-                        >Message *</label
-                      >
-                      <textarea
-                        class="form-control"
-                        id="message"
-                        rows="5"
-                        v-model="form.message"
-                        placeholder="Please provide detailed information about your inquiry..."
-                        required
-                      ></textarea>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="col-12">
-                      <button
-                        type="submit"
-                        class="btn btn-bsh-primary btn-lg px-5"
-                        :disabled="isSubmitting"
-                      >
-                        <span
-                          v-if="isSubmitting"
-                          class="spinner-border spinner-border-sm me-2"
-                        ></span>
-                        {{ isSubmitting ? "Sending..." : "Send Message" }}
-                        <i
-                          v-if="!isSubmitting"
-                          class="bi bi-arrow-right ms-2"
-                        ></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <!-- Sidebar -->
-          <div class="col-lg-4">
-            <!-- Business Hours -->
-            <div class="card border-0 shadow-sm mb-4">
-              <div class="card-body p-4">
-                <h5 class="fw-bold mb-3 d-flex align-items-center">
-                  <i class="bi bi-clock text-primary me-2"></i>
-                  Business Hours
-                </h5>
-                <div class="space-y-3">
-                  <!-- <div
-                    v-for="(hours, day) in info.workingHours.regular"
-                    :key="day"
-                    class="d-flex justify-content-between align-items-center py-2 border-bottom"
-                  >
-                    <span class="fw-semibold text-muted">{{ day }}</span>
-                    <span class="text-primary fw-semibold">{{ hours }}</span>
-                  </div> -->
-                  <!-- Weekdays -->
-                  <div
-                    class="d-flex justify-content-between align-items-center py-2 border-bottom"
-                  >
-                    <span class="fw-semibold text-muted">Monday - Friday</span>
-                    <span class="text-primary fw-semibold">{{
-                      info.workingHours.regular.monday
-                    }}</span>
-                  </div>
-                  <!-- Saturday -->
-                  <div
-                    class="d-flex justify-content-between align-items-center py-2 border-bottom"
-                  >
-                    <span class="fw-semibold text-muted">Saturday</span>
-                    <span class="text-primary fw-semibold">{{
-                      info.workingHours.regular.saturday
-                    }}</span>
-                  </div>
-                  <!-- Sunday -->
-                  <div
-                    class="d-flex justify-content-between align-items-center py-2 border-bottom"
-                  >
-                    <span class="fw-semibold text-muted">Sunday</span>
-                    <span class="text-primary fw-semibold">{{
-                      info.workingHours.regular.sunday
-                    }}</span>
-                  </div>
-                  <!-- Emergency Hours -->
-                  <div class="">
-                    <div
-                      class="d-flex justify-content-between align-items-center py-2"
-                    >
-                      <span class="fw-semibold text-danger"
-                        >Emergency Care</span
-                      >
-                      <span class="text-danger fw-semibold">{{
-                        info.workingHours.emergency
-                      }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Quick Contact -->
-            <div class="card border-0 shadow-sm mb-4">
-              <div class="card-body p-4">
-                <h5 class="fw-bold mb-3 d-flex align-items-center">
-                  <i class="bi bi-lightning-charge text-warning me-2"></i>
-                  Quick Contact
-                </h5>
-                <div class="d-grid gap-2">
-                  <a
-                    :href="`tel:${
-                      info.contact.phones.find(
-                        (phone) => phone.type === 'emergency'
-                      ).number
-                    }`"
-                    class="btn btn-danger"
-                  >
-                    <i class="bi bi-telephone-fill me-2"></i>Emergency Line
-                  </a>
-                  <a
-                    :href="`tel:${
-                      info.contact.phones.find((phone) => phone.type === 'main')
-                        .number
-                    }`"
-                    class="btn btn-outline-primary"
-                  >
-                    <i class="bi bi-headset me-2"></i>General Inquiries
-                  </a>
-                  <a
-                    :href="`mailto:${
-                      info.contact.emails.find(
-                        (email) => email.type === 'general'
-                      ).address
-                    }`"
-                    class="btn btn-outline-success"
-                  >
-                    <i class="bi bi-envelope me-2"></i>Email Us
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Additional Info -->
-            <div class="card border-0 shadow-sm">
-              <div class="card-body p-4">
-                <h5 class="fw-bold mb-3 d-flex align-items-center">
-                  <i class="bi bi-info-circle text-info me-2"></i>
-                  Additional Information
-                </h5>
-                <ul class="list-unstyled mb-0">
-                  <li class="mb-2">
-                    <i class="bi bi-check-circle text-success me-2"></i>
-                    Response within 24 hours
-                  </li>
-                  <li class="mb-2">
-                    <i class="bi bi-check-circle text-success me-2"></i>
-                    Emergency consultations available
-                  </li>
-                  <li class="mb-2">
-                    <i class="bi bi-check-circle text-success me-2"></i>
-                    Multilingual support
-                  </li>
-                  <li class="mb-0">
-                    <i class="bi bi-check-circle text-success me-2"></i>
-                    Secure patient information
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Map Section -->
-    <section class="py-5 bg-light">
-      <div class="container-fluid px-md-5 px-3">
-        <div class="row">
-          <div class="col-12">
-            <h3 class="fw-bold mb-4 text-center">Find Us</h3>
-            <div
-              class="map-container position-relative rounded-4 overflow-hidden shadow"
-            >
-              <!-- Placeholder for Google Maps -->
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.3987655859155!2d3.387522674379743!3d6.59726239339652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b93d29dd6636d%3A0x7d6c56c706112584!2sBase%20Specialist%20hospital!5e0!3m2!1sen!2sng!4v1760878955531!5m2!1sen!2sng"
-                width="100%"
-                height="400"
-                style="border: 0"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
-
-              <!-- Map Overlay Info -->
-              <div class="position-absolute top-0 end-0 m-4">
-                <div class="card border-0 shadow">
-                  <div class="card-body p-3">
-                    <h6 class="fw-bold mb-1">Base Specialist Hospital</h6>
-                    <p class="text-muted small mb-0">
-                      {{ info.address.fullAddress }}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <FAQSection
-      id="contact-page"
-      title="Common Questions"
-      subtitle="Need Quick Answers?"
-      :maxItems="6"
-    />
-  </div>
+  </main>
 </template>
 
 <style scoped>
-.contact {
-  min-height: 100vh;
-}
-
-.hero-banner {
-  background: linear-gradient(
-    135deg,
-    var(--bsh-primary) 0%,
-    var(--bsh-secondary) 100%
-  );
-  min-height: 50vh;
-}
-
-.min-vh-50 {
-  min-height: 50vh;
-}
-
-.hover-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hover-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
-}
-
-.icon-wrapper {
-  transition: all 0.3s ease;
-}
-
-.hover-card:hover .icon-wrapper {
-  transform: scale(1.1);
-}
-
-.form-control:focus,
-.form-select:focus {
-  border-color: var(--bsh-primary);
-  box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
-}
-
-.space-y-3 > * + * {
-  margin-top: 1rem;
-}
-
-.map-container {
-  position: relative;
-  height: 400px;
-}
-
-.map-container iframe {
-  filter: grayscale(0.3);
-  transition: filter 0.3s ease;
-}
-
-.map-container:hover iframe {
-  filter: grayscale(0);
-}
-
-@media (max-width: 768px) {
-  .hero-banner {
-    min-height: 40vh;
-  }
-
-  .min-vh-50 {
-    min-height: 40vh;
-  }
-
-  .hero-banner h1 {
-    font-size: 2.5rem !important;
-  }
-
-  .card-body.p-5 {
-    padding: 2rem !important;
-  }
-}
+.contact-intro{padding-top:3.5rem;padding-bottom:3.5rem}.contact-callout{display:flex;align-items:center;justify-content:center;gap:.7rem;margin:0 auto 2.4rem;color:var(--blue);font-weight:800}.contact-callout i{font-size:1.15rem}.contact-callout small{padding-left:.7rem;border-left:1px solid var(--line);color:var(--muted);font-size:.76rem}.contact-options{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.contact-options>a{padding:1.45rem;background:#fff;border:1px solid var(--line);border-radius:18px;transition:.2s}.contact-options>a:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(23,72,103,.1);border-color:#9bd2e7}.contact-options>a>i{display:grid;place-items:center;width:42px;height:42px;margin-bottom:1rem;border-radius:13px;background:#e7f6fa;color:var(--aqua);font-size:1.15rem}.contact-options span,.contact-options strong,.contact-options small{display:block}.contact-options strong{font-family:Sora,sans-serif;font-size:.92rem}.contact-options small{margin:.45rem 0 1rem;color:var(--muted);font-size:.75rem;line-height:1.6}.contact-options b{font-size:.73rem;color:var(--blue)}.contact-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(270px,.7fr);gap:5rem}.section-heading a{color:var(--blue);font-weight:800}.contact-form-wrap form{display:grid;gap:1rem}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.contact-form-wrap label{display:grid;gap:.4rem;color:var(--ink);font-size:.78rem;font-weight:800}.contact-form-wrap input,.contact-form-wrap select,.contact-form-wrap textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:.75rem .9rem;background:#fff;color:var(--ink);font-weight:500;outline:0}.contact-form-wrap textarea{resize:vertical}.contact-form-wrap input:focus,.contact-form-wrap select:focus,.contact-form-wrap textarea:focus{border-color:#58afcf;box-shadow:0 0 0 3px rgba(45,145,201,.13)}.contact-form-wrap button{border:0;width:max-content;margin-top:.4rem;cursor:pointer}.contact-form-wrap button:disabled{cursor:wait;opacity:.72}.form-message{margin:0 0 1.4rem;padding:.8rem 1rem;border-radius:11px;background:#e5f7ee;color:#08784e;font-size:.82rem;font-weight:700}.form-message--error{background:#fce9ea;color:#a5262e}.hours-panel{align-self:start;padding:2rem;border:1px solid var(--line);border-radius:20px;background:var(--mist)}.hours-panel h2{margin:.5rem 0 1.4rem;font-family:Sora,sans-serif;font-size:1.45rem;letter-spacing:-.04em}.hours-panel dl{display:grid;grid-template-columns:1fr auto;gap:.75rem 1rem;margin:0}.hours-panel dt,.hours-panel dd{font-size:.78rem}.hours-panel dd{margin:0;color:var(--muted);text-align:right}.hours-panel>div{display:grid;grid-template-columns:auto 1fr;gap:.2rem .65rem;margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--line)}.hours-panel>div i{grid-row:span 2;color:var(--emergency);font-size:1.1rem}.hours-panel>div strong,.hours-panel>div span{font-size:.76rem}.hours-panel>div span{color:var(--muted)}@media(max-width:950px){.contact-options{grid-template-columns:repeat(2,1fr)}.contact-grid{gap:3rem}}@media(max-width:600px){.contact-options,.field-grid,.contact-grid{grid-template-columns:1fr}.contact-callout{align-items:flex-start;flex-wrap:wrap;justify-content:flex-start}.contact-callout small{border:0;padding-left:1.8rem;flex-basis:100%}}
 </style>
