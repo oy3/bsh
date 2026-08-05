@@ -381,6 +381,25 @@ textarea {
   display: grid;
   gap: 0.6rem;
 }
+.scroll-top-action {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--blue-deep);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(13, 45, 66, 0.2);
+  transition: 0.2s;
+}
+.scroll-top-action i {
+  font-size: 1rem;
+}
+.scroll-top-action:hover {
+  transform: translateY(-3px);
+}
 .floating-actions a {
   display: flex;
   align-items: center;
@@ -412,7 +431,7 @@ textarea {
   padding: 3.5rem 0 5rem;
   background:
     linear-gradient(115deg, rgba(5, 49, 92, 0.96), rgba(11, 79, 138, 0.82)),
-    url("./assets/bg-bsh.jpeg") center/cover;
+    var(--page-hero-image, url("./assets/bg-bsh.jpeg")) center/cover;
   color: #fff;
 }
 .page-hero nav {

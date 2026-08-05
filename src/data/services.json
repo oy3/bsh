@@ -32,7 +32,7 @@
     "shortDescription": "Advanced surgical procedures with state-of-the-art technology and expert surgeons.",
     "summary": "General, orthopaedic and minimally invasive surgery in a well-equipped theatre, with careful pre-operative planning and structured recovery support.",
     "description": "Our surgery department is equipped with cutting-edge technology and staffed by highly skilled surgeons. We offer a wide range of surgical procedures, from minimally invasive to complex operations, all performed with the highest standards of safety and care.",
-    "image": "/images/services/surgeries.jpg",
+    "image": "/images/services/surgeries.jpeg",
     "icon": "bi-scissors",
     "features": [
       {
@@ -113,7 +113,7 @@
     "shortDescription": "24/7 emergency medical services with rapid response times.",
     "summary": "An emergency team on site day and night for accidents, acute illness, obstetric emergencies and paediatric emergencies.",
     "description": "Our emergency department is staffed 24/7 by experienced emergency physicians and nurses. We provide immediate care for all medical emergencies with state-of-the-art equipment and facilities.",
-    "image": "/images/services/emergency.jpg",
+    "image": "/images/services/emergency.jpeg",
     "icon": "bi-hospital-fill",
     "features": [
       {

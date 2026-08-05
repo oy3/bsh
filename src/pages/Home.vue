@@ -5,7 +5,8 @@ import doctorsData from "../data/doctors.json";
 import testimonials from "../data/testimonials.json";
 import hospitalInfo from "../data/hospital-info.json";
 import familyImage from "../assets/home-bsh.jpg";
-import surgeryImage from "../assets/bg-doc.jpg";
+import surgeryImage from "/images/services/surgeries.jpeg";
+import haematologyImage from "../assets/bg-doc.jpg";
 import womenImage from "../assets/home-bsh2.jpg";
 import emergencyImage from "../assets/bg-bsh.jpeg";
 export default {
@@ -17,7 +18,7 @@ export default {
       familyImage,
       surgeryImage,
       womenImage,
-      familyImage,
+      haematologyImage,
       emergencyImage,
     ],
     doctors: doctorsData.doctors.slice(0, 4),

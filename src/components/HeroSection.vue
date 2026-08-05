@@ -1,6 +1,149 @@
 <template>
-  <section class="home-hero"><img src="../assets/bg-bsh.jpeg" alt="" aria-hidden="true" class="home-hero__image"><div class="home-hero__veil"></div><div class="site-container home-hero__grid"><div><p class="hero-kicker">Emergency department open 24 hours, 7 days a week</p><h1>Specialist healthcare where your well-being takes centre stage</h1><p class="home-hero__copy">Base Specialist Hospital is a Lagos-based specialist hospital offering family medicine, surgery, obstetrics and gynaecology, haematology and 24/7 emergency care — delivered with warmth, clinical rigour and respect for every patient.</p><div class="hero-actions"><router-link to="/book-appointment" class="button-primary"><i class="bi bi-calendar-plus"></i> Book an appointment</router-link><a href="tel:+2347033449959" class="button-secondary"><i class="bi bi-telephone"></i> Call us now</a></div></div><aside class="hero-card"><i class="bi bi-heart-pulse-fill"></i><strong>Care when you need it</strong><span>Our emergency team is here 24 hours a day, every day.</span><a href="tel:+2347033449959">Call +234 703 344 9959 <i class="bi bi-arrow-up-right"></i></a></aside></div></section>
+  <section class="home-hero"> <img src="../assets/bg-bsh.jpeg" alt="" aria-hidden="true" class="home-hero__image">
+    <div class="home-hero__veil"></div>
+    <div class="site-container home-hero__grid">
+      <div>
+        <p class="hero-kicker">Emergency department open 24 hours, 7 days a week</p>
+        <h1>Specialist healthcare where your well-being takes centre stage</h1>
+        <p class="home-hero__copy">Base Specialist Hospital is a Lagos-based specialist hospital offering family
+          medicine, surgery, obstetrics and gynaecology, haematology and 24/7 emergency care — delivered with warmth,
+          clinical rigour and respect for every patient.</p>
+        <div class="hero-actions"><router-link to="/book-appointment" class="button-primary"><i
+              class="bi bi-calendar-plus"></i> Book an appointment</router-link><a href="tel:+2347033449959"
+            class="button-secondary"><i class="bi bi-telephone"></i> Call us now</a></div>
+      </div>
+      <aside class="hero-card"><i class="bi bi-heart-pulse-fill"></i><strong>Care when you need it</strong><span>Our
+          emergency team is here 24 hours a day, every day.</span><a href="tel:+2347033449959">Call +234 703 344 9959 <i
+            class="bi bi-arrow-up-right"></i></a></aside>
+    </div>
+  </section>
 </template>
 <style scoped>
-.home-hero{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:#073969}.home-hero__image,.home-hero__veil{position:absolute;inset:0;width:100%;height:100%;z-index:-2}.home-hero__image{object-fit:cover;opacity:.34}.home-hero__veil{z-index:-1;background:linear-gradient(102deg,#063966 5%,rgba(6,57,102,.92) 44%,rgba(6,57,102,.53) 100%)}.home-hero__grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(280px,.65fr);gap:4rem;align-items:end;min-height:620px;padding-top:6.5rem;padding-bottom:5rem}.hero-kicker{display:inline-flex;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(255,255,255,.09);padding:.42rem .78rem;text-transform:uppercase;font-size:.65rem;font-weight:800;letter-spacing:.1em}.home-hero h1{max-width:720px;margin:1.3rem 0;font-family:Sora,sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.05;letter-spacing:-.055em}.home-hero__copy{max-width:620px;color:#d7e6f2;font-size:1.04rem}.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.1rem}.hero-card{padding:1.5rem;border:1px solid rgba(255,255,255,.25);border-radius:22px;background:rgba(255,255,255,.11);backdrop-filter:blur(10px);display:grid;gap:.55rem}.hero-card>i{font-size:1.6rem;color:#75d5ed}.hero-card strong{font-family:Sora,sans-serif;font-size:1rem}.hero-card span{font-size:.8rem;color:#dcebf5}.hero-card a{margin-top:.65rem;font-size:.78rem;font-weight:800}@media(max-width:700px){.home-hero__grid{grid-template-columns:1fr;min-height:590px;padding-top:4.6rem;padding-bottom:3rem;gap:2.3rem}.home-hero h1{font-size:2.5rem}.home-hero__copy{font-size:.92rem}.hero-card{padding:1.05rem}.home-hero__veil{background:linear-gradient(105deg,#063966 5%,rgba(6,57,102,.87) 100%)}}
+.home-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  /* background: linear-gradient(90deg,rgba(7, 57, 105, 1) 0%, rgba(7, 57, 105, 0.76) 30%, rgba(7, 57, 105, 0) 100%); */
+}
+
+.home-hero__image,
+.home-hero__veil {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2
+}
+
+.home-hero__image {
+  object-fit: cover;
+  /* opacity: .34 */
+}
+
+.home-hero__veil {
+  z-index: -1;
+  background: linear-gradient(90deg,rgba(7, 57, 105, 1) 0%, rgba(7, 57, 105, 0.76) 40%, rgba(7, 57, 105, 0) 100%);
+}
+
+.home-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, .65fr);
+  gap: 4rem;
+  align-items: end;
+  min-height: 620px;
+  padding-top: 6.5rem;
+  padding-bottom: 5rem
+}
+
+.hero-kicker {
+  display: inline-flex;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .09);
+  padding: .42rem .78rem;
+  text-transform: uppercase;
+  font-size: .65rem;
+  font-weight: 800;
+  letter-spacing: .1em
+}
+
+.home-hero h1 {
+  max-width: 720px;
+  margin: 1.3rem 0;
+  font-family: Sora, sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -.055em
+}
+
+.home-hero__copy {
+  max-width: 620px;
+  color: #d7e6f2;
+  font-size: 1.04rem
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 2.1rem
+}
+
+.hero-card {
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, .11);
+  backdrop-filter: blur(10px);
+  display: grid;
+  gap: .55rem
+}
+
+.hero-card>i {
+  font-size: 1.6rem;
+  color: #75d5ed
+}
+
+.hero-card strong {
+  font-family: Sora, sans-serif;
+  font-size: 1rem
+}
+
+.hero-card span {
+  font-size: .8rem;
+  color: #dcebf5
+}
+
+.hero-card a {
+  margin-top: .65rem;
+  font-size: .78rem;
+  font-weight: 800
+}
+
+@media(max-width:700px) {
+  .home-hero__grid {
+    grid-template-columns: 1fr;
+    min-height: 590px;
+    padding-top: 4.6rem;
+    padding-bottom: 3rem;
+    gap: 2.3rem
+  }
+
+  .home-hero h1 {
+    font-size: 2.5rem
+  }
+
+  .home-hero__copy {
+    font-size: .92rem
+  }
+
+  .hero-card {
+    padding: 1.05rem
+  }
+
+  .home-hero__veil {
+    background: linear-gradient(105deg, #063966 5%, rgba(6, 57, 102, .87) 100%)
+  }
+}
 </style>
