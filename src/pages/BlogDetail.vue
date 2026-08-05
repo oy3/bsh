@@ -1,12 +1,199 @@
 <script>
-import blogsData from '../data/blogs.json'
-const referenceArticles={
-  'future-of-telemedicine-transforming-healthcare-access':{category:'Chronic Care',title:'Living well with hypertension in Lagos',date:'18 June 2026',time:'6 min read',lead:'High blood pressure is common, quiet and treatable. Here is what our physicians want every Lagos household to understand about controlling it.',body:['Hypertension often has no symptoms, which is why regular blood-pressure checks matter. Knowing your numbers is the first step towards protecting your heart, brain and kidneys.','Treatment can include practical changes to food, activity, sleep and stress, alongside medication where your clinician recommends it. The right plan is one you can follow consistently.','If you have been diagnosed with high blood pressure, keep your follow-up appointments and take medication exactly as prescribed. Speak with a clinician before stopping or changing any treatment.']},
-  'mental-health-awareness-breaking-stigma':{category:'Maternal Health',title:'Antenatal care at BSH: what to expect, visit by visit',date:'27 May 2026',time:'7 min read',lead:'From your first booking appointment to delivery day, here is how our obstetrics team supports you through a safe pregnancy.',body:['Antenatal care gives you and your baby the benefit of regular checks, clear answers and a care plan tailored to your pregnancy. Register as early as possible once you know you are pregnant.','At each visit, our team checks your wellbeing, answers your questions and explains the next stage of your care. Bring any records or medication details to your first appointment.','Contact us immediately if you notice bleeding, severe pain, persistent headache, reduced fetal movement or any symptom that worries you.']},
-  'preventive-care-key-to-longterm-health':{category:'Haematology',title:'Understanding your genotype: sickle cell explained',date:'30 April 2026',time:'5 min read',lead:'Genotype testing takes minutes and can shape decisions that last a lifetime. Our haematologist explains what the results mean.',body:['Genotype describes inherited information about haemoglobin, the part of red blood cells that carries oxygen. A simple test can identify your genotype.','Knowing your genotype is especially useful before starting a family. A clinician can explain what your result means and when genetic counselling may help.']},
-  'understanding-heart-disease-prevention-treatment':{category:'Emergency Care',title:'When to go to the emergency department — and when to book a clinic visit',date:'21 March 2026',time:'4 min read',lead:'Knowing the difference saves time, money and sometimes lives. A practical guide from our emergency team.',body:['Severe chest pain, difficulty breathing, loss of consciousness, uncontrolled bleeding and sudden weakness or confusion need urgent assessment. Come directly to the emergency department or call our emergency line.','For ongoing symptoms that are not immediately life-threatening, a scheduled clinic appointment gives your care team time to investigate and plan treatment.']},
-}
-export default {name:'BlogDetail',computed:{article(){return referenceArticles[this.$route.params.slug]||null}},methods:{back(){this.$router.push('/blog')}}}
+import blogsData from "../data/blogs.json";
+const referenceArticles = {
+  "future-of-telemedicine-transforming-healthcare-access": {
+    category: "Chronic Care",
+    title: "Living well with hypertension in Lagos",
+    date: "18 June 2026",
+    time: "6 min read",
+    lead: "High blood pressure is common, quiet and treatable. Here is what our physicians want every Lagos household to understand about controlling it.",
+    body: [
+      "Hypertension often has no symptoms, which is why regular blood-pressure checks matter. Knowing your numbers is the first step towards protecting your heart, brain and kidneys.",
+      "Treatment can include practical changes to food, activity, sleep and stress, alongside medication where your clinician recommends it. The right plan is one you can follow consistently.",
+      "If you have been diagnosed with high blood pressure, keep your follow-up appointments and take medication exactly as prescribed. Speak with a clinician before stopping or changing any treatment.",
+    ],
+  },
+  "mental-health-awareness-breaking-stigma": {
+    category: "Maternal Health",
+    title: "Antenatal care at BSH: what to expect, visit by visit",
+    date: "27 May 2026",
+    time: "7 min read",
+    lead: "From your first booking appointment to delivery day, here is how our obstetrics team supports you through a safe pregnancy.",
+    body: [
+      "Antenatal care gives you and your baby the benefit of regular checks, clear answers and a care plan tailored to your pregnancy. Register as early as possible once you know you are pregnant.",
+      "At each visit, our team checks your wellbeing, answers your questions and explains the next stage of your care. Bring any records or medication details to your first appointment.",
+      "Contact us immediately if you notice bleeding, severe pain, persistent headache, reduced fetal movement or any symptom that worries you.",
+    ],
+  },
+  "preventive-care-key-to-longterm-health": {
+    category: "Haematology",
+    title: "Understanding your genotype: sickle cell explained",
+    date: "30 April 2026",
+    time: "5 min read",
+    lead: "Genotype testing takes minutes and can shape decisions that last a lifetime. Our haematologist explains what the results mean.",
+    body: [
+      "Genotype describes inherited information about haemoglobin, the part of red blood cells that carries oxygen. A simple test can identify your genotype.",
+      "Knowing your genotype is especially useful before starting a family. A clinician can explain what your result means and when genetic counselling may help.",
+    ],
+  },
+  "understanding-heart-disease-prevention-treatment": {
+    category: "Emergency Care",
+    title:
+      "When to go to the emergency department — and when to book a clinic visit",
+    date: "21 March 2026",
+    time: "4 min read",
+    lead: "Knowing the difference saves time, money and sometimes lives. A practical guide from our emergency team.",
+    body: [
+      "Severe chest pain, difficulty breathing, loss of consciousness, uncontrolled bleeding and sudden weakness or confusion need urgent assessment. Come directly to the emergency department or call our emergency line.",
+      "For ongoing symptoms that are not immediately life-threatening, a scheduled clinic appointment gives your care team time to investigate and plan treatment.",
+    ],
+  },
+};
+export default {
+  name: "BlogDetail",
+  computed: {
+    article() {
+      return referenceArticles[this.$route.params.slug] || null;
+    },
+  },
+  methods: {
+    back() {
+      this.$router.push("/blog");
+    },
+  },
+};
 </script>
-<template><main class="article-page"><template v-if="article"><section class="article-hero"><div class="site-container"><router-link to="/blog"><i class="bi bi-arrow-left"></i> Health tips</router-link><p class="eyebrow">{{ article.category }}</p><h1>{{ article.title }}</h1><p class="article-meta"><i class="bi bi-calendar3"></i>{{ article.date }} <span>•</span> <i class="bi bi-clock"></i>{{ article.time }}</p></div></section><section class="section"><article class="site-container article-content"><p class="article-lead">{{ article.lead }}</p><p v-for="paragraph in article.body" :key="paragraph">{{ paragraph }}</p><div class="article-help"><strong>Need personal medical advice?</strong><span>Book an appointment to speak with a member of our team.</span><router-link to="/book-appointment">Book an appointment <i class="bi bi-arrow-right"></i></router-link></div></article></section></template><section v-else class="section section--mist"><div class="site-container article-missing"><i class="bi bi-journal-x"></i><h1>Article not found</h1><p>The article you are looking for does not exist or has been moved.</p><router-link class="button-primary" to="/blog">Back to health tips</router-link></div></section></main></template>
-<style scoped>.article-hero{padding:4.8rem 0 4.4rem;background:linear-gradient(112deg,var(--blue-deep),var(--blue));color:#fff}.article-hero .site-container{max-width:900px}.article-hero>a{display:inline-flex;gap:.5rem;margin-bottom:2.2rem;color:#cae2f2;font-size:.78rem;font-weight:800}.article-hero h1{max-width:850px;margin:.55rem 0 1rem;font-family:Sora,sans-serif;font-size:clamp(2rem,4.8vw,4rem);line-height:1.1;letter-spacing:-.05em}.article-meta{margin:0;color:#d4e7f4;font-size:.76rem}.article-meta span{padding:0 .55rem}.article-meta i{margin-right:.3rem}.article-content{max-width:760px}.article-lead{margin:0 0 2rem;padding:1.35rem 1.5rem;border-left:4px solid var(--aqua);background:var(--mist);font-size:1.1rem;line-height:1.7;color:#34546c}.article-content>p:not(.article-lead){margin:0 0 1.4rem;font-size:1rem;line-height:1.9;color:#40576b}.article-help{display:grid;gap:.25rem;margin-top:3rem;padding:1.5rem;border-radius:18px;background:var(--mist)}.article-help strong{font-family:Sora,sans-serif}.article-help span{color:var(--muted);font-size:.83rem}.article-help a{margin-top:.7rem;color:var(--blue);font-size:.8rem;font-weight:800}.article-missing{max-width:600px;text-align:center}.article-missing>i{font-size:3rem;color:var(--aqua)}.article-missing h1{font-family:Sora,sans-serif}.article-missing p{color:var(--muted);margin-bottom:1.5rem}</style>
+<template>
+  <main class="article-page">
+    <template v-if="article"
+      ><section class="article-hero">
+        <div class="site-container">
+          <router-link to="/blog">
+            <i class="bi bi-chevron-left me-2"></i>Back
+          </router-link>
+          <p class="eyebrow">{{ article.category }}</p>
+          <h1>{{ article.title }}</h1>
+          <p class="article-meta">
+            <i class="bi bi-calendar3"></i>{{ article.date }} <span>•</span>
+            <i class="bi bi-clock"></i>{{ article.time }}
+          </p>
+        </div>
+      </section>
+      <section class="section">
+        <article class="site-container article-content">
+          <p class="article-lead">{{ article.lead }}</p>
+          <p v-for="paragraph in article.body" :key="paragraph">
+            {{ paragraph }}
+          </p>
+          <div class="article-help">
+            <strong>Need personal medical advice?</strong
+            ><span>Book an appointment to speak with a member of our team.</span
+            ><router-link to="/book-appointment"
+              >Book an appointment <i class="bi bi-arrow-right"></i
+            ></router-link>
+          </div>
+        </article></section
+    ></template>
+    <section v-else class="section section--mist">
+      <div class="site-container article-missing">
+        <i class="bi bi-journal-x"></i>
+        <h1>Article not found</h1>
+        <p>The article you are looking for does not exist or has been moved.</p>
+        <router-link class="button-primary" to="/blog">
+          Back to health tips
+        </router-link>
+      </div>
+    </section>
+  </main>
+</template>
+<style scoped>
+.article-hero {
+  padding: 4.8rem 0 4.4rem;
+  background: linear-gradient(112deg, var(--blue-deep), var(--blue));
+  color: #fff;
+}
+.article-hero .site-container {
+  max-width: 900px;
+}
+.article-hero > a {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin-bottom: 2.2rem;
+  color: #cae2f2;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+.article-hero h1 {
+  max-width: 850px;
+  margin: 0.55rem 0 1rem;
+  font-family: Sora, sans-serif;
+  font-size: clamp(2rem, 4.8vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+}
+.article-meta {
+  margin: 0;
+  color: #d4e7f4;
+  font-size: 0.76rem;
+}
+.article-meta span {
+  padding: 0 0.55rem;
+}
+.article-meta i {
+  margin-right: 0.3rem;
+}
+.article-content {
+  max-width: 760px;
+}
+.article-lead {
+  margin: 0 0 2rem;
+  padding: 1.35rem 1.5rem;
+  border-left: 4px solid var(--aqua);
+  background: var(--mist);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #34546c;
+}
+.article-content > p:not(.article-lead) {
+  margin: 0 0 1.4rem;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #40576b;
+}
+.article-help {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border-radius: 18px;
+  background: var(--mist);
+}
+.article-help strong {
+  font-family: Sora, sans-serif;
+}
+.article-help span {
+  color: var(--muted);
+  font-size: 0.83rem;
+}
+.article-help a {
+  margin-top: 0.7rem;
+  color: var(--blue);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.article-missing {
+  max-width: 600px;
+  text-align: center;
+}
+.article-missing > i {
+  font-size: 3rem;
+  color: var(--aqua);
+}
+.article-missing h1 {
+  font-family: Sora, sans-serif;
+}
+.article-missing p {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+</style>
