@@ -10,7 +10,7 @@ const transparentNav = computed(() => route.path === '/')
 
 let revealObserver
 const revealSelector = [
-  '.section-heading', '.service-card', '.doctor-card', '.testimonial-card',
+  '.section-heading', '.service-card', '.doctor-card', '.testimonial-card', '.news-card',
   '.gallery-item', '.faq-list article', '.faq-page article', '.contact-options > a',
   '.care-point', '.service-panel', '.journey-grid > li', '.feature-card', '.specialist-card', '.doctor-tile',
   '.about-values article', '.about-strengths article', '.blog-card', '.tip-card',
