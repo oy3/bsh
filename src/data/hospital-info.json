@@ -3,7 +3,7 @@
   "shortName": "BSH",
   "logo": "../src/assets/bsh.svg",
   "slogan": "Comprehensive healthcare where your well-being takes center stage",
-  "description": "BSH a world of comprehensive healthcare where your well-being takes center stage. At BSH, we're dedicated to providing you with personalized and compassionate medical services.",
+  "description": "Base Specialist Hospital a world of comprehensive healthcare where your well-being takes center stage. At BSH, we're dedicated to providing you with personalized and compassionate medical services.",
   "address": {
     "street": "22 Demurin Street",
     "area": "Alapere",
@@ -23,7 +23,7 @@
       {
         "number": "+234 703 344 9959",
         "type": "main",
-        "isEmergency": false 
+        "isEmergency": false
       },
       {
         "number": "+234 703 344 9959",

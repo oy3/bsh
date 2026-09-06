@@ -1,9 +1,10 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
+import FloatingActions from '../components/FloatingActions.vue'
 
 export default {
-  components: { Navbar, Footer },
+  components: { Navbar, Footer, FloatingActions },
   props: {
     transparentNav: {
       type: Boolean,
@@ -20,6 +21,7 @@ export default {
       <slot />
     </main>
     <Footer />
+    <FloatingActions />
   </div>
 </template>
 

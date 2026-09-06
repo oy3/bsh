@@ -3,6 +3,7 @@
     "id": "family-health",
     "title": "Family Health",
     "shortDescription": "Comprehensive care for every member of your family.",
+    "summary": "One trusted medical home for children, adults and grandparents — from routine check-ups to long-term condition management.",
     "description": "At BSH, our Family Health service is dedicated to providing comprehensive, patient-centered care for individuals and families across all ages and stages of life. We believe in building long-term relationships with our patients, allowing us to understand your unique health needs and provide personalized care that supports your overall well-being.",
     "image": "/images/services/family-health.jpg",
     "icon": "bi-people-fill",
@@ -29,8 +30,9 @@
     "id": "surgery",
     "title": "Surgeries",
     "shortDescription": "Advanced surgical procedures with state-of-the-art technology and expert surgeons.",
+    "summary": "General, orthopaedic and minimally invasive surgery in a well-equipped theatre, with careful pre-operative planning and structured recovery support.",
     "description": "Our surgery department is equipped with cutting-edge technology and staffed by highly skilled surgeons. We offer a wide range of surgical procedures, from minimally invasive to complex operations, all performed with the highest standards of safety and care.",
-    "image": "/images/services/surgeries.jpg",
+    "image": "/images/services/surgeries.jpeg",
     "icon": "bi-scissors",
     "features": [
       {
@@ -55,6 +57,7 @@
     "id": "gynaecology",
     "title": "Gynaecology",
     "shortDescription": "Specialized care for reproductive health, including menopause and hormone health.",
+    "summary": "Antenatal care, safe delivery, fertility support and gynaecological treatment in a calm, private and genuinely supportive setting.",
     "description": "Our gynecology department provides comprehensive care for women's reproductive health. From routine check-ups to complex procedures, our experienced team offers compassionate care in a comfortable and private setting.",
     "image": "/images/services/gynaecology.jpg",
     "icon": "bi-gender-female",
@@ -81,6 +84,7 @@
     "id": "haematology",
     "title": "Haematology",
     "shortDescription": "Diagnosis and treatment of blood disorders and related conditions.",
+    "summary": "Specialist assessment of anaemia, sickle cell disease, clotting disorders and blood cancers, supported by our in-house laboratory.",
     "description": "Our hematology department specializes in diagnosing and treating disorders of the blood, bone marrow, and lymphatic systems. We offer comprehensive care for both benign and malignant blood conditions.",
     "image": "/images/services/haematology.jpg",
     "icon": "bi-droplet-fill",
@@ -107,8 +111,9 @@
     "id": "emergency-care",
     "title": "Emergency Care",
     "shortDescription": "24/7 emergency medical services with rapid response times.",
+    "summary": "An emergency team on site day and night for accidents, acute illness, obstetric emergencies and paediatric emergencies.",
     "description": "Our emergency department is staffed 24/7 by experienced emergency physicians and nurses. We provide immediate care for all medical emergencies with state-of-the-art equipment and facilities.",
-    "image": "/images/services/emergency.jpg",
+    "image": "/images/services/emergency.jpeg",
     "icon": "bi-hospital-fill",
     "features": [
       {
