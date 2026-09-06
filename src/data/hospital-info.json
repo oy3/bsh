@@ -5,13 +5,13 @@
   "slogan": "Comprehensive healthcare where your well-being takes center stage",
   "description": "Base Specialist Hospital a world of comprehensive healthcare where your well-being takes center stage. At BSH, we're dedicated to providing you with personalized and compassionate medical services.",
   "address": {
-    "street": "22 Demurin Street",
+    "street": "64 Oriola Street",
     "area": "Alapere",
     "city": "Lagos",
     "state": "LA",
     "postalCode": "100001",
     "country": "Nigeria",
-    "fullAddress": "22 Demurin Street, Alapere, Lagos 100001, Nigeria",
+    "fullAddress": "64 Oriola Street, Alapere, Lagos 100001, Nigeria",
     "coordinates": {
       "latitude": "6.5944",
       "longitude": "3.3887"
@@ -33,7 +33,7 @@
     ],
     "emails": [
       {
-        "address": "info@basespecialistshospital.com",
+        "address": "info@basespecialisthospital.com",
         "type": "general"
       },
       {

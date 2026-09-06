@@ -71,7 +71,7 @@ export default {
       },
       {
         q: "Where is Base Specialist Hospital located?",
-        a: "We are at 22 Demurin Street, Alapere, Ketu, Lagos 100001, Nigeria.",
+        a: "We are at 64 Oriola Street, Alapere, Lagos 100001, Nigeria.",
       },
     ],
   }),
