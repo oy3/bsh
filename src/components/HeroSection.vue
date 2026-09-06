@@ -1,220 +1,149 @@
-<script>
-export default {
-  name: "HeroSection",
-  data() {
-    return {
-      heroData: {
-        title: "Compassionate care, exceptional results.",
-        subtitle:
-          "Our team of experienced professionals are committed to providing quality care and personalized attention to our clients.",
-        buttonText: "See how we work",
-        stats: [
-          {
-            number: "20+",
-            label: "years of experience",
-          },
-          {
-            number: "95%",
-            label: "client satisfaction rating",
-          },
-          {
-            number: "1,000+",
-            label: "clients served annually",
-          },
-          {
-            number: "10+",
-            label: "professionals on staff",
-          },
-        ],
-        badge: {
-          avatars: ["👨‍💼", "👩‍💼", "👨‍💻"],
-          text: "1K +",
-          subtitle: "Client Success",
-        },
-      },
-    };
-  },
-};
-</script>
-
 <template>
-  <section
-    class="hero-section position-relative overflow-hidden min-vh-100 d-flex align-items-center"
-  >
-    <!-- Background Image with Overlay -->
-    <div class="position-absolute top-0 end-0 w-100 h-100 hero-bg-container">
-      <div
-        class="position-absolute top-0 start-0 w-100 h-100 hero-gradient"
-        style="z-index: 2"
-      ></div>
-      <img
-        src="/src/assets/bg-bsh.jpeg"
-        alt="BSH Team"
-        class="w-100 h-100 object-fit-cover"
-        style="object-position: center"
-      />
-    </div>
-
-    <!-- Content Container -->
-    <div class="container-fluid h-100 position-relative" style="z-index: 3">
-      <div class="row h-100 align-items-center">
-        <!-- Left Content -->
-        <div class="col-lg-6 col-xl-5">
-          <div class="ps-lg-5 pt-5 pt-lg-0">
-            <!-- Main Heading -->
-            <h1 class="text-white display-5 fw-bold mt-5 lh-1 mb-4">
-              {{ heroData.title }}
-            </h1>
-
-            <!-- Subtitle -->
-            <p class="text-white-50 mb-5 fs-5 lh-base" style="max-width: 500px">
-              {{ heroData.subtitle }}
-            </p>
-
-            <div class="d-flex align-items-center text-white">
-              <button
-                class="btn btn-outline-light rounded-circle me-2 d-flex align-items-center justify-content-center p-0"
-                style="height: 30px; width: 30px"
-              >
-                <i
-                  class="bi bi-play-fill"
-                  style="font-size: 14px; margin-left: 2px"
-                ></i>
-              </button>
-              <span class="small fw-medium">{{ heroData.buttonText }}</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Side - Image Area -->
-        <div
-          class="col-lg-6 col-xl-7 position-relative d-flex justify-content-end"
-        >
-          <!-- Success Badge -->
-          <div
-            class="card shadow-sm position-absolute badge-position bg-white bg-opacity-10 border border-light-subtle rounded-pill p-2"
-          >
-            <div class="d-flex align-items-center">
-              <div class="d-flex me-2">
-                <span
-                  v-for="(avatar, index) in heroData.badge.avatars"
-                  :key="index"
-                  class="rounded-circle bg-light d-flex align-items-center justify-content-center border border-3 border-white avatar-overlap"
-                  style="width: 40px; height: 40px; font-size: 1.2rem"
-                  :style="{
-                    zIndex: heroData.badge.avatars.length - index,
-                    marginLeft: index > 0 ? '-10px' : '0',
-                  }"
-                >
-                  {{ avatar }}
-                </span>
-              </div>
-              <div class="lh-1">
-                <div class="fw-bold text-dark h6 mb-0">
-                  {{ heroData.badge.text }}
-                </div>
-                <div class="text-muted" style="font-size: x-small">
-                  {{ heroData.badge.subtitle }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <section class="home-hero"> <img src="../assets/bg-bsh.jpeg" alt="" aria-hidden="true" class="home-hero__image">
+    <div class="home-hero__veil"></div>
+    <div class="site-container home-hero__grid">
+      <div>
+        <p class="hero-kicker">Emergency department open 24 hours, 7 days a week</p>
+        <h1>Specialist healthcare where your well-being takes centre stage</h1>
+        <p class="home-hero__copy">Base Specialist Hospital is a Lagos-based specialist hospital offering family
+          medicine, surgery, obstetrics and gynaecology, haematology and 24/7 emergency care — delivered with warmth,
+          clinical rigour and respect for every patient.</p>
+        <div class="hero-actions"><router-link to="/book-appointment" class="button-primary"><i
+              class="bi bi-calendar-plus"></i> Book an appointment</router-link><a href="tel:+2347033449959"
+            class="button-secondary"><i class="bi bi-telephone"></i> Call us now</a></div>
       </div>
-
-      <!-- Stats Section positioned at bottom right -->
-      <div
-        class="position-absolute end-0 stats-container border rounded-top-4 rounded-end-0 border-dark-subtle border-end-0 border-bottom-0"
-      >
-        <div
-          class="card bg-white bg-opacity-10 backdrop-blur rounded-top-4 rounded-end-0 rounded-bottom-0 border-0 p-4 p-lg-5"
-        >
-          <div class="row g-3 g-lg-4 text-center">
-            <div
-              v-for="(stat, index) in heroData.stats"
-              :key="index"
-              class="col-6 col-lg-3"
-            >
-              <div class="text-white">
-                <div class="display-6 fw-bold mb-2">{{ stat.number }}</div>
-                <div class="small opacity-75 lh-base">{{ stat.label }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <aside class="hero-card"><i class="bi bi-heart-pulse-fill"></i><strong>Care when you need it</strong><span>Our
+          emergency team is here 24 hours a day, every day.</span><a href="tel:+2347033449959">Call +234 703 344 9959 <i
+            class="bi bi-arrow-up-right"></i></a></aside>
     </div>
   </section>
 </template>
-
 <style scoped>
-.hero-section {
-  background-color: var(--bsh-primary);
+.home-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  /* background: linear-gradient(90deg,rgba(7, 57, 105, 1) 0%, rgba(7, 57, 105, 0.76) 30%, rgba(7, 57, 105, 0) 100%); */
 }
 
-.hero-bg-container {
-  width: 90%;
-}
-
-.hero-gradient {
-  background-image: linear-gradient(
-    to left,
-    rgba(255, 0, 0, 0),
-    var(--bsh-primary)
-  );
-}
-
-.hero-btn:hover {
-  transform: translateX(10px);
-  transition: transform 0.3s ease;
-}
-
-.badge-position {
-  top: 20%;
-  right: 5%;
-  min-width: 200px;
-}
-
-.stats-container {
+.home-hero__image,
+.home-hero__veil {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: 70%;
+  height: 100%;
+  z-index: -2
 }
 
-.backdrop-blur {
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+.home-hero__image {
+  object-fit: cover;
+  /* opacity: .34 */
 }
 
-/* Responsive Design */
-@media (max-width: 991px) {
-  .hero-bg-container {
-    width: 100%;
-    opacity: 0.3;
-  }
-
-  .badge-position {
-    position: static !important;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    min-width: auto;
-  }
-
-  .stats-container {
-    position: static !important;
-    margin-top: 2rem;
-    max-width: 100%;
-    border: 1px solid #adb5bd !important;
-    border-radius: 30px 30px 0px 0px !important;
-  }
-
-  .stats-container .card {
-    border-radius: 30px 30px 0px 0px !important;
-  }
+.home-hero__veil {
+  z-index: -1;
+  background: linear-gradient(90deg,rgba(7, 57, 105, 1) 0%, rgba(7, 57, 105, 0.76) 40%, rgba(7, 57, 105, 0) 100%);
 }
 
-@media (max-width: 768px) {
-  .stats-container .card {
-    padding: 1.5rem !important;
+.home-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, .65fr);
+  gap: 4rem;
+  align-items: end;
+  min-height: 620px;
+  padding-top: 6.5rem;
+  padding-bottom: 5rem
+}
+
+.hero-kicker {
+  display: inline-flex;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .09);
+  padding: .42rem .78rem;
+  text-transform: uppercase;
+  font-size: .65rem;
+  font-weight: 800;
+  letter-spacing: .1em
+}
+
+.home-hero h1 {
+  max-width: 720px;
+  margin: 1.3rem 0;
+  font-family: Sora, sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -.055em
+}
+
+.home-hero__copy {
+  max-width: 620px;
+  color: #d7e6f2;
+  font-size: 1.04rem
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 2.1rem
+}
+
+.hero-card {
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, .11);
+  backdrop-filter: blur(10px);
+  display: grid;
+  gap: .55rem
+}
+
+.hero-card>i {
+  font-size: 1.6rem;
+  color: #75d5ed
+}
+
+.hero-card strong {
+  font-family: Sora, sans-serif;
+  font-size: 1rem
+}
+
+.hero-card span {
+  font-size: .8rem;
+  color: #dcebf5
+}
+
+.hero-card a {
+  margin-top: .65rem;
+  font-size: .78rem;
+  font-weight: 800
+}
+
+@media(max-width:700px) {
+  .home-hero__grid {
+    grid-template-columns: 1fr;
+    min-height: 590px;
+    padding-top: 4.6rem;
+    padding-bottom: 3rem;
+    gap: 2.3rem
+  }
+
+  .home-hero h1 {
+    font-size: 2.5rem
+  }
+
+  .home-hero__copy {
+    font-size: .92rem
+  }
+
+  .hero-card {
+    padding: 1.05rem
+  }
+
+  .home-hero__veil {
+    background: linear-gradient(105deg, #063966 5%, rgba(6, 57, 102, .87) 100%)
   }
 }
 </style>
