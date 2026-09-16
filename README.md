@@ -146,7 +146,7 @@ npm run preview
 The website uses EmailJS for automated email notifications. Two types of emails are supported:
 
 ### Contact Form Emails
-When a visitor fills the contact form, an email is sent to `info@basespecialistshospital.com` with:
+When a visitor fills the contact form, an email is sent to `info@basespecialisthospital.com` with:
 - Visitor's name and email
 - Phone number
 - Department/Category
@@ -283,7 +283,7 @@ npm run build
 
 4. **Nginx** serves `/apps/bsh/current` and SPA fallback config must be enabled
 
-5. **Set up SSL certificate** via Certbot for HTTPS (already active at basespecialistshospital.com)
+5. **Set up SSL certificate** via Certbot for HTTPS (already active at basespecialisthospital.com)
 
 ### Deploy to Netlify (alternative)
 

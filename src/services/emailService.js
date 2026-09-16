@@ -19,7 +19,7 @@ export const emailService = {
         try {
             const templateParams = {
                 from_name: "Base Specialist Hospital",
-                from_email: "info@basespecialistshospital.com",
+                from_email: "info@basespecialisthospital.com",
                 user_name: `${formData.firstName} ${formData.lastName}`,
                 user_email: formData.email,
                 phone: formData.phone,
@@ -27,7 +27,7 @@ export const emailService = {
                 subject: formData.subject,
                 message: formData.message,
                 urgency: formData.urgency,
-                to_email: "info@basespecialistshospital.com",
+                to_email: "info@basespecialisthospital.com",
                 reply_to: formData.email,
             };
 
@@ -57,13 +57,13 @@ export const emailService = {
         try {
             const templateParams = {
                 from_name: "Base Specialist Hospital",
-                from_email: "info@basespecialistshospital.com",
+                from_email: "info@basespecialisthospital.com",
                 user_name: formData.fullName,
                 user_email: formData.email,
                 service: formData.service,
                 preferred_date: formData.preferredDate,
                 message: formData.message || "No additional message",
-                to_email: "info@basespecialistshospital.com",
+                to_email: "info@basespecialisthospital.com",
                 reply_to: formData.email,
             };
 
