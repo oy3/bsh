@@ -9,6 +9,16 @@ import surgeryImage from "/images/services/surgeries.jpeg";
 import haematologyImage from "../assets/bg-doc.jpg";
 import womenImage from "../assets/home-bsh2.jpg";
 import emergencyImage from "../assets/bg-bsh.jpeg";
+import hygeiaLogo from "../assets/hmos/hygeia.png";
+import relianceLogo from "../assets/hmos/reliance.svg";
+import axaMansardLogo from "../assets/hmos/axa-mansard.svg";
+import leadwayLogo from "../assets/hmos/leadway.png";
+import avonLogo from "../assets/hmos/avon.png";
+import policeHmoLogo from "../assets/hmos/police-hmo.png";
+import redcareLogo from "../assets/hmos/redcare.png";
+import totalHealthTrustLogo from "../assets/hmos/total-health-trust.svg";
+import clearlineLogo from "../assets/hmos/clearline.png";
+import venusMedicareLogo from "../assets/hmos/venus-medicare.png";
 export default {
   name: "Home",
   components: { HeroSection },
@@ -26,6 +36,22 @@ export default {
       testimonials.testimonials?.slice(0, 3) ||
       testimonials.slice?.(0, 3) ||
       [],
+    hmos: [
+      { name: "Hygeia HMO", logo: hygeiaLogo },
+      { name: "Reliance HMO", logo: relianceLogo },
+      { name: "AXA Mansard Health", logo: axaMansardLogo, compact: true },
+      { name: "Leadway Health", logo: leadwayLogo },
+      { name: "Avon HMO", logo: avonLogo },
+      { name: "Police HMO", logo: policeHmoLogo, compact: true },
+      { name: "Redcare HMO", logo: redcareLogo },
+      {
+        name: "Total Health Trust",
+        logo: totalHealthTrustLogo,
+        compact: true,
+      },
+      { name: "Clearline HMO", logo: clearlineLogo, showName: true },
+      { name: "Venus Medicare", logo: venusMedicareLogo },
+    ],
     healthTips: [
       {
         category: "Chronic care",
@@ -268,6 +294,33 @@ export default {
             Read more <i class="bi bi-arrow-right"></i>
           </router-link>
         </div>
+      </div>
+    </section>
+
+    <section class="insurance-section" aria-labelledby="insurance-heading">
+      <div class="site-container">
+        <div class="section-heading section-heading--center">
+          <p class="eyebrow">Insurance</p>
+          <h2 id="insurance-heading">We work with leading HMOs</h2>
+          <p>
+            Bring your HMO card and our front desk will confirm your cover before
+            your consultation.
+          </p>
+        </div>
+        <ul
+          class="insurance-list"
+          aria-label="Accepted health insurance providers"
+        >
+          <li
+            v-for="hmo in hmos"
+            :key="hmo.name"
+            :class="{ 'insurance-logo--compact': hmo.compact }"
+            :title="hmo.name"
+          >
+            <img :src="hmo.logo" :alt="`${hmo.name} logo`" loading="lazy" />
+            <span v-if="hmo.showName">Clearline</span>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -614,6 +667,74 @@ export default {
 .testimonial-card span {
   color: var(--muted);
 }
+.insurance-section {
+  padding: 6rem 0;
+  border-block: 1px solid var(--line);
+  background: var(--mist);
+}
+.insurance-section .section-heading {
+  max-width: 850px;
+  margin-bottom: 3rem;
+}
+.insurance-section .section-heading h2 {
+  margin-top: 0.65rem;
+  font-size: clamp(2rem, 4vw, 3.15rem);
+}
+.insurance-section .section-heading > p:last-child {
+  margin-top: 1.15rem;
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+.insurance-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+.insurance-list li {
+  display: flex;
+  min-width: 0;
+  height: 108px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--blue-deep);
+  box-shadow: 0 5px 12px rgba(23, 72, 103, 0.08);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.insurance-list img {
+  display: block;
+  width: auto;
+  max-width: 150px;
+  height: auto;
+  max-height: 54px;
+  object-fit: contain;
+}
+.insurance-list .insurance-logo--compact img {
+  max-width: 64px;
+  max-height: 58px;
+}
+.insurance-list li span {
+  color: #075697;
+  font-family: Sora, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.insurance-list li:hover {
+  transform: translateY(-3px);
+  border-color: #9bd2e7;
+  box-shadow: 0 10px 20px rgba(23, 72, 103, 0.12);
+}
 .health-tips-section {
   background: #fff;
 }
@@ -766,6 +887,9 @@ export default {
   .health-tips-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .insurance-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   .story-grid,
   .faq-layout {
     grid-template-columns: 1fr;
@@ -808,6 +932,31 @@ export default {
   }
   .service-card__body {
     padding: 1.35rem;
+  }
+  .insurance-section {
+    padding: 4.5rem 0;
+  }
+  .insurance-section .section-heading {
+    margin-bottom: 2rem;
+  }
+  .insurance-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+  .insurance-list li {
+    height: 88px;
+    padding: 1rem;
+  }
+  .insurance-list img {
+    max-width: 115px;
+    max-height: 44px;
+  }
+  .insurance-list .insurance-logo--compact img {
+    max-width: 50px;
+    max-height: 48px;
+  }
+  .insurance-list li span {
+    font-size: 0.82rem;
   }
   .health-tips-heading {
     align-items: flex-start;
