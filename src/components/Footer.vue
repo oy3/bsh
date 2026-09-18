@@ -93,7 +93,7 @@ export default {
         reserved.
       </span>
       <span>
-        Powered By
+        Built by
         <a
           href="http://www.rootlab.africa"
           target="_blank"
